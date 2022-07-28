@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV_DTO;
 
 namespace AV_API.Controllers
 {
@@ -23,14 +24,17 @@ namespace AV_API.Controllers
 
         // GET: api/Asientos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Asiento>>> GetAsientos()
+        public async Task<ActionResult<IEnumerable<AsientoDTO>>> GetAsientos()
         {
-            return await _context.Asientos.ToListAsync();
+            //return await _context.Asientos.ToListAsync();
+            return await _context.Asientos
+             .Select(x => MapeoDTO.AsientoDTO(x))
+                .ToListAsync();
         }
 
         // GET: api/Asientos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Asiento>> GetAsiento(int id)
+        public async Task<ActionResult<AsientoDTO>> GetAsiento(int id)
         {
             var asiento = await _context.Asientos.FindAsync(id);
 
@@ -39,20 +43,20 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            return asiento;
+            return Ok(asiento);
         }
 
         // PUT: api/Asientos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsiento(int id, Asiento asiento)
+        public async Task<IActionResult> PutAsiento(int id, AsientoDTO asientoDTO)
         {
-            if (id != asiento.NroAsiento)
+            if (id != asientoDTO.NroAsiento)
             {
                 return BadRequest();
             }
 
-            _context.Entry(asiento).State = EntityState.Modified;
+            _context.Entry(asientoDTO).State = EntityState.Modified;
 
             try
             {
@@ -76,7 +80,7 @@ namespace AV_API.Controllers
         // POST: api/Asientos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Asiento>> PostAsiento(Asiento asiento)
+        public async Task<ActionResult<AsientoDTO>> PostAsiento(Asiento asiento)
         {
             _context.Asientos.Add(asiento);
             try

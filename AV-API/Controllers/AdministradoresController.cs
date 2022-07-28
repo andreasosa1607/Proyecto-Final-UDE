@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV_DTO;
 
 namespace AV_API.Controllers
 {
@@ -23,14 +24,17 @@ namespace AV_API.Controllers
 
         // GET: api/Administradores
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Administrador>>> GetAdministradores()
+        public async Task<ActionResult<IEnumerable<AdministradorDTO>>> GetAdministradores()
         {
-            return await _context.Administradores.ToListAsync();
-        }
+            //return await _context.Administradores.ToListAsync();
 
+            return await _context.Administradores
+                .Select(x => MapeoDTO.AdministradorDTO(x))
+                .ToListAsync();
+        }
         // GET: api/Administradores/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Administrador>> GetAdministrador(int id)
+        public async Task<ActionResult<AdministradorDTO>> GetAdministrador(int id)
         {
             var administrador = await _context.Administradores.FindAsync(id);
 
@@ -39,20 +43,20 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            return administrador;
+            return Ok(administrador);
         }
 
         // PUT: api/Administradores/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdministrador(int id, Administrador administrador)
+        public async Task<IActionResult> PutAdministrador(int id, AdministradorDTO administradorDTO)
         {
-            if (id != administrador.IdAdmin)
+            if (id != administradorDTO.IdAdmin)
             {
                 return BadRequest();
             }
 
-            _context.Entry(administrador).State = EntityState.Modified;
+            _context.Entry(administradorDTO).State = EntityState.Modified;
 
             try
             {
@@ -76,7 +80,7 @@ namespace AV_API.Controllers
         // POST: api/Administradores
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Administrador>> PostAdministrador(Administrador administrador)
+        public async Task<ActionResult<AdministradorDTO>> PostAdministrador(Administrador administrador)
         {
             _context.Administradores.Add(administrador);
             await _context.SaveChangesAsync();
