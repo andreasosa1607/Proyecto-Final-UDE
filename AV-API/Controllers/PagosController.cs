@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV_DTO;
 
 namespace AV_API.Controllers
 {
@@ -23,14 +24,17 @@ namespace AV_API.Controllers
 
         // GET: api/Pagos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pago>>> GetPagos()
+        public async Task<ActionResult<IEnumerable<PagoDTO>>> GetPagos()
         {
-            return await _context.Pagos.ToListAsync();
+            //return await _context.Pagos.ToListAsync();
+            return await _context.Pagos
+          .Select(x => MapeoDTO.PagoDTO(x))
+             .ToListAsync();
         }
 
         // GET: api/Pagos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pago>> GetPago(int id)
+        public async Task<ActionResult<PagoDTO>> GetPago(int id)
         {
             var pago = await _context.Pagos.FindAsync(id);
 
@@ -39,20 +43,20 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            return pago;
+            return Ok(pago);
         }
 
         // PUT: api/Pagos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPago(int id, Pago pago)
+        public async Task<IActionResult> PutPago(int id, PagoDTO pagoDTO)
         {
-            if (id != pago.IdPago)
+            if (id != pagoDTO.IdPago)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pago).State = EntityState.Modified;
+            _context.Entry(pagoDTO).State = EntityState.Modified;
 
             try
             {
@@ -76,7 +80,7 @@ namespace AV_API.Controllers
         // POST: api/Pagos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Pago>> PostPago(Pago pago)
+        public async Task<ActionResult<PagoDTO>> PostPago(Pago pago)
         {
             _context.Pagos.Add(pago);
             await _context.SaveChangesAsync();
