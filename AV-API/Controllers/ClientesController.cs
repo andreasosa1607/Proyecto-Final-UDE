@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV_DTO;
 
 namespace AV_API.Controllers
 {
@@ -23,9 +24,12 @@ namespace AV_API.Controllers
 
         // GET: api/Clientes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<ClienteDTO>>> GetClientes()
         {
-            return await _context.Clientes.ToListAsync();
+            // return await _context.Clientes.ToListAsync();
+            return await _context.Clientes
+           .Select(x => MapeoDTO.ClienteDTO(x))
+              .ToListAsync();
         }
 
         // GET: api/Clientes/5

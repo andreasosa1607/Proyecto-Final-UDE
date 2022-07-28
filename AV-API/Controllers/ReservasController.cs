@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV_DTO;
 
 namespace AV_API.Controllers
 {
@@ -23,14 +24,18 @@ namespace AV_API.Controllers
 
         // GET: api/Reservas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservas()
+        public async Task<ActionResult<IEnumerable<ReservaDTO>>> GetReservas()
         {
-            return await _context.Reservas.ToListAsync();
+            // return await _context.Reservas.ToListAsync();
+            return await _context.Reservas
+           .Select(x => MapeoDTO.ReservaDTO(x))
+              .ToListAsync();
         }
+
 
         // GET: api/Reservas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Reserva>> GetReserva(int id)
+        public async Task<ActionResult<ReservaDTO>> GetReserva(int id)
         {
             var reserva = await _context.Reservas.FindAsync(id);
 
@@ -39,20 +44,20 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            return reserva;
+            return Ok(reserva);
         }
 
         // PUT: api/Reservas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReserva(int id, Reserva reserva)
+        public async Task<IActionResult> PutReserva(int id, ReservaDTO reservaDTO)
         {
-            if (id != reserva.IdReserva)
+            if (id != reservaDTO.IdReserva)
             {
                 return BadRequest();
             }
 
-            _context.Entry(reserva).State = EntityState.Modified;
+            _context.Entry(reservaDTO).State = EntityState.Modified;
 
             try
             {
@@ -76,7 +81,7 @@ namespace AV_API.Controllers
         // POST: api/Reservas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Reserva>> PostReserva(Reserva reserva)
+        public async Task<ActionResult<ReservaDTO>> PostReserva(Reserva reserva)
         {
             _context.Reservas.Add(reserva);
             await _context.SaveChangesAsync();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV_DTO;
 
 namespace AV_API.Controllers
 {
@@ -23,14 +24,17 @@ namespace AV_API.Controllers
 
         // GET: api/Logines
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Login>>> GetLogins()
+        public async Task<ActionResult<IEnumerable<LoginDTO>>> GetLogins()
         {
-            return await _context.Logins.ToListAsync();
+            // return await _context.Logins.ToListAsync();
+            return await _context.Logins
+           .Select(x => MapeoDTO.LoginDTO(x))
+              .ToListAsync();
         }
 
         // GET: api/Logines/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Login>> GetLogin(string id)
+        public async Task<ActionResult<LoginDTO>> GetLogin(string id)
         {
             var login = await _context.Logins.FindAsync(id);
 
@@ -39,20 +43,20 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            return login;
+            return Ok(login);
         }
 
         // PUT: api/Logines/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLogin(string id, Login login)
+        public async Task<IActionResult> PutLogin(string id, LoginDTO loginDTO)
         {
-            if (id != login.CorreoElectronico)
+            if (id != loginDTO.CorreoElectronico)
             {
                 return BadRequest();
             }
 
-            _context.Entry(login).State = EntityState.Modified;
+            _context.Entry(loginDTO).State = EntityState.Modified;
 
             try
             {
@@ -76,7 +80,7 @@ namespace AV_API.Controllers
         // POST: api/Logines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Login>> PostLogin(Login login)
+        public async Task<ActionResult<LoginDTO>> PostLogin(Login login)
         {
             _context.Logins.Add(login);
             try
