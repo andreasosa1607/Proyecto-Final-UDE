@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV_DTO;
 
 namespace AV_API.Controllers
 {
@@ -23,23 +24,27 @@ namespace AV_API.Controllers
 
         // GET: api/Eventos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Evento>>> GetEventos()
+        public async Task<ActionResult<IEnumerable<EventoDTO>>> GetEventos()
         {
-            return await _context.Eventos.ToListAsync();
+            //return await _context.Eventos.ToListAsync();
+            return await _context.Eventos
+          .Select(x => MapeoDTO.EventoDTO(x))
+             .ToListAsync();
+
         }
 
         // GET: api/Eventos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Evento>> GetEvento(int id)
+        public async Task<ActionResult<EventoDTO>> GetEvento(int id)
         {
             var evento = await _context.Eventos.FindAsync(id);
 
             if (evento == null)
             {
-                return NotFound("No existe");
+                return NotFound();
             }
 
-            return evento;
+            return Ok(evento);
         }
 
         // PUT: api/Eventos/5

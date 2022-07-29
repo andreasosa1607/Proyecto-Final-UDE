@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV_DTO;
 
 namespace AV_API.Controllers
 {
@@ -23,14 +24,17 @@ namespace AV_API.Controllers
 
         // GET: api/Mesas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Mesa>>> GetMesas()
+        public async Task<ActionResult<IEnumerable<MesaDTO>>> GetMesas()
         {
-            return await _context.Mesas.ToListAsync();
+            //  return await _context.Mesas.ToListAsync();
+            return await _context.Mesas
+            .Select(x => MapeoDTO.MesaDTO(x))
+               .ToListAsync();
         }
 
         // GET: api/Mesas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Mesa>> GetMesa(int id)
+        public async Task<ActionResult<MesaDTO>> GetMesa(int id)
         {
             var mesa = await _context.Mesas.FindAsync(id);
 
@@ -39,20 +43,20 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            return mesa;
+            return Ok(mesa);
         }
 
         // PUT: api/Mesas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMesa(int id, Mesa mesa)
+        public async Task<IActionResult> PutMesa(int id, MesaDTO mesaDTO)
         {
-            if (id != mesa.NroMesa)
+            if (id != mesaDTO.NroMesa)
             {
                 return BadRequest();
             }
 
-            _context.Entry(mesa).State = EntityState.Modified;
+            _context.Entry(mesaDTO).State = EntityState.Modified;
 
             try
             {
@@ -76,9 +80,9 @@ namespace AV_API.Controllers
         // POST: api/Mesas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Mesa>> PostMesa(Mesa mesa)
+        public async Task<ActionResult<MesaDTO>> PostMesa(Mesa mesa)
         {
-            _context.Mesas.Add(mesa);
+              _context.Mesas.Add(mesa);
             try
             {
                 await _context.SaveChangesAsync();
