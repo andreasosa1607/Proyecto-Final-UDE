@@ -30,41 +30,42 @@ namespace AV.BO
         [Column(TypeName = "image")]
         public string ImagenPortada { get; set; }
 
-        // VER como poner aca el set dateformat dmy y NOTMAPPED
+        
         [Required]
-        [NotMapped]
         [Column(TypeName = "Date")]
         public DateTime Fecha { get; set; }
 
        
-        // ver con Emiliano tipo HORA
+        
         [Required]
-        [NotMapped]
         [Column(TypeName = "Time(7)")]
         public TimeSpan Hora { get; set; }
 
-        //ver duracion del evento
+        
+        [Required]
+        [Column(TypeName = "Integer")]
+        public int Duracion { get; set; }
 
         [Required]
         [Column(TypeName = "VarChar(100)")]
         public string Lugar { get; set; }
 
-        // ver maximo y minimo de numero con emiliano
+        
         [Required]
         [Column(TypeName = "Integer")]
         public int NroCupos { get; set ; }
 
-        // ver maximo y minimo de numero con emiliano
+        
         [Required]
         [Column(TypeName = "Integer")]
         public int CantidadMesas { get; set; }
 
-        // ver maximo y minimo de numero con emiliano
+        
         [Required]
         [Column(TypeName = "Integer")]
         public int CantidadAsientosMesa { get; set; }
 
-        // ver maximo y minimo de numero con emiliano
+        
         [Required]
         [Column(TypeName = "Integer")]
         public int PrecioAsiento { get; set; }
@@ -83,7 +84,7 @@ namespace AV.BO
         [Column(TypeName = "Varchar(20)")]
         public string EmpresaCreadora { get; set; }
 
-        //Test
+       
     
     }
 }

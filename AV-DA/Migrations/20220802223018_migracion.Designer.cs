@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AV.DA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    [Migration("20220628212048_creacion")]
-    partial class creacion
+    [Migration("20220802223018_migracion")]
+    partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -120,9 +120,18 @@ namespace AV.DA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(300)");
 
+                    b.Property<int>("Duracion")
+                        .HasColumnType("Integer");
+
                     b.Property<string>("EmpresaCreadora")
                         .IsRequired()
                         .HasColumnType("Varchar(20)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("Date");
+
+                    b.Property<TimeSpan>("Hora")
+                        .HasColumnType("Time(7)");
 
                     b.Property<string>("Idioma")
                         .IsRequired()

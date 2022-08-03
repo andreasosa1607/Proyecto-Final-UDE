@@ -46,7 +46,7 @@ namespace AV.BO
 
         // ver esto con Emiliano (traerla por FTP)
         [Required]
-        [Column(TypeName = "image")]
+        [Column(TypeName = "Blob")]
         public string FotoPerfil { get; set; }
 
 

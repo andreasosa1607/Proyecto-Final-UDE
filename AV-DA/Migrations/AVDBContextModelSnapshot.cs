@@ -118,9 +118,18 @@ namespace AV.DA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(300)");
 
+                    b.Property<int>("Duracion")
+                        .HasColumnType("Integer");
+
                     b.Property<string>("EmpresaCreadora")
                         .IsRequired()
                         .HasColumnType("Varchar(20)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("Date");
+
+                    b.Property<TimeSpan>("Hora")
+                        .HasColumnType("Time(7)");
 
                     b.Property<string>("Idioma")
                         .IsRequired()
