@@ -77,7 +77,7 @@ namespace AV_DTO
 
             administradorDTO.IdAdmin = administrador.IdAdmin;
             administradorDTO.NombreEmpresa = administrador.NombreEmpresa;
-            administradorDTO.Pago = administrador.Pago;
+
 
             return administradorDTO;
         }
@@ -117,6 +117,8 @@ namespace AV_DTO
             pagoDTO.Reserva = pago.Reserva;
 
             return pagoDTO;
+
+
         }
     }
 }
