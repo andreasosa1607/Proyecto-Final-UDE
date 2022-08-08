@@ -215,6 +215,7 @@ namespace AV_DTO
 
             administradorDTO.IdAdmin = administrador.IdAdmin;
             administradorDTO.NombreEmpresa = administrador.NombreEmpresa;
+
             administradorDTO.Pago = MapeoDTO.PagoDTO(administrador.Pago);
 
             return administradorDTO;
@@ -320,6 +321,8 @@ namespace AV_DTO
                 pagoDTO.Reserva = MapeoDTO.ReservaDTO(pago.Reserva);
             }
             return pagoDTO;
+
+
         }
 
         //Dado un Pago se actualiza CON EL DTO

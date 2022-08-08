@@ -17,8 +17,6 @@ namespace AV.BO
         [Column(TypeName = "VarChar(100)")]
         public string NombreEmpresa { get; set; }
 
-        [Required]
-        [Column(TypeName = "Pago")]
-        public Pago Pago { get; set; }
+        
     }
 }

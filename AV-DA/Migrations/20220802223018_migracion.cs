@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AV.DA.Migrations
 {
-    public partial class creacion : Migration
+    public partial class migracion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,9 @@ namespace AV.DA.Migrations
                     Descripcion = table.Column<string>(type: "VarChar(300)", nullable: false),
                     Tipo = table.Column<string>(type: "VarChar(30)", nullable: false),
                     ImagenPortada = table.Column<byte[]>(type: "image", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "Date", nullable: false),
+                    Hora = table.Column<TimeSpan>(type: "Time(7)", nullable: false),
+                    Duracion = table.Column<int>(type: "Integer", nullable: false),
                     Lugar = table.Column<string>(type: "VarChar(100)", nullable: false),
                     NroCupos = table.Column<int>(type: "Integer", nullable: false),
                     CantidadMesas = table.Column<int>(type: "Integer", nullable: false),
