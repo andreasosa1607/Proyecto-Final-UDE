@@ -11,7 +11,7 @@ using AV_DTO;
 
 namespace AV_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api_1_0/[controller]")]
     [ApiController]
     public class AdministradoresController : ControllerBase
     {
@@ -56,8 +56,16 @@ namespace AV_API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(administradorDTO).State = EntityState.Modified;
+            var administrador = await _context.Administradores.FindAsync(id);
 
+            if (administrador == null)
+            {
+                return NotFound();
+            }
+
+            administrador = MapeoDTO.ActualizarAdministrador(administrador, administradorDTO);
+            _context.Entry(administrador).State = EntityState.Modified;
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -80,8 +88,9 @@ namespace AV_API.Controllers
         // POST: api/Administradores
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AdministradorDTO>> PostAdministrador(Administrador administrador)
+        public async Task<ActionResult<AdministradorDTO>> PostAdministrador(AdministradorDTO administradorDTO)
         {
+            Administrador administrador = MapeoDTO.Administrador(administradorDTO);
             _context.Administradores.Add(administrador);
             await _context.SaveChangesAsync();
 

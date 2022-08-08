@@ -50,13 +50,21 @@ namespace AV_API.Controllers
         // PUT: api/Eventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvento(int id, Evento evento)
+        public async Task<IActionResult> PutEvento(int id, EventoDTO eventoDTO)
         {
-            if (id != evento.EventoId)
+            if (id != eventoDTO.EventoId)
             {
                 return BadRequest();
             }
 
+            var evento = await _context.Eventos.FindAsync(id);
+            if (evento == null)
+
+            {
+                return NotFound();
+            }
+
+            evento = MapeoDTO.ActualizarEvento(evento, eventoDTO);
             _context.Entry(evento).State = EntityState.Modified;
 
             try
@@ -81,8 +89,9 @@ namespace AV_API.Controllers
         // POST: api/Eventos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Evento>> PostEvento(Evento evento)
+        public async Task<ActionResult<EventoDTO>> PostEvento(EventoDTO eventoDTO)
         {
+            Evento evento = MapeoDTO.Evento(eventoDTO);
             _context.Eventos.Add(evento);
             await _context.SaveChangesAsync();
 

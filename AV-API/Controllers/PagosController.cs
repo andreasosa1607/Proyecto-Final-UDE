@@ -11,7 +11,7 @@ using AV_DTO;
 
 namespace AV_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api_1_0/[controller]")]
     [ApiController]
     public class PagosController : ControllerBase
     {
@@ -56,7 +56,16 @@ namespace AV_API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(pagoDTO).State = EntityState.Modified;
+            var pago = await _context.Pagos.FindAsync(id);
+            if (pago == null)
+
+            {
+                return NotFound();
+            }
+
+            pago = MapeoDTO.ActualizarPago(pago, pagoDTO);
+
+            _context.Entry(pago).State = EntityState.Modified;
 
             try
             {
@@ -80,8 +89,9 @@ namespace AV_API.Controllers
         // POST: api/Pagos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<PagoDTO>> PostPago(Pago pago)
+        public async Task<ActionResult<PagoDTO>> PostPago(PagoDTO pagoDTO)
         {
+            Pago pago = MapeoDTO.Pago(pagoDTO);
             _context.Pagos.Add(pago);
             await _context.SaveChangesAsync();
 
