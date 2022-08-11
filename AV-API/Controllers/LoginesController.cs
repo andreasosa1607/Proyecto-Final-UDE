@@ -11,7 +11,7 @@ using AV_DTO;
 
 namespace AV_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api_1_0/[controller]")]
     [ApiController]
     public class LoginesController : ControllerBase
     {
@@ -56,7 +56,15 @@ namespace AV_API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(loginDTO).State = EntityState.Modified;
+            var login = await _context.Logins.FindAsync(id);
+            if (login == null)
+
+            {
+                return NotFound();
+            }
+
+            login = MapeoDTO.ActualizarLogin(login, loginDTO);
+            _context.Entry(login).State = EntityState.Modified;
 
             try
             {
@@ -80,9 +88,11 @@ namespace AV_API.Controllers
         // POST: api/Logines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<LoginDTO>> PostLogin(Login login)
+        public async Task<ActionResult<LoginDTO>> PostLogin(LoginDTO loginDTO)
         {
+            Login login = MapeoDTO.Login(loginDTO);
             _context.Logins.Add(login);
+
             try
             {
                 await _context.SaveChangesAsync();

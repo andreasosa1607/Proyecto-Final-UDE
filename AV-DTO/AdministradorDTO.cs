@@ -9,6 +9,6 @@ namespace AV_DTO
     {
         public int IdAdmin { get; set; }
         public string NombreEmpresa { get; set; }
-        public Pago Pago { get; set; }
+        public PagoDTO Pago { get; set; }
     }
 }

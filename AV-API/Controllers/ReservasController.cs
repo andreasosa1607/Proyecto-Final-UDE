@@ -11,7 +11,7 @@ using AV_DTO;
 
 namespace AV_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api_1_0/[controller]")]
     [ApiController]
     public class ReservasController : ControllerBase
     {
@@ -56,8 +56,18 @@ namespace AV_API.Controllers
             {
                 return BadRequest();
             }
+           
+            var reserva = await _context.Reservas.FindAsync(id);
+            if (reserva == null)
 
-            _context.Entry(reservaDTO).State = EntityState.Modified;
+            {
+                return NotFound();
+            }
+
+            reserva = MapeoDTO.ActualizaReserva(reserva, reservaDTO);
+            _context.Entry(reserva).State = EntityState.Modified;
+
+           // _context.Entry(reservaDTO).State = EntityState.Modified;
 
             try
             {
@@ -81,8 +91,9 @@ namespace AV_API.Controllers
         // POST: api/Reservas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ReservaDTO>> PostReserva(Reserva reserva)
+        public async Task<ActionResult<ReservaDTO>> PostReserva(ReservaDTO reservaDTO)
         {
+            Reserva reserva = MapeoDTO.Reserva(reservaDTO);
             _context.Reservas.Add(reserva);
             await _context.SaveChangesAsync();
 

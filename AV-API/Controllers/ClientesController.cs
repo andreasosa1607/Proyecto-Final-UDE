@@ -11,7 +11,7 @@ using AV_DTO;
 
 namespace AV_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api_1_0/[controller]")]
     [ApiController]
     public class ClientesController : ControllerBase
     {
@@ -34,7 +34,7 @@ namespace AV_API.Controllers
 
         // GET: api/Clientes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(int id)
+        public async Task<ActionResult<ClienteDTO>> GetCliente(int id)
         {
             var cliente = await _context.Clientes.FindAsync(id);
 
@@ -43,21 +43,28 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            return cliente;
+            return Ok(cliente);
         }
 
         // PUT: api/Clientes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCliente(int id, Cliente cliente)
+        public async Task<IActionResult> PutCliente(int id, ClienteDTO clienteDTO)
         {
-            if (id != cliente.ClienteId)
+            if (id != clienteDTO.ClienteId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cliente).State = EntityState.Modified;
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
 
+            cliente = MapeoDTO.ActualizarCliente(cliente, clienteDTO);
+            _context.Entry(cliente).State = EntityState.Modified;
+          
             try
             {
                 await _context.SaveChangesAsync();
@@ -80,8 +87,9 @@ namespace AV_API.Controllers
         // POST: api/Clientes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        public async Task<ActionResult<ClienteDTO>> PostCliente(ClienteDTO clienteDTO)
         {
+            Cliente cliente = MapeoDTO.Cliente(clienteDTO);
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
 
