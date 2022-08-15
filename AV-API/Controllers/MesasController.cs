@@ -11,7 +11,7 @@ using AV_DTO;
 
 namespace AV_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api_1_0/[controller]")]
     [ApiController]
     public class MesasController : ControllerBase
     {
@@ -55,8 +55,15 @@ namespace AV_API.Controllers
             {
                 return BadRequest();
             }
+            var mesa = await _context.Mesas.FindAsync(id);
+            if (mesa == null)
 
-            _context.Entry(mesaDTO).State = EntityState.Modified;
+            {
+                return NotFound();
+            }
+
+            mesa = MapeoDTO.ActualizarMesa(mesa, mesaDTO);
+            _context.Entry(mesa).State = EntityState.Modified;
 
             try
             {
@@ -80,9 +87,10 @@ namespace AV_API.Controllers
         // POST: api/Mesas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MesaDTO>> PostMesa(Mesa mesa)
+        public async Task<ActionResult<MesaDTO>> PostMesa(MesaDTO mesaDTO)
         {
-              _context.Mesas.Add(mesa);
+            Mesa mesa = MapeoDTO.Mesa(mesaDTO);
+            _context.Mesas.Add(mesa);
             try
             {
                 await _context.SaveChangesAsync();
