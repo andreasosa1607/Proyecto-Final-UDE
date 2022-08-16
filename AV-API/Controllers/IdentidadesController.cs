@@ -29,11 +29,6 @@ namespace AV_API.Controllers
         {
             try
             {
-                //Verifica el usuario y contraseña
-                if (login.Rol != "Cliente" || login.CorreoElectronico != "usuario1" || login.Contraseña != "123")
-                {
-                    return BadRequest("Usuario/Contraseña incorrectos");
-                }
 
                 //Genera el token
                 var token = GenerarToken(login);
