@@ -12,6 +12,6 @@ namespace AV_DTO
         public EventoDTO Evento { get; set; }
         public string EstadoReserva { get; set; }
         public string ComprobantePago { get; set; }
-        public Asiento Asiento { get; set; }
+        public AsientoDTO Asiento { get; set; }
     }
 }

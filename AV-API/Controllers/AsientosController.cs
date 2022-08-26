@@ -11,7 +11,7 @@ using AV_DTO;
 
 namespace AV_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api_1_0/[controller]")]
     [ApiController]
     public class AsientosController : ControllerBase
     {
@@ -56,7 +56,14 @@ namespace AV_API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(asientoDTO).State = EntityState.Modified;
+            var asiento = await _context.Asientos.FindAsync(id);
+            if (asiento == null)
+            {
+                return NotFound();
+            }
+
+            asiento = MapeoDTO.ActualizarAsiento(asiento, asientoDTO);
+            _context.Entry(asiento).State = EntityState.Modified;
 
             try
             {
@@ -80,8 +87,9 @@ namespace AV_API.Controllers
         // POST: api/Asientos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AsientoDTO>> PostAsiento(Asiento asiento)
+        public async Task<ActionResult<AsientoDTO>> PostAsiento(AsientoDTO asientoDTO)
         {
+            Asiento asiento = MapeoDTO.Asiento(asientoDTO);
             _context.Asientos.Add(asiento);
             try
             {
