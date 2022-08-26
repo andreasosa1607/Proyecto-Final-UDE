@@ -8,13 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
 using AV_DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AV_API.Controllers
 {
-    [Route("api_1_0/[controller]")]
+
+    [Route("api/[controller]")]
     [ApiController]
     public class ClientesController : ControllerBase
     {
+      
         private readonly AVDBContext _context;
 
         public ClientesController(AVDBContext context)
@@ -23,6 +26,7 @@ namespace AV_API.Controllers
         }
 
         // GET: api/Clientes
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ClienteDTO>>> GetClientes()
         {
