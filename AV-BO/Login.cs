@@ -20,10 +20,11 @@ namespace AV.BO
         [Column(TypeName = "VarChar(30)")]
         public string Contraseña { get; set; }
 
-        // ver si esta bien que sea la key y como poner formato mail
         [Key]
         [Required]
         [Column(TypeName = "VarChar(150)")]
         public string CorreoElectronico { get; set; }
+
+       
     }
 }
