@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-
+using System.Security.Claims;
 
 namespace AV_API.Controllers
 {
@@ -56,14 +56,28 @@ namespace AV_API.Controllers
             DateTime now = DateTime.Now;
             dtFechaExpiraToken = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59, 999);
 
+           
 
-            return new JwtSecurityToken
+            var claims = new Claim[]
+            {
+                new Claim("correoElectronico", login.CorreoElectronico),
+                new Claim("rol", login.Rol),
+                new Claim(JwtRegisteredClaimNames.Iat, (now).ToString(), ClaimValueTypes.Integer64)
+            };
+
+   
+         
+  
+            return new JwtSecurityToken 
             (
+                claims: claims,
                 issuer: ValidIssuer,
                 audience: ValidAudience,
                 expires: dtFechaExpiraToken,
                 notBefore: now,
                 signingCredentials: new SigningCredentials(IssuerSigningKey, SecurityAlgorithms.HmacSha256)
+ 
+                
             );
         }
     }
