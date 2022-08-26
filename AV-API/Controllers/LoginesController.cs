@@ -34,7 +34,7 @@ namespace AV_API.Controllers
 
         // GET: api/Logines/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<LoginDTO>> GetLogin(string id)
+        public async Task<ActionResult<Login>> GetLogin(string id)
         {
             var login = await _context.Logins.FindAsync(id);
 
@@ -42,20 +42,22 @@ namespace AV_API.Controllers
             {
                 return NotFound();
             }
+                return login; 
 
-            return Ok(login);
         }
 
         // PUT: api/Logines/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLogin(string id, LoginDTO loginDTO)
+        public async Task<IActionResult> PutLogin(string id, Login login)
         {
-            if (id != loginDTO.CorreoElectronico)
+            if (id != login.CorreoElectronico)
             {
                 return BadRequest();
             }
 
+<<<<<<< HEAD
+=======
             var login = await _context.Logins.FindAsync(id);
             if (login == null)
 
@@ -64,6 +66,7 @@ namespace AV_API.Controllers
             }
 
             login = MapeoDTO.ActualizarLogin(login, loginDTO);
+>>>>>>> c445231bb64893b458c8fbde3fc8dd07908413b8
             _context.Entry(login).State = EntityState.Modified;
 
             try
