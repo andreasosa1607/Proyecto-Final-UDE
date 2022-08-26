@@ -13,7 +13,10 @@ namespace AV_DTO
         public string ImagenPortada { get; set; }
         public DateTime Fecha { get; set; }
         public TimeSpan Hora { get; set; }
-        public string Lugar { get; set; }
+        public int Duracion { get; set; }
+        public string callePuerta { get; set; }
+        public string barrio { get; set; }
+        public string ciudad { get; set; }
         public int NroCupos { get; set; }
         public int CantidadMesas { get; set; }
         public int CantidadAsientosMesa { get; set; }

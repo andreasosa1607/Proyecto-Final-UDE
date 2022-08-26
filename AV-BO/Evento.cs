@@ -26,46 +26,54 @@ namespace AV.BO
         public string Tipo { get; set; }
 
         // ver esto con Emiliano (traerla por FTP)
-        [Required]
+
         [Column(TypeName = "image")]
         public string ImagenPortada { get; set; }
 
-        
+
         [Required]
-        [Column(TypeName = "Date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Fecha { get; set; }
 
-       
-        
-        [Required]
-        [Column(TypeName = "Time(7)")]
-        public TimeSpan Hora { get; set; }
-
-        
         [Required]
         [Column(TypeName = "Integer")]
         public int Duracion { get; set; }
 
+
+        [Required]
+        [Column(TypeName = "Time(7)")]
+        public TimeSpan Hora { get; set; }
+
+
         [Required]
         [Column(TypeName = "VarChar(100)")]
-        public string Lugar { get; set; }
+        public string callePuerta { get; set; }
 
-        
+        [Required]
+        [Column(TypeName = "VarChar(100)")]
+        public string barrio { get; set; }
+
+        [Required]
+        [Column(TypeName = "VarChar(100)")]
+        public string ciudad { get; set; }
+
+
         [Required]
         [Column(TypeName = "Integer")]
-        public int NroCupos { get; set ; }
+        public int NroCupos { get; set; }
 
-        
+
         [Required]
         [Column(TypeName = "Integer")]
         public int CantidadMesas { get; set; }
 
-        
+
         [Required]
         [Column(TypeName = "Integer")]
         public int CantidadAsientosMesa { get; set; }
 
-        
+
         [Required]
         [Column(TypeName = "Integer")]
         public int PrecioAsiento { get; set; }
@@ -79,12 +87,11 @@ namespace AV.BO
         [Required]
         [Column(TypeName = "VarChar(20)")]
         public string CriterioAsignacion { get; set; }
-   
-        [Required]
-        [Column(TypeName = "Varchar(20)")]
-        public string EmpresaCreadora { get; set; }
 
-       
+        [Required]
+        [Column(TypeName = "Varchar(100)")]
+        public string EmpresaCreadora { get; set; }
+    
     
     }
 }

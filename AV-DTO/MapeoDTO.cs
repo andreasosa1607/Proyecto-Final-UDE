@@ -103,31 +103,30 @@ namespace AV_DTO
         }
 
 
-            public static EventoDTO EventoDTO(Evento evento)
+        public static EventoDTO EventoDTO(Evento evento)
         {
             EventoDTO eventoDTO = new EventoDTO();
 
-            if (eventoDTO != null)
-            {
-                eventoDTO.EventoId = evento.EventoId;
-                eventoDTO.Nombre = evento.Nombre;
-                eventoDTO.Descripcion = evento.Descripcion;
-                eventoDTO.Tipo = evento.Tipo;
-                eventoDTO.ImagenPortada = evento.ImagenPortada;
-                eventoDTO.Fecha = evento.Fecha;
-                eventoDTO.Hora = evento.Hora;
-                eventoDTO.Lugar = evento.Lugar;
-                eventoDTO.NroCupos = evento.NroCupos;
-                eventoDTO.CantidadMesas = evento.CantidadMesas;
-                eventoDTO.CantidadAsientosMesa = evento.CantidadAsientosMesa;
-                eventoDTO.PrecioAsiento = evento.PrecioAsiento;
-                eventoDTO.Idioma = evento.Idioma;
-                eventoDTO.CriterioAsignacion = evento.CriterioAsignacion;
-                eventoDTO.EmpresaCreadora = evento.EmpresaCreadora;
-            }
+            eventoDTO.EventoId = evento.EventoId;
+            eventoDTO.Nombre = evento.Nombre;
+            eventoDTO.Descripcion = evento.Descripcion;
+            eventoDTO.Tipo = evento.Tipo;
+            eventoDTO.ImagenPortada = evento.ImagenPortada;
+            eventoDTO.Fecha = evento.Fecha;
+            eventoDTO.Hora = evento.Hora;
+            eventoDTO.callePuerta = evento.callePuerta;
+            eventoDTO.barrio = evento.barrio;
+            eventoDTO.ciudad = evento.ciudad;
+            eventoDTO.NroCupos = evento.NroCupos;
+            eventoDTO.CantidadMesas = evento.CantidadMesas;
+            eventoDTO.CantidadAsientosMesa = evento.CantidadAsientosMesa;
+            eventoDTO.PrecioAsiento = evento.PrecioAsiento;
+            eventoDTO.Idioma = evento.Idioma;
+            eventoDTO.CriterioAsignacion = evento.CriterioAsignacion;
+            eventoDTO.EmpresaCreadora = evento.EmpresaCreadora;
+
             return eventoDTO;
         }
-
         //Dado un evento se actualiza con el dto
         public static Evento ActualizarEvento (Evento evento, EventoDTO eventoDTO)
         {
@@ -139,7 +138,9 @@ namespace AV_DTO
             evento.ImagenPortada = eventoDTO.ImagenPortada;
             evento.Fecha = eventoDTO.Fecha;
             evento.Hora = eventoDTO.Hora;
-            evento.Lugar = eventoDTO.Lugar;
+            eventoDTO.callePuerta = evento.callePuerta;
+            eventoDTO.barrio = evento.barrio;
+            eventoDTO.ciudad = evento.ciudad;
             evento.NroCupos = eventoDTO.NroCupos;
             evento.CantidadMesas = eventoDTO.CantidadMesas;
             evento.CantidadAsientosMesa = eventoDTO.CantidadAsientosMesa;
@@ -163,7 +164,9 @@ namespace AV_DTO
             evento.ImagenPortada = eventoDTO.ImagenPortada;
             evento.Fecha = eventoDTO.Fecha;
             evento.Hora = eventoDTO.Hora;
-            evento.Lugar = eventoDTO.Lugar;
+            eventoDTO.callePuerta = evento.callePuerta;
+            eventoDTO.barrio = evento.barrio;
+            eventoDTO.ciudad = evento.ciudad;
             evento.NroCupos = eventoDTO.NroCupos;
             evento.CantidadMesas = eventoDTO.CantidadMesas;
             evento.CantidadAsientosMesa = eventoDTO.CantidadAsientosMesa;

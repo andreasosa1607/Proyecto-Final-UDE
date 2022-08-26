@@ -15,5 +15,7 @@ namespace AV_DTO
         public string ProfesionCargo { get; set; }
         public string NombreEmpresa { get; set; }
         public string FotoPerfil { get; set; }
+        public LoginDTO login { get; set; }
+
     }
 }
