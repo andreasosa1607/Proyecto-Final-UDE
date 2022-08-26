@@ -67,8 +67,10 @@ namespace AV.DA.Migrations
                         .HasColumnType("VarChar(100)");
 
                     b.Property<byte[]>("FotoPerfil")
-                        .IsRequired()
                         .HasColumnType("image");
+
+                    b.Property<string>("LoginCorreoElectronico")
+                        .HasColumnType("VarChar(150)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -93,6 +95,8 @@ namespace AV.DA.Migrations
                         .HasColumnType("VarChar(20)");
 
                     b.HasKey("ClienteId");
+
+                    b.HasIndex("LoginCorreoElectronico");
 
                     b.ToTable("Clientes");
                 });
@@ -123,7 +127,10 @@ namespace AV.DA.Migrations
 
                     b.Property<string>("EmpresaCreadora")
                         .IsRequired()
-                        .HasColumnType("Varchar(20)");
+                        .HasColumnType("Varchar(100)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("Date");
@@ -136,12 +143,7 @@ namespace AV.DA.Migrations
                         .HasColumnType("VarChar(20)");
 
                     b.Property<byte[]>("ImagenPortada")
-                        .IsRequired()
                         .HasColumnType("image");
-
-                    b.Property<string>("Lugar")
-                        .IsRequired()
-                        .HasColumnType("VarChar(100)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -156,6 +158,18 @@ namespace AV.DA.Migrations
                     b.Property<string>("Tipo")
                         .IsRequired()
                         .HasColumnType("VarChar(30)");
+
+                    b.Property<string>("barrio")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
+
+                    b.Property<string>("callePuerta")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
+
+                    b.Property<string>("ciudad")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
 
                     b.HasKey("EventoId");
 
@@ -272,6 +286,15 @@ namespace AV.DA.Migrations
                         .HasForeignKey("MesaNroMesa");
 
                     b.Navigation("Mesa");
+                });
+
+            modelBuilder.Entity("AV.BO.Cliente", b =>
+                {
+                    b.HasOne("AV.BO.Login", "Login")
+                        .WithMany()
+                        .HasForeignKey("LoginCorreoElectronico");
+
+                    b.Navigation("Login");
                 });
 
             modelBuilder.Entity("AV.BO.Pago", b =>

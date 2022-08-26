@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
-using AV.DA;
 using AV_DTO;
+using AV.DA;
 
 namespace AV_API.Controllers
 {
