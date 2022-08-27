@@ -7,13 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
+using AV.DA.ServiceCorreosElectronicos;
 using AV_DTO;
 using Microsoft.AspNetCore.Authorization;
 
 namespace AV_API.Controllers
 {
+<<<<<<< HEAD
+    [Route("api_1_0/[controller]")]
+=======
 
     [Route("api/[controller]")]
+>>>>>>> c445231bb64893b458c8fbde3fc8dd07908413b8
     [ApiController]
     public class ClientesController : ControllerBase
     {
@@ -51,7 +56,6 @@ namespace AV_API.Controllers
         }
 
         // PUT: api/Clientes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCliente(int id, ClienteDTO clienteDTO)
         {
@@ -89,7 +93,6 @@ namespace AV_API.Controllers
         }
 
         // POST: api/Clientes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ClienteDTO>> PostCliente(ClienteDTO clienteDTO)
         {
@@ -120,5 +123,8 @@ namespace AV_API.Controllers
         {
             return _context.Clientes.Any(e => e.ClienteId == id);
         }
+
+
+    
     }
 }

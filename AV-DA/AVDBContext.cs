@@ -28,7 +28,10 @@ namespace AV.DA
             modelBuilder.Entity<Mesa>().Property(et => et.NroMesa).ValueGeneratedNever();
             modelBuilder.Entity<Asiento>().Property(et => et.NroAsiento).ValueGeneratedNever();
             modelBuilder.Entity<Login>().Property(et => et.CorreoElectronico).ValueGeneratedNever();
+
         }
+
+      
 
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Mesa> Mesas { get; set; }
