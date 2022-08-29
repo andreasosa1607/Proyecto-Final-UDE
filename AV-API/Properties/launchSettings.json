@@ -8,6 +8,7 @@
       "sslPort": 44319
     }
   },
+
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
@@ -17,6 +18,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+
     "AV_API": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
