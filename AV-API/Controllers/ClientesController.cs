@@ -13,12 +13,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AV_API.Controllers
 {
-<<<<<<< HEAD
-    [Route("api_1_0/[controller]")]
-=======
 
-    [Route("api/[controller]")]
->>>>>>> c445231bb64893b458c8fbde3fc8dd07908413b8
+    [Route("api_1_0/[controller]")]
+
     [ApiController]
     public class ClientesController : ControllerBase
     {
