@@ -6,6 +6,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+<<<<<<< HEAD
+<<<<<<< HEAD
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using AV.DA;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+using AV.DA;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+=======
+>>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
+=======
+>>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;

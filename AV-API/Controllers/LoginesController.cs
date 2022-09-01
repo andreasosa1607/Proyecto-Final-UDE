@@ -42,7 +42,15 @@ namespace AV_API.Controllers
             {
                 return NotFound();
             }
+<<<<<<< HEAD
+<<<<<<< HEAD
+            return login;
+=======
                 return Ok(login); 
+>>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
+=======
+                return Ok(login); 
+>>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
 
         }
 
@@ -56,7 +64,16 @@ namespace AV_API.Controllers
                 return BadRequest();
             }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+            var login = await _context.Logins.FindAsync(id);
+=======
      var login = await _context.Logins.FindAsync(id);
+>>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
+=======
+     var login = await _context.Logins.FindAsync(id);
+>>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
             if (login == null)
 
             {
@@ -84,7 +101,7 @@ namespace AV_API.Controllers
 
             return NoContent();
         }
-
+    
         // POST: api/Logines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -114,7 +131,7 @@ namespace AV_API.Controllers
 
         // DELETE: api/Logines/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLogin(string id)
+        public async Task<ActionResult<Login>> DeleteLogin(string id)
         {
             var login = await _context.Logins.FindAsync(id);
             if (login == null)
@@ -125,7 +142,7 @@ namespace AV_API.Controllers
             _context.Logins.Remove(login);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return login;
         }
 
         private bool LoginExists(string id)
