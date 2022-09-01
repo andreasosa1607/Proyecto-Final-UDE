@@ -1,10 +1,13 @@
+using AV.DA;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+<<<<<<< HEAD
+<<<<<<< HEAD
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using AV.DA;
@@ -16,7 +19,12 @@ using Microsoft.EntityFrameworkCore;
 
 using AV.DA;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+=======
+>>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
+=======
+>>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 namespace AV_API
@@ -87,6 +95,7 @@ namespace AV_API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AV_API", Version = "v1" });
             });
         }
+    
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
