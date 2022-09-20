@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,15 +42,13 @@ namespace AV_API.Controllers
             {
                 return NotFound();
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             return login;
-=======
+
                 return Ok(login); 
->>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
-=======
+
                 return Ok(login); 
->>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
+
 
         }
 
@@ -64,16 +62,12 @@ namespace AV_API.Controllers
                 return BadRequest();
             }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
             var login = await _context.Logins.FindAsync(id);
-=======
+
      var login = await _context.Logins.FindAsync(id);
->>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
-=======
+
      var login = await _context.Logins.FindAsync(id);
->>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
+
             if (login == null)
 
             {
@@ -81,6 +75,7 @@ namespace AV_API.Controllers
             }
 
             login = MapeoDTO.ActualizarLogin(login, loginDTO);
+
             _context.Entry(login).State = EntityState.Modified;
 
             try
@@ -101,7 +96,7 @@ namespace AV_API.Controllers
 
             return NoContent();
         }
-    
+
         // POST: api/Logines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
