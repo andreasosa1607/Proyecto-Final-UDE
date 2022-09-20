@@ -37,6 +37,7 @@ namespace AV_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<EventoDTO>> GetEvento(int id)
         {
+
             var evento = await _context.Eventos.FindAsync(id);
 
             if (evento == null)
@@ -44,7 +45,7 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            return Ok(evento);
+            return MapeoDTO.EventoDTO(evento);
         }
 
         // PUT: api/Eventos/5
@@ -64,7 +65,7 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            evento = MapeoDTO.ActualizarEvento(evento, eventoDTO);
+       evento = MapeoDTO.ActualizarEvento(evento, eventoDTO);
             _context.Entry(evento).State = EntityState.Modified;
 
             try

@@ -9,6 +9,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 
     <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+
+    <PlatformTarget>AnyCPU</PlatformTarget>
 
     <PlatformTarget>ARM64</PlatformTarget>
 
@@ -22,6 +28,7 @@
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
 
 
+
     <Compile Remove="Controllers\Constantes.cs" />
   </ItemGroup>
 
@@ -31,7 +38,6 @@
 
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
-
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
       <PrivateAssets>all</PrivateAssets>
