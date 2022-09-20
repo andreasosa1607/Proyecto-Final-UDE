@@ -5,6 +5,10 @@
     <RootNamespace>AV.BO</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="DTOs\**" />
     <EmbeddedResource Remove="DTOs\**" />

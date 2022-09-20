@@ -6,6 +6,10 @@
     <UserSecretsId>6820a761-c01e-4d8e-b71c-ee20f4d11135</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
 
 <PackageReference Include="Flurl.Http" Version="4.0.0-pre2" />
