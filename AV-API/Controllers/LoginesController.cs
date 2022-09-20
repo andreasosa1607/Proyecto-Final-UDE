@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,7 +42,13 @@ namespace AV_API.Controllers
             {
                 return NotFound();
             }
+
+            return login;
+
                 return Ok(login); 
+
+                return Ok(login); 
+
 
         }
 
@@ -56,7 +62,12 @@ namespace AV_API.Controllers
                 return BadRequest();
             }
 
+            var login = await _context.Logins.FindAsync(id);
+
      var login = await _context.Logins.FindAsync(id);
+
+     var login = await _context.Logins.FindAsync(id);
+
             if (login == null)
 
             {
@@ -64,6 +75,7 @@ namespace AV_API.Controllers
             }
 
             login = MapeoDTO.ActualizarLogin(login, loginDTO);
+
             _context.Entry(login).State = EntityState.Modified;
 
             try
@@ -114,7 +126,7 @@ namespace AV_API.Controllers
 
         // DELETE: api/Logines/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLogin(string id)
+        public async Task<ActionResult<Login>> DeleteLogin(string id)
         {
             var login = await _context.Logins.FindAsync(id);
             if (login == null)
@@ -125,7 +137,7 @@ namespace AV_API.Controllers
             _context.Logins.Remove(login);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return login;
         }
 
         private bool LoginExists(string id)

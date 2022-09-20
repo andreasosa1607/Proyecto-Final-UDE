@@ -16,6 +16,13 @@ namespace AV_API.Controllers
 
     [Route("api_1_0/[controller]")]
 
+
+
+    [Route("api/[controller]")]
+
+
+
+
     [ApiController]
     public class ClientesController : ControllerBase
     {
@@ -102,7 +109,7 @@ namespace AV_API.Controllers
 
         // DELETE: api/Clientes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCliente(int id)
+        public async Task<ActionResult<Cliente>> DeleteCliente(int id)
         {
             var cliente = await _context.Clientes.FindAsync(id);
             if (cliente == null)
@@ -113,7 +120,7 @@ namespace AV_API.Controllers
             _context.Clientes.Remove(cliente);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return cliente;
         }
 
         private bool ClienteExists(int id)

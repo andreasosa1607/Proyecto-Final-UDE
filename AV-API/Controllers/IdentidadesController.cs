@@ -7,6 +7,10 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using AV.DA;
+using AV_DTO;
+
 
 namespace AV_API.Controllers
 {
@@ -17,21 +21,42 @@ namespace AV_API.Controllers
         private readonly IConfiguration _configuration;
         private readonly ILogger<IdentidadesController> _logger;
 
-        public IdentidadesController(IConfiguration configuration, ILogger<IdentidadesController> logger)
+        private readonly AVDBContext _context;
+
+        //public IdentidadesController(AVDBContext context)
+        //{
+        //    _context = context;
+        //}
+
+        public IdentidadesController(IConfiguration configuration, ILogger<IdentidadesController> logger, AVDBContext context)
         {
             _configuration = configuration;
             _logger = logger;
+            _context = context;
         }
 
         [HttpPost]
         [Route("login")]
-        public IActionResult Login(Login login)
+        public async Task<ActionResult<LoginDTO>> Login(LoginDTO login)
+
         {
+            var loginExiste = await _context.Logins.FindAsync(login.CorreoElectronico);
+
+            if (loginExiste == null)
+            {
+                return NotFound();
+            }
+
             try
             {
+                //Verifica el usuario y contraseña
+                if ( login.CorreoElectronico != loginExiste.CorreoElectronico || login.Contraseña != loginExiste.Contraseña)
+                {
+                    return BadRequest("Correo Electronico/Contraseña incorrectos");
+                }
 
                 //Genera el token
-                var token = GenerarToken(login);
+                var token = GenerarToken(loginExiste);
 
                 return Ok(new
                 {

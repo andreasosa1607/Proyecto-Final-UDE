@@ -47,6 +47,16 @@ namespace AV.BO
 
 
         [Required]
+        [Column(TypeName = "Integer")]
+        public int Duracion { get; set; }
+
+
+        [Required]
+        [Column(TypeName = "Varchar(10)")]
+        public string Hora { get; set; }
+
+
+        [Required]
         [Column(TypeName = "VarChar(100)")]
         public string callePuerta { get; set; }
 
