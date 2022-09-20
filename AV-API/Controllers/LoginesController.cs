@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +34,7 @@ namespace AV_API.Controllers
 
         // GET: api/Logines/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Login>> GetLogin(string id)
+        public async Task<ActionResult<LoginDTO>> GetLogin(string id)
         {
             var login = await _context.Logins.FindAsync(id);
 
@@ -42,7 +42,13 @@ namespace AV_API.Controllers
             {
                 return NotFound();
             }
-                return login; 
+
+            return login;
+
+                return Ok(login); 
+
+                return Ok(login); 
+
 
         }
 
@@ -57,6 +63,11 @@ namespace AV_API.Controllers
             }
 
             var login = await _context.Logins.FindAsync(id);
+
+     var login = await _context.Logins.FindAsync(id);
+
+     var login = await _context.Logins.FindAsync(id);
+
             if (login == null)
 
             {
@@ -85,7 +96,6 @@ namespace AV_API.Controllers
 
             return NoContent();
         }
-
 
         // POST: api/Logines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -116,7 +126,7 @@ namespace AV_API.Controllers
 
         // DELETE: api/Logines/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLogin(string id)
+        public async Task<ActionResult<Login>> DeleteLogin(string id)
         {
             var login = await _context.Logins.FindAsync(id);
             if (login == null)
@@ -127,7 +137,7 @@ namespace AV_API.Controllers
             _context.Logins.Remove(login);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return login;
         }
 
         private bool LoginExists(string id)

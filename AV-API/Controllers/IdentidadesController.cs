@@ -74,14 +74,14 @@ namespace AV_API.Controllers
         {
             string ValidIssuer = _configuration["ApiAuth:Issuer"];
             string ValidAudience = _configuration["ApiAuth:Audience"];
-            SymmetricSecurityKey IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["ApiAuth:SecretKey"]));
+           SymmetricSecurityKey IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["ApiAuth:SecretKey"]));
 
             //La fecha de expiracion sera el mismo dia a las 12 de la noche
             DateTime dtFechaExpiraToken;
             DateTime now = DateTime.Now;
             dtFechaExpiraToken = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59, 999);
 
-           
+
 
             var claims = new Claim[]
             {
@@ -90,10 +90,10 @@ namespace AV_API.Controllers
                 new Claim(JwtRegisteredClaimNames.Iat, (now).ToString(), ClaimValueTypes.Integer64)
             };
 
-   
-         
-  
-            return new JwtSecurityToken 
+
+
+
+            return new JwtSecurityToken
             (
                 claims: claims,
                 issuer: ValidIssuer,
@@ -101,8 +101,8 @@ namespace AV_API.Controllers
                 expires: dtFechaExpiraToken,
                 notBefore: now,
                 signingCredentials: new SigningCredentials(IssuerSigningKey, SecurityAlgorithms.HmacSha256)
- 
-                
+
+
             );
         }
     }
