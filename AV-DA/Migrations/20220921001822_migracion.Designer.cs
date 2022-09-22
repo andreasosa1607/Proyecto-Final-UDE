@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AV.DA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    [Migration("20220827042128_migracion")]
+    [Migration("20220921001822_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,11 +28,16 @@ namespace AV.DA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("LoginCorreoElectronico")
+                        .HasColumnType("VarChar(150)");
+
                     b.Property<string>("NombreEmpresa")
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
 
                     b.HasKey("IdAdmin");
+
+                    b.HasIndex("LoginCorreoElectronico");
 
                     b.ToTable("Administradores");
                 });
@@ -45,9 +50,14 @@ namespace AV.DA.Migrations
                     b.Property<int?>("MesaNroMesa")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ReservaIdReserva")
+                        .HasColumnType("int");
+
                     b.HasKey("NroAsiento");
 
                     b.HasIndex("MesaNroMesa");
+
+                    b.HasIndex("ReservaIdReserva");
 
                     b.ToTable("Asientos");
                 });
@@ -64,7 +74,6 @@ namespace AV.DA.Migrations
                         .HasColumnType("VarChar(100)");
 
                     b.Property<byte[]>("FotoPerfil")
-                        .IsRequired()
                         .HasColumnType("image");
 
                     b.Property<string>("LoginCorreoElectronico")
@@ -106,11 +115,23 @@ namespace AV.DA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Barrio")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
+
+                    b.Property<string>("CallePuerta")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
+
                     b.Property<int>("CantidadAsientosMesa")
                         .HasColumnType("Integer");
 
                     b.Property<int>("CantidadMesas")
                         .HasColumnType("Integer");
+
+                    b.Property<string>("Ciudad")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
 
                     b.Property<string>("CriterioAsignacion")
                         .IsRequired()
@@ -154,18 +175,6 @@ namespace AV.DA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(30)");
 
-                    b.Property<string>("barrio")
-                        .IsRequired()
-                        .HasColumnType("VarChar(100)");
-
-                    b.Property<string>("callePuerta")
-                        .IsRequired()
-                        .HasColumnType("VarChar(100)");
-
-                    b.Property<string>("ciudad")
-                        .IsRequired()
-                        .HasColumnType("VarChar(100)");
-
                     b.HasKey("EventoId");
 
                     b.ToTable("Eventos");
@@ -195,12 +204,17 @@ namespace AV.DA.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CantidadAsientos")
-                        .HasColumnType("Int");
+                        .HasColumnType("Integer");
+
+                    b.Property<int?>("EventoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("LugaresDisponibles")
-                        .HasColumnType("Int");
+                        .HasColumnType("Integer");
 
                     b.HasKey("NroMesa");
+
+                    b.HasIndex("EventoId");
 
                     b.ToTable("Mesas");
                 });
@@ -237,9 +251,6 @@ namespace AV.DA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AsientoNroAsiento")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
@@ -254,9 +265,21 @@ namespace AV.DA.Migrations
                     b.Property<int?>("EventoId")
                         .HasColumnType("int");
 
-                    b.HasKey("IdReserva");
+                    b.Property<int>("Telefono")
+                        .HasColumnType("Integer");
 
-                    b.HasIndex("AsientoNroAsiento");
+                    b.Property<int>("cantidadReservas")
+                        .HasColumnType("Integer");
+
+                    b.Property<string>("correoElectronico")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
+                    b.Property<string>("nombreEmpresa")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
+
+                    b.HasKey("IdReserva");
 
                     b.HasIndex("ClienteId");
 
@@ -265,11 +288,24 @@ namespace AV.DA.Migrations
                     b.ToTable("Reservas");
                 });
 
+            modelBuilder.Entity("AV.BO.Administrador", b =>
+                {
+                    b.HasOne("AV.BO.Login", "Login")
+                        .WithMany()
+                        .HasForeignKey("LoginCorreoElectronico");
+
+                    b.Navigation("Login");
+                });
+
             modelBuilder.Entity("AV.BO.Asiento", b =>
                 {
                     b.HasOne("AV.BO.Mesa", "Mesa")
                         .WithMany()
                         .HasForeignKey("MesaNroMesa");
+
+                    b.HasOne("AV.BO.Reserva", null)
+                        .WithMany("Asientos")
+                        .HasForeignKey("ReservaIdReserva");
 
                     b.Navigation("Mesa");
                 });
@@ -283,6 +319,13 @@ namespace AV.DA.Migrations
                     b.Navigation("Login");
                 });
 
+            modelBuilder.Entity("AV.BO.Mesa", b =>
+                {
+                    b.HasOne("AV.BO.Evento", null)
+                        .WithMany("Mesas")
+                        .HasForeignKey("EventoId");
+                });
+
             modelBuilder.Entity("AV.BO.Pago", b =>
                 {
                     b.HasOne("AV.BO.Reserva", "Reserva")
@@ -294,10 +337,6 @@ namespace AV.DA.Migrations
 
             modelBuilder.Entity("AV.BO.Reserva", b =>
                 {
-                    b.HasOne("AV.BO.Asiento", "Asiento")
-                        .WithMany()
-                        .HasForeignKey("AsientoNroAsiento");
-
                     b.HasOne("AV.BO.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId");
@@ -306,11 +345,19 @@ namespace AV.DA.Migrations
                         .WithMany()
                         .HasForeignKey("EventoId");
 
-                    b.Navigation("Asiento");
-
                     b.Navigation("Cliente");
 
                     b.Navigation("Evento");
+                });
+
+            modelBuilder.Entity("AV.BO.Evento", b =>
+                {
+                    b.Navigation("Mesas");
+                });
+
+            modelBuilder.Entity("AV.BO.Reserva", b =>
+                {
+                    b.Navigation("Asientos");
                 });
 #pragma warning restore 612, 618
         }
