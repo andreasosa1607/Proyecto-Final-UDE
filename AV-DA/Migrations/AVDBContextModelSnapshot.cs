@@ -128,9 +128,6 @@ namespace AV.DA.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("Hora")
-                        .HasColumnType("Time(7)");
-
                     b.Property<string>("Idioma")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");

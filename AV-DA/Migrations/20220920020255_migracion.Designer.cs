@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AV.DA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    [Migration("20220827191232_migracion")]
+    [Migration("20220920020255_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,9 +129,6 @@ namespace AV.DA.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
-
-                    b.Property<TimeSpan>("Hora")
-                        .HasColumnType("Time(7)");
 
                     b.Property<string>("Idioma")
                         .IsRequired()

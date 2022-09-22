@@ -32,7 +32,6 @@ namespace AV.DA.Migrations
                     ImagenPortada = table.Column<byte[]>(type: "image", nullable: true),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Duracion = table.Column<int>(type: "Integer", nullable: false),
-                    Hora = table.Column<TimeSpan>(type: "Time(7)", nullable: false),
                     callePuerta = table.Column<string>(type: "VarChar(100)", nullable: false),
                     barrio = table.Column<string>(type: "VarChar(100)", nullable: false),
                     ciudad = table.Column<string>(type: "VarChar(100)", nullable: false),
