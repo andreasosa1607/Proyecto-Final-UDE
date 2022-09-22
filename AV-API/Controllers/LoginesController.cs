@@ -34,7 +34,7 @@ namespace AV_API.Controllers
 
         // GET: api/Logines/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<LoginDTO>> GetLogin(string id)
+        public async Task<ActionResult<Login>> GetLogin(string id)
         {
             var login = await _context.Logins.FindAsync(id);
 
@@ -45,11 +45,31 @@ namespace AV_API.Controllers
 
             return login;
 
-                return Ok(login); 
-
-                return Ok(login); 
 
 
+        }
+
+        [HttpGet("{id}/{passAnterior}")]
+        public async Task<ActionResult<Login>> GetLoginYPass(string id, string passAnterior)
+        {
+            var login = await _context.Logins.FindAsync(id);
+
+            if (login == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                if (login.Contraseña == passAnterior)
+                {
+                    return login;
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
         }
 
         // PUT: api/Logines/5
@@ -62,11 +82,11 @@ namespace AV_API.Controllers
                 return BadRequest();
             }
 
+
             var login = await _context.Logins.FindAsync(id);
 
      var login = await _context.Logins.FindAsync(id);
 
-     var login = await _context.Logins.FindAsync(id);
 
             if (login == null)
 

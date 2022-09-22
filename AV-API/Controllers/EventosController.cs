@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
 using AV_DTO;
+using AV.BL;
 
 namespace AV_API.Controllers
 {
@@ -47,6 +48,7 @@ namespace AV_API.Controllers
 
             return MapeoDTO.EventoDTO(evento);
         }
+
 
         // PUT: api/Eventos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -108,11 +110,32 @@ namespace AV_API.Controllers
             {
                 return NotFound();
             }
+            else
+            {
 
-            _context.Eventos.Remove(evento);
-            await _context.SaveChangesAsync();
+                List<Reserva> reservas = await _context.Reservas.Where(x => x.Evento.EventoId == evento.EventoId).ToListAsync();
 
-            return NoContent();
+
+                if (reservas == null || reservas.Count == 0)
+
+                {
+                    return NotFound();
+
+                }
+                else
+                {
+                        _context.Eventos.Remove(evento);
+                foreach(Reserva reserva in reservas)
+                    {
+                        reserva.EstadoReserva = "Evento cancelado";
+                        await _context.SaveChangesAsync();
+                    }
+                        await _context.SaveChangesAsync();
+
+                        return NoContent();
+                    
+                }
+            }
         }
 
         private bool EventoExists(int id)

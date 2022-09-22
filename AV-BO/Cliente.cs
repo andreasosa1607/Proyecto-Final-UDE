@@ -45,7 +45,6 @@ namespace AV.BO
         public string NombreEmpresa { get; set; }
 
         // ver esto con Emiliano (traerla por FTP)
-        [Required]
         [Column(TypeName = "image")]
         public string FotoPerfil { get; set; }
 

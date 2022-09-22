@@ -32,6 +32,23 @@ namespace AV.BO
         public string ComprobantePago { get; set; }
 
         [Column(TypeName = "Asiento")]
-        public Asiento Asiento { get; set; }
+        public List<Asiento> Asientos { get; set; }
+
+        [Required]
+        [Column(TypeName = "VarChar(100)")]
+        public string nombreEmpresa { get; set; }
+
+        [Required]
+        [Column(TypeName = "Integer")]
+        public int Telefono { get; set; }
+
+        [Required]
+        [Column(TypeName = "VarChar(50)")]
+        public string correoElectronico { get; set; }
+
+        [Required]
+        [Column(TypeName = "Integer")]
+        public int cantidadReservas { get; set; }
+
     }
 }

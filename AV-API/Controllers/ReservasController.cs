@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
 using AV_DTO;
+using AV.BL;
 
 namespace AV_API.Controllers
 {
@@ -56,7 +57,7 @@ namespace AV_API.Controllers
             {
                 return BadRequest();
             }
-           
+
             var reserva = await _context.Reservas.FindAsync(id);
             if (reserva == null)
 
@@ -67,7 +68,7 @@ namespace AV_API.Controllers
             reserva = MapeoDTO.ActualizaReserva(reserva, reservaDTO);
             _context.Entry(reserva).State = EntityState.Modified;
 
-           // _context.Entry(reservaDTO).State = EntityState.Modified;
+            // _context.Entry(reservaDTO).State = EntityState.Modified;
 
             try
             {
@@ -94,11 +95,20 @@ namespace AV_API.Controllers
         public async Task<ActionResult<ReservaDTO>> PostReserva(ReservaDTO reservaDTO)
         {
             Reserva reserva = MapeoDTO.Reserva(reservaDTO);
+            reserva.Evento.NroCupos = (reserva.Evento.NroCupos) - (reserva.cantidadReservas);
+            _context.Eventos.Update(reserva.Evento);
+            _context.Clientes.Update(reserva.Cliente);
+            _context.Logins.Update(reserva.Cliente.Login);
             _context.Reservas.Add(reserva);
+            
             await _context.SaveChangesAsync();
-
+           
+            ReservaBL.EnvioCorreo(reserva);
             return CreatedAtAction("GetReserva", new { id = reserva.IdReserva }, reserva);
         }
+
+ 
+        
 
         // DELETE: api/Reservas/5
         [HttpDelete("{id}")]
