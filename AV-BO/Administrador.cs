@@ -17,6 +17,6 @@ namespace AV.BO
         [Column(TypeName = "VarChar(100)")]
         public string NombreEmpresa { get; set; }
 
-        
+        public Login Login { get; set; }
     }
 }

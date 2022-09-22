@@ -24,23 +24,65 @@ namespace AV_API.Controllers
         }
 
         // GET: api/Clientes/correoElectronico
-        [HttpGet("{correoElectronico}")]
+        [HttpGet("{correoElectronico}/{pass}")]
 
-        public async Task<ActionResult<Cliente>> GetCliente(string correoElectronico)
+        public async Task<ActionResult<Cliente>> GetCliente(string correoElectronico, string pass)
         {
-            List<Cliente> clientes = await _context.Clientes.Where(x => x.Login.CorreoElectronico == correoElectronico).ToListAsync();
+            var login = await _context.Logins.FindAsync(correoElectronico);
 
-            if (clientes == null || clientes.Count == 0)
+            if (login == null)
             {
                 return NotFound();
             }
             else
             {
-                Cliente cliente = clientes.First();
-                return cliente;
-            }
-            
+                if (login.Contraseña == pass)
+                {
 
+                    List<Cliente> clientes = await _context.Clientes.Where(x => x.Login.CorreoElectronico == login.CorreoElectronico).ToListAsync();
+
+                    if (clientes == null || clientes.Count == 0)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        Cliente cliente = clientes.First();
+                        return cliente;
+                    }
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+        }
+
+        [HttpGet("{correoElectronico}")]
+        public async Task<ActionResult<Cliente>> GetClienteSinPass(string correoElectronico)
+        {
+            var login = await _context.Logins.FindAsync(correoElectronico);
+
+            if (login == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                    List<Cliente> clientes = await _context.Clientes.Where(x => x.Login.CorreoElectronico == login.CorreoElectronico).ToListAsync();
+
+                    if (clientes == null || clientes.Count == 0)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        Cliente cliente = clientes.First();
+                        return cliente;
+                    }
+              
+            }
         }
     }
 }
