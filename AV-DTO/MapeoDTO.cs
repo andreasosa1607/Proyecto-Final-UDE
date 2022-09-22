@@ -98,6 +98,7 @@ namespace AV_DTO
             cliente.ProfesionCargo = clienteDTO.ProfesionCargo;
             cliente.NombreEmpresa = clienteDTO.NombreEmpresa;
             cliente.FotoPerfil = clienteDTO.FotoPerfil;
+            cliente.Login = MapeoDTO.Login(clienteDTO.login);
 
             return cliente;
         }
