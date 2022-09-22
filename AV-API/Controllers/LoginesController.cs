@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,6 +46,7 @@ namespace AV_API.Controllers
             return login;
 
 
+
         }
 
         [HttpGet("{id}/{passAnterior}")]
@@ -83,6 +84,10 @@ namespace AV_API.Controllers
 
 
             var login = await _context.Logins.FindAsync(id);
+
+     var login = await _context.Logins.FindAsync(id);
+
+
             if (login == null)
 
             {
@@ -90,6 +95,7 @@ namespace AV_API.Controllers
             }
 
             login = MapeoDTO.ActualizarLogin(login, loginDTO);
+
             _context.Entry(login).State = EntityState.Modified;
 
             try
@@ -110,7 +116,7 @@ namespace AV_API.Controllers
 
             return NoContent();
         }
-    
+
         // POST: api/Logines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

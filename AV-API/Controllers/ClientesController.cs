@@ -16,6 +16,13 @@ namespace AV_API.Controllers
 
     [Route("api_1_0/[controller]")]
 
+
+
+    [Route("api/[controller]")]
+
+
+
+
     [ApiController]
     public class ClientesController : ControllerBase
     {

@@ -146,10 +146,14 @@ namespace AV_DTO
             eventoDTO.Tipo = evento.Tipo;
             eventoDTO.ImagenPortada = evento.ImagenPortada;
             eventoDTO.Fecha = evento.Fecha;
+
             eventoDTO.Hora = evento.Hora;
             eventoDTO.CallePuerta = evento.CallePuerta;
             eventoDTO.Barrio = evento.Barrio;
             eventoDTO.Ciudad = evento.Ciudad;
+
+            eventoDTO.Duracion = evento.Duracion;
+
             eventoDTO.NroCupos = evento.NroCupos;
             eventoDTO.CantidadMesas = evento.CantidadMesas;
             eventoDTO.CantidadAsientosMesa = evento.CantidadAsientosMesa;
@@ -174,6 +178,8 @@ namespace AV_DTO
             evento.CallePuerta = eventoDTO.CallePuerta;
             evento.Barrio = eventoDTO.Barrio;
             evento.Ciudad = eventoDTO.Ciudad;
+            // evento.Hora = eventoDTO.Hora;
+            evento.Duracion = eventoDTO.Duracion;
             evento.NroCupos = eventoDTO.NroCupos;
             evento.CantidadMesas = eventoDTO.CantidadMesas;
             evento.CantidadAsientosMesa = eventoDTO.CantidadAsientosMesa;
@@ -200,6 +206,7 @@ namespace AV_DTO
             evento.CallePuerta = eventoDTO.CallePuerta;
             evento.Barrio = eventoDTO.Barrio;
             evento.Ciudad = eventoDTO.Ciudad;
+            evento.Duracion = eventoDTO.Duracion;
             evento.NroCupos = eventoDTO.NroCupos;
             evento.CantidadMesas = eventoDTO.CantidadMesas;
             evento.CantidadAsientosMesa = eventoDTO.CantidadAsientosMesa;

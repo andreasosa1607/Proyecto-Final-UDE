@@ -27,7 +27,7 @@ namespace AV.BO
         public string EstadoReserva { get; set; }
 
         // ver esto con Emiliano (traerla por FTP)
-        [Required]
+        //[Required]
         [Column(TypeName = "image")]
         public string ComprobantePago { get; set; }
 

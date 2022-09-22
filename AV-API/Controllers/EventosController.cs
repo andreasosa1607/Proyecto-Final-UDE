@@ -67,7 +67,7 @@ namespace AV_API.Controllers
                 return NotFound();
             }
 
-            evento = MapeoDTO.ActualizarEvento(evento, eventoDTO);
+       evento = MapeoDTO.ActualizarEvento(evento, eventoDTO);
             _context.Entry(evento).State = EntityState.Modified;
 
             try

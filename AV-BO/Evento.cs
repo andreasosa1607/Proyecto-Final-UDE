@@ -37,6 +37,15 @@ namespace AV.BO
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Fecha { get; set; }
 
+       [Required]
+       [Column(TypeName = "Integer")]
+       public int Duracion { get; set; }
+
+
+       //[Required]
+       // [Column(TypeName = "Time(7)")]
+       // public TimeSpan Hora { get; set; }
+
 
         [Required]
         [Column(TypeName = "Time(7)")]

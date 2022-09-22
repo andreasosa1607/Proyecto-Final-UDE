@@ -9,5 +9,8 @@
     <ProjectReference Include="..\AV-BO\AV-BO.csproj" />
     <ProjectReference Include="..\AV-DA\AV-DA.csproj" />
   </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
 
 </Project>
