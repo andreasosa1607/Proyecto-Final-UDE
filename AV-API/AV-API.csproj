@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>ARM64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,20 +28,16 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-<<<<<<< HEAD
-<<<<<<< HEAD
     <PackageReference Include="Serilog" Version="2.11.0" />
-=======
     <PackageReference Include="Serilog" Version="2.12.0-dev-01533" />
->>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
-=======
+
     <PackageReference Include="Serilog" Version="2.12.0-dev-01533" />
->>>>>>> 7a5c6edcf46d252ac983bbed7a1c2c2264be4d17
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="System.Security.Claims" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AV-BL\AV-BL.csproj" />
     <ProjectReference Include="..\AV-BO\AV-BO.csproj" />
     <ProjectReference Include="..\AV-DA\AV-DA.csproj" />
     <ProjectReference Include="..\AV-DTO\AV-DTO.csproj" />

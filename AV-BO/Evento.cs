@@ -11,6 +11,7 @@ namespace AV.BO
     public class Evento
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EventoId { get; set; }
 
         [Required]
@@ -38,26 +39,26 @@ namespace AV.BO
 
 
         [Required]
+        [Column(TypeName = "Time(7)")]
+        public TimeSpan Hora { get; set; }
+
+        [Required]
         [Column(TypeName = "Integer")]
         public int Duracion { get; set; }
 
 
-        [Required]
-        [Column(TypeName = "Varchar(10)")]
-        public string Hora { get; set; }
-
 
         [Required]
         [Column(TypeName = "VarChar(100)")]
-        public string callePuerta { get; set; }
+        public string CallePuerta { get; set; }
 
         [Required]
         [Column(TypeName = "VarChar(100)")]
-        public string barrio { get; set; }
+        public string Barrio { get; set; }
 
         [Required]
         [Column(TypeName = "VarChar(100)")]
-        public string ciudad { get; set; }
+        public string Ciudad { get; set; }
 
 
         [Required]
@@ -92,7 +93,8 @@ namespace AV.BO
         [Required]
         [Column(TypeName = "Varchar(100)")]
         public string EmpresaCreadora { get; set; }
-    
-    
+
+        public List<Mesa> Mesas { get; set; }
+
     }
 }

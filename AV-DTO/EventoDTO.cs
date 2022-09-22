@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AV.BO;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,11 +13,11 @@ namespace AV_DTO
         public string Tipo { get; set; }
         public string ImagenPortada { get; set; }
         public DateTime Fecha { get; set; }
-        public string Hora { get; set; }
+        public TimeSpan Hora { get; set; }
         public int Duracion { get; set; }
-        public string callePuerta { get; set; }
-        public string barrio { get; set; }
-        public string ciudad { get; set; }
+        public string CallePuerta { get; set; }
+        public string Barrio { get; set; }
+        public string Ciudad { get; set; }
         public int NroCupos { get; set; }
         public int CantidadMesas { get; set; }
         public int CantidadAsientosMesa { get; set; }
@@ -25,5 +26,6 @@ namespace AV_DTO
         public string CriterioAsignacion { get; set; }
         public string EmpresaCreadora { get; set; }
 
+        public List<Mesa> Mesas { get; set; }
     }
 }

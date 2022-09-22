@@ -5,4 +5,9 @@
     <RootNamespace>AV.BL</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AV-BO\AV-BO.csproj" />
+    <ProjectReference Include="..\AV-DA\AV-DA.csproj" />
+  </ItemGroup>
+
 </Project>
