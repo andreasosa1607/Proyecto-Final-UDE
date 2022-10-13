@@ -29,6 +29,7 @@ namespace AV_API.Controllers
         {
             //return await _context.Eventos.ToListAsync();
             return await _context.Eventos
+          //.Include("Cliente").Include("Reserva")
           .Select(x => MapeoDTO.EventoDTO(x))
              .ToListAsync();
 

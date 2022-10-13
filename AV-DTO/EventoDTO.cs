@@ -17,6 +17,12 @@ namespace AV_DTO
         public string CallePuerta { get; set; }
         public string Barrio { get; set; }
         public string Ciudad { get; set; }
+<<<<<<< HEAD
+=======
+
+       // public string Hora { get; set; }
+
+>>>>>>> main
         public int NroCupos { get; set; }
         public int CantidadMesas { get; set; }
         public int CantidadAsientosMesa { get; set; }

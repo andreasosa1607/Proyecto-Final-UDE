@@ -75,7 +75,7 @@ namespace AV_API.Controllers
         // PUT: api/Logines/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLogin(string id, LoginDTO loginDTO)
+        public async Task<ActionResult<LoginDTO>> PutLogin(string id, LoginDTO loginDTO)
         {
             if (id != loginDTO.CorreoElectronico)
             {
@@ -85,6 +85,10 @@ namespace AV_API.Controllers
 
             var login = await _context.Logins.FindAsync(id);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 
             if (login == null)
 
@@ -112,7 +116,7 @@ namespace AV_API.Controllers
                 }
             }
 
-            return NoContent();
+            return MapeoDTO.LoginDTO(login);
         }
 
         // POST: api/Logines

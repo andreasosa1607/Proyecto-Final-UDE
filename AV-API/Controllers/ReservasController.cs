@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using AV.BL;
 using AV.BO;
 using AV.DA;
 using AV_DTO;
-using AV.BL;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AV_API.Controllers
 {
@@ -27,7 +25,14 @@ namespace AV_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReservaDTO>>> GetReservas()
         {
+<<<<<<< HEAD
             return await _context.Reservas.Include("Cliente").Include("Evento").Select(x => MapeoDTO.ReservaDTO(x)).ToListAsync();
+=======
+            // return await _context.Reservas.ToListAsync();
+            return await _context.Reservas.Include("Cliente").Include("Evento")
+           .Select(x => MapeoDTO.ReservaDTO(x))
+              .ToListAsync();
+>>>>>>> main
         }
 
 
@@ -35,14 +40,22 @@ namespace AV_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ReservaDTO>> GetReserva(int id)
         {
-            var reserva = await _context.Reservas.FindAsync(id);
+            List<Reserva> reservas = await _context.Reservas.Include("Evento").Include("Cliente").Where(x => x.IdReserva == id).ToListAsync();
+                //FindAsync(id);
 
-            if (reserva == null)
+            if (reservas == null)
             {
                 return NotFound();
             }
+            else
+            {
+                Reserva reserva = reservas.First();
+                return MapeoDTO.ReservaDTO(reserva);
+            }
 
-            return Ok(reserva);
+            
+
+            //return MapeoDTO.ReservaDTO(reserva);
         }
 
         // PUT: api/Reservas/5

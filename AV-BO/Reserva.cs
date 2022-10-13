@@ -54,5 +54,10 @@ namespace AV.BO
         [Column(TypeName = "DateTime")]
         public DateTime FechaReserva { get; set; }
 
+        [Required]
+        [Column(TypeName = "VarChar(50)")]
+        public string descripcionEstado { get; set; }
+
+
     }
 }
