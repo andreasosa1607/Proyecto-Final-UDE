@@ -46,14 +46,6 @@ namespace AV_API.Controllers
             return login;
 
 
-
-        }
-
-        [HttpGet("{id}/{passAnterior}")]
-        public async Task<ActionResult<Login>> GetLoginYPass(string id, string passAnterior)
-        {
-            var login = await _context.Logins.FindAsync(id);
-
             if (login == null)
             {
                 return NotFound();
@@ -75,7 +67,7 @@ namespace AV_API.Controllers
         // PUT: api/Logines/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<ActionResult<LoginDTO>> PutLogin(string id, LoginDTO loginDTO)
+        public async Task<IActionResult> PutLogin(string id, LoginDTO loginDTO)
         {
             if (id != loginDTO.CorreoElectronico)
             {
@@ -85,7 +77,7 @@ namespace AV_API.Controllers
 
             var login = await _context.Logins.FindAsync(id);
 
-
+     var login = await _context.Logins.FindAsync(id);
 
             if (login == null)
 
@@ -113,7 +105,7 @@ namespace AV_API.Controllers
                 }
             }
 
-            return MapeoDTO.LoginDTO(login);
+            return NoContent();
         }
 
         // POST: api/Logines

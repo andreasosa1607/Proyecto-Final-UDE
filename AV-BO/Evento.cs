@@ -46,6 +46,15 @@ namespace AV.BO
        // [Column(TypeName = "Time(7)")]
        // public TimeSpan Hora { get; set; }
 
+
+        [Required]
+        [Column(TypeName = "VarChar(8)")]
+        public string Hora { get; set; }
+
+     
+
+
+
         [Required]
         [Column(TypeName = "VarChar(100)")]
         public string CallePuerta { get; set; }

@@ -1,5 +1,9 @@
 ﻿using AV.BO;
 using System.Collections.Generic;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
+
 
 namespace AV.BL
 {
@@ -45,6 +49,24 @@ namespace AV.BL
               );
 
             return "Ok";
+
+
+        }
+
+        public static string GenerarQR(Reserva reserva)
+        {
+            Document doc = new Document(PageSize.A4);
+            string ruta = @"C:\Users\Andrea\OneDrive\Escritorio\Proyecto Final\Proyecto-Final-UDE\Codigos QR\" + reserva.nombreEmpresa + reserva.IdReserva + ".pdf";
+            PdfWriter.GetInstance(doc, new FileStream(ruta, FileMode.Create));
+            doc.Open();
+            BarcodeQRCode barcodeQRCode = new BarcodeQRCode(reserva.nombreEmpresa + " ID de Reserva: " + reserva.IdReserva + " Asiento: " + reserva.Asientos, 1000, 1000, null);
+            Image codeQRImage = barcodeQRCode.GetImage();
+            codeQRImage.ScaleAbsolute(200, 200);
+            doc.Add(codeQRImage);
+            doc.Close();
+
+
+            return ruta;
         }
     }
 }

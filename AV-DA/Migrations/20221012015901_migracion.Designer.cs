@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AVDA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    [Migration("20221009172817_migracion")]
+    [Migration("20221012015901_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,6 +108,22 @@ namespace AVDA.Migrations
                     b.ToTable("Clientes");
                 });
 
+            modelBuilder.Entity("AV.BO.ComprobanteDePago", b =>
+                {
+                    b.Property<int>("IdDocumento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
+
+                    b.HasKey("IdDocumento");
+
+                    b.ToTable("ComprobantesDePagos");
+                });
+
             modelBuilder.Entity("AV.BO.Evento", b =>
                 {
                     b.Property<int>("EventoId")
@@ -150,6 +166,10 @@ namespace AVDA.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Hora")
+                        .IsRequired()
+                        .HasColumnType("VarChar(8)");
 
                     b.Property<string>("Idioma")
                         .IsRequired()
@@ -268,10 +288,6 @@ namespace AVDA.Migrations
                         .HasColumnType("Integer");
 
                     b.Property<string>("correoElectronico")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("descripcionEstado")
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 

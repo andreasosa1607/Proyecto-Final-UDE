@@ -50,10 +50,5 @@ namespace AV.BO
         [Column(TypeName = "Integer")]
         public int cantidadReservas { get; set; }
 
-        [Required]
-        [Column(TypeName = "VarChar(50)")]
-        public string descripcionEstado { get; set; }
-
-
     }
 }
