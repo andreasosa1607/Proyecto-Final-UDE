@@ -45,8 +45,7 @@ namespace AV_API.Controllers
         }
 
         [HttpGet("{reservas}")]
-        //async
-        public ActionResult<List<Reserva>> GetEventosReserva(List<Reserva> reservas)
+        public async Task<ActionResult<List<Reserva>>> GetEventosReserva(List<Reserva> reservas)
         {
             foreach (Reserva reserva in reservas)
             {
@@ -65,7 +64,7 @@ namespace AV_API.Controllers
             }
 
             return reservas;
-
+           
         }
 
     } 

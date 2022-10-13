@@ -8,6 +8,19 @@ namespace AVDA.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ComprobantesDePagos",
+                columns: table => new
+                {
+                    IdDocumento = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "VarChar(100)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ComprobantesDePagos", x => x.IdDocumento);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Eventos",
                 columns: table => new
                 {
@@ -17,13 +30,9 @@ namespace AVDA.Migrations
                     Descripcion = table.Column<string>(type: "VarChar(300)", nullable: false),
                     Tipo = table.Column<string>(type: "VarChar(30)", nullable: false),
                     ImagenPortada = table.Column<byte[]>(type: "image", nullable: true),
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.cs
-                    FechaHora = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Duracion = table.Column<string>(type: "VarChar(10)", nullable: false),
-========
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Duracion = table.Column<int>(type: "Integer", nullable: false),
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.cs
+                    Hora = table.Column<string>(type: "VarChar(8)", nullable: false),
                     CallePuerta = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Barrio = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Ciudad = table.Column<string>(type: "VarChar(100)", nullable: false),
@@ -33,8 +42,7 @@ namespace AVDA.Migrations
                     PrecioAsiento = table.Column<int>(type: "Integer", nullable: false),
                     Idioma = table.Column<string>(type: "VarChar(20)", nullable: false),
                     CriterioAsignacion = table.Column<string>(type: "VarChar(20)", nullable: false),
-                    EmpresaCreadora = table.Column<string>(type: "Varchar(100)", nullable: false),
-                    EstadoEvento = table.Column<string>(type: "Varchar(30)", nullable: false)
+                    EmpresaCreadora = table.Column<string>(type: "Varchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,19 +139,10 @@ namespace AVDA.Migrations
                     EventoId = table.Column<int>(type: "int", nullable: true),
                     EstadoReserva = table.Column<string>(type: "VarChar(20)", nullable: false),
                     ComprobantePago = table.Column<byte[]>(type: "image", nullable: true),
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.cs
-                    NombreEmpresa = table.Column<string>(type: "VarChar(100)", nullable: false),
-                    Telefono = table.Column<int>(type: "Integer", nullable: false),
-                    CorreoElectronico = table.Column<string>(type: "VarChar(50)", nullable: false),
-                    CantidadReservas = table.Column<int>(type: "Integer", nullable: false),
-                    FechaReserva = table.Column<DateTime>(type: "DateTime", nullable: false)
-========
                     nombreEmpresa = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Telefono = table.Column<int>(type: "Integer", nullable: false),
                     correoElectronico = table.Column<string>(type: "VarChar(50)", nullable: false),
-                    cantidadReservas = table.Column<int>(type: "Integer", nullable: false),
-                    descripcionEstado = table.Column<string>(type: "VarChar(50)", nullable: false)
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.cs
+                    cantidadReservas = table.Column<int>(type: "Integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -256,6 +255,9 @@ namespace AVDA.Migrations
 
             migrationBuilder.DropTable(
                 name: "Asientos");
+
+            migrationBuilder.DropTable(
+                name: "ComprobantesDePagos");
 
             migrationBuilder.DropTable(
                 name: "Pagos");
