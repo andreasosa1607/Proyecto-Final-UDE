@@ -139,16 +139,24 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(300)");
 
-                    b.Property<int>("Duracion")
-                        .HasColumnType("Integer");
+                    b.Property<string>("Duracion")
+                        .IsRequired()
+                        .HasColumnType("VarChar(10)");
 
                     b.Property<string>("EmpresaCreadora")
                         .IsRequired()
                         .HasColumnType("Varchar(100)");
 
-                    b.Property<DateTime>("Fecha")
+                    b.Property<string>("EstadoEvento")
+                        .IsRequired()
+                        .HasColumnType("Varchar(30)");
+
+<<<<<<< HEAD
+                    b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
+=======
+>>>>>>> main
                     b.Property<string>("Idioma")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -246,11 +254,18 @@ namespace AVDA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CantidadReservas")
+                        .HasColumnType("Integer");
+
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<byte[]>("ComprobantePago")
                         .HasColumnType("image");
+
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
 
                     b.Property<string>("EstadoReserva")
                         .IsRequired()
@@ -259,9 +274,12 @@ namespace AVDA.Migrations
                     b.Property<int?>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Telefono")
-                        .HasColumnType("Integer");
+                    b.Property<DateTime>("FechaReserva")
+                        .HasColumnType("DateTime");
 
+<<<<<<< HEAD
+                    b.Property<string>("NombreEmpresa")
+=======
                     b.Property<int>("cantidadReservas")
                         .HasColumnType("Integer");
 
@@ -274,8 +292,12 @@ namespace AVDA.Migrations
                         .HasColumnType("VarChar(50)");
 
                     b.Property<string>("nombreEmpresa")
+>>>>>>> main
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
+
+                    b.Property<int>("Telefono")
+                        .HasColumnType("Integer");
 
                     b.HasKey("IdReserva");
 

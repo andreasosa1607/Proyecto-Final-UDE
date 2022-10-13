@@ -85,7 +85,10 @@ namespace AV_API.Controllers
 
             var login = await _context.Logins.FindAsync(id);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
 
             if (login == null)
 

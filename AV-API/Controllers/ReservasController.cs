@@ -25,10 +25,14 @@ namespace AV_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReservaDTO>>> GetReservas()
         {
+<<<<<<< HEAD
+            return await _context.Reservas.Include("Cliente").Include("Evento").Select(x => MapeoDTO.ReservaDTO(x)).ToListAsync();
+=======
             // return await _context.Reservas.ToListAsync();
             return await _context.Reservas.Include("Cliente").Include("Evento")
            .Select(x => MapeoDTO.ReservaDTO(x))
               .ToListAsync();
+>>>>>>> main
         }
 
 
@@ -101,7 +105,7 @@ namespace AV_API.Controllers
         public async Task<ActionResult<ReservaDTO>> PostReserva(ReservaDTO reservaDTO)
         {
             Reserva reserva = MapeoDTO.Reserva(reservaDTO);
-            reserva.Evento.NroCupos = (reserva.Evento.NroCupos) - (reserva.cantidadReservas);
+            reserva.Evento.NroCupos = (reserva.Evento.NroCupos) - (reserva.CantidadReservas);
             _context.Eventos.Update(reserva.Evento);
             _context.Clientes.Update(reserva.Cliente);
             _context.Logins.Update(reserva.Cliente.Login);
@@ -138,3 +142,4 @@ namespace AV_API.Controllers
         }
     }
 }
+
