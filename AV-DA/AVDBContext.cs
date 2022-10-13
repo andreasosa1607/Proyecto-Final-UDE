@@ -21,6 +21,11 @@ namespace AV.DA
         {
         }
 
+        public object GetSection(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         //este método es para que no autogenere los id de tipo int
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,5 +46,6 @@ namespace AV.DA
         public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Pago> Pagos { get; set; }
         public DbSet<Login> Logins { get; set; }
+        public DbSet<ComprobanteDePago> ComprobantesDePagos { get; set; }
     }
 }

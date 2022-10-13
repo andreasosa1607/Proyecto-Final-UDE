@@ -17,7 +17,8 @@ namespace AV_API.Controllers
     [Route("api_1_0/[controller]")]
 
 
-   // [Route("api/[controller]")]
+
+    [Route("api/[controller]")]
 
 
 
@@ -48,61 +49,52 @@ namespace AV_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ClienteDTO>> GetCliente(int id)
         {
-            var clientes = await (_context.Clientes.Include("Login").Where(x => x.ClienteId == id).ToListAsync());
-            var cliente = clientes.First();
-            //.FindAsync(id);
+            var cliente = await _context.Clientes.FindAsync(id);
 
             if (cliente == null)
             {
                 return NotFound();
             }
 
-            return MapeoDTO.ClienteDTO(cliente);
-
+            return Ok(cliente);
         }
 
         // PUT: api/Clientes/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<ClienteDTO>> PutCliente(int id, EditarClienteDTO clienteDTO)
+        public async Task<IActionResult> PutCliente(int id, ClienteDTO clienteDTO)
         {
             if (id != clienteDTO.ClienteId)
             {
                 return BadRequest();
             }
-            else
-            {
-                var clientes = await _context.Clientes.Where(x => x.ClienteId == id).ToListAsync();
-                var cliente = clientes.First();
 
-                if (cliente == null)
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            cliente = MapeoDTO.ActualizarCliente(cliente, clienteDTO);
+            _context.Entry(cliente).State = EntityState.Modified;
+          
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ClienteExists(id))
                 {
                     return NotFound();
                 }
-
-   
-                cliente = MapeoDTO.ActualizarCliente2(cliente, clienteDTO);
-
-                _context.Entry(cliente).State = EntityState.Modified;
-
-                try
+                else
                 {
-                    await _context.SaveChangesAsync();
+                    throw;
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClienteExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return MapeoDTO.ClienteDTO(cliente);
             }
-    }
+
+            return NoContent();
+        }
 
         // POST: api/Clientes
         [HttpPost]
