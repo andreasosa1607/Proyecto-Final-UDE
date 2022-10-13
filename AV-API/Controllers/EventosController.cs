@@ -113,7 +113,7 @@ namespace AV_API.Controllers
             else
             {
 
-                List<Reserva> reservas = await _context.Reservas.Where(x => x.Evento.EventoId == evento.EventoId).ToListAsync();
+                List<Reserva> reservas = await _context.Reservas.Include("Cliente").Where(x => x.Evento.EventoId == evento.EventoId).ToListAsync();
 
 
                 if (reservas == null || reservas.Count == 0)
@@ -124,13 +124,14 @@ namespace AV_API.Controllers
                 }
                 else
                 {
-                        _context.Eventos.Remove(evento);
-                foreach(Reserva reserva in reservas)
+                    foreach(Reserva reserva in reservas)
                     {
+                        EventoBL.EnvioCorreoEventoEliminado(reservas, evento);
                         reserva.EstadoReserva = "Evento cancelado";
                         await _context.SaveChangesAsync();
                     }
-                        await _context.SaveChangesAsync();
+                    _context.Eventos.Remove(evento);
+                    await _context.SaveChangesAsync();
 
                         return NoContent();
                     

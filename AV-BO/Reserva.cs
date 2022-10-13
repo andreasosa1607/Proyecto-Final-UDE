@@ -36,7 +36,7 @@ namespace AV.BO
 
         [Required]
         [Column(TypeName = "VarChar(100)")]
-        public string nombreEmpresa { get; set; }
+        public string NombreEmpresa { get; set; }
 
         [Required]
         [Column(TypeName = "Integer")]
@@ -44,11 +44,15 @@ namespace AV.BO
 
         [Required]
         [Column(TypeName = "VarChar(50)")]
-        public string correoElectronico { get; set; }
+        public string CorreoElectronico { get; set; }
 
         [Required]
         [Column(TypeName = "Integer")]
-        public int cantidadReservas { get; set; }
+        public int CantidadReservas { get; set; }
+
+        [Required]
+        [Column(TypeName = "DateTime")]
+        public DateTime FechaReserva { get; set; }
 
     }
 }

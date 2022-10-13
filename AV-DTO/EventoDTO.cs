@@ -12,14 +12,11 @@ namespace AV_DTO
         public string Descripcion { get; set; }
         public string Tipo { get; set; }
         public string ImagenPortada { get; set; }
-        public DateTime Fecha { get; set; }
-        public int Duracion { get; set; }
+        public DateTime FechaHora { get; set; }
+        public string Duracion { get; set; }
         public string CallePuerta { get; set; }
         public string Barrio { get; set; }
         public string Ciudad { get; set; }
-
-        public string Hora { get; set; }
-
         public int NroCupos { get; set; }
         public int CantidadMesas { get; set; }
         public int CantidadAsientosMesa { get; set; }
@@ -29,6 +26,7 @@ namespace AV_DTO
         public string EmpresaCreadora { get; set; }
 
         public List<Mesa> Mesas { get; set; }
+        public string EstadoEvento { get; set; }
 
     }
 }

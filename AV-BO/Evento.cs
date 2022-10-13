@@ -34,27 +34,12 @@ namespace AV.BO
 
         [Required]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime Fecha { get; set; }
+        [DisplayFormat(DataFormatString = "{yyyyMMdd, HHmmss}", ApplyFormatInEditMode = true)]
+        public DateTime FechaHora { get; set; }
 
        [Required]
-       [Column(TypeName = "Integer")]
-       public int Duracion { get; set; }
-
-
-       //[Required]
-       // [Column(TypeName = "Time(7)")]
-       // public TimeSpan Hora { get; set; }
-
-
-        [Required]
-        [Column(TypeName = "Time(7)")]
-        public TimeSpan Hora { get; set; }
-
-        [Required]
-        [Column(TypeName = "Integer")]
-        public int Duracion { get; set; }
-
+       [Column(TypeName = "VarChar(10)")]
+       public string Duracion { get; set; }
 
 
         [Required]
@@ -104,6 +89,10 @@ namespace AV.BO
         public string EmpresaCreadora { get; set; }
 
         public List<Mesa> Mesas { get; set; }
+
+        [Required]
+        [Column(TypeName = "Varchar(30)")]
+        public string EstadoEvento { get; set; }
 
     }
 }

@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace AV.DA.Migrations
+namespace AVDA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    [Migration("20220921001822_migracion")]
+    [Migration("20221009161903_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -141,18 +141,20 @@ namespace AV.DA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(300)");
 
-                    b.Property<int>("Duracion")
-                        .HasColumnType("Integer");
+                    b.Property<string>("Duracion")
+                        .IsRequired()
+                        .HasColumnType("VarChar(10)");
 
                     b.Property<string>("EmpresaCreadora")
                         .IsRequired()
                         .HasColumnType("Varchar(100)");
 
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("EstadoEvento")
+                        .IsRequired()
+                        .HasColumnType("Varchar(30)");
 
-                    b.Property<TimeSpan>("Hora")
-                        .HasColumnType("Time(7)");
+                    b.Property<DateTime>("FechaHora")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Idioma")
                         .IsRequired()
@@ -251,12 +253,18 @@ namespace AV.DA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CantidadReservas")
+                        .HasColumnType("Integer");
+
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<byte[]>("ComprobantePago")
-                        .IsRequired()
                         .HasColumnType("image");
+
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
 
                     b.Property<string>("EstadoReserva")
                         .IsRequired()
@@ -265,19 +273,15 @@ namespace AV.DA.Migrations
                     b.Property<int?>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Telefono")
-                        .HasColumnType("Integer");
+                    b.Property<DateTime>("FechaReserva")
+                        .HasColumnType("DateTime");
 
-                    b.Property<int>("cantidadReservas")
-                        .HasColumnType("Integer");
-
-                    b.Property<string>("correoElectronico")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("nombreEmpresa")
+                    b.Property<string>("NombreEmpresa")
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
+
+                    b.Property<int>("Telefono")
+                        .HasColumnType("Integer");
 
                     b.HasKey("IdReserva");
 
