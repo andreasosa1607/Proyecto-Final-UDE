@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace AV.DA.Migrations
+namespace AVDA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    [Migration("20220921001822_migracion")]
+    [Migration("20221009172817_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,9 +151,6 @@ namespace AV.DA.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("Hora")
-                        .HasColumnType("Time(7)");
-
                     b.Property<string>("Idioma")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -255,7 +252,6 @@ namespace AV.DA.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("ComprobantePago")
-                        .IsRequired()
                         .HasColumnType("image");
 
                     b.Property<string>("EstadoReserva")
@@ -272,6 +268,10 @@ namespace AV.DA.Migrations
                         .HasColumnType("Integer");
 
                     b.Property<string>("correoElectronico")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
+                    b.Property<string>("descripcionEstado")
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 

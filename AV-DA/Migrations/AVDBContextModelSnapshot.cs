@@ -250,7 +250,6 @@ namespace AVDA.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("ComprobantePago")
-                        .IsRequired()
                         .HasColumnType("image");
 
                     b.Property<string>("EstadoReserva")
@@ -267,6 +266,10 @@ namespace AVDA.Migrations
                         .HasColumnType("Integer");
 
                     b.Property<string>("correoElectronico")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
+                    b.Property<string>("descripcionEstado")
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 

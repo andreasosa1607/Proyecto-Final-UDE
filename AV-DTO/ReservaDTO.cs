@@ -8,8 +8,8 @@ namespace AV_DTO
     public class ReservaDTO
     {
         public int IdReserva { get; set; }
-        public Cliente Cliente { get; set; }
-        public Evento Evento { get; set; }
+        public ClienteDTO Cliente { get; set; }
+        public EventoDTO Evento { get; set; }
         public string EstadoReserva { get; set; }
         public string ComprobantePago { get; set; }
         public List<Asiento> Asientos { get; set; }
@@ -17,5 +17,6 @@ namespace AV_DTO
         public int Telefono { get; set; }
         public string correoElectronico { get; set; }
         public int cantidadReservas { get; set; }
+        public string descripcionEstado { get; set; }
     }
 }

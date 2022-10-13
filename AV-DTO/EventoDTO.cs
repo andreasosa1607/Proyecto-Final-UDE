@@ -18,7 +18,7 @@ namespace AV_DTO
         public string Barrio { get; set; }
         public string Ciudad { get; set; }
 
-        public string Hora { get; set; }
+       // public string Hora { get; set; }
 
         public int NroCupos { get; set; }
         public int CantidadMesas { get; set; }
