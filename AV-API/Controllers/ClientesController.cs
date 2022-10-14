@@ -10,6 +10,7 @@ using AV.DA;
 using AV.DA.ServiceCorreosElectronicos;
 using AV_DTO;
 using Microsoft.AspNetCore.Authorization;
+using AV.BL;
 
 namespace AV_API.Controllers
 {
@@ -100,7 +101,10 @@ namespace AV_API.Controllers
         [HttpPost]
         public async Task<ActionResult<ClienteDTO>> PostCliente(ClienteDTO clienteDTO)
         {
+            
             Cliente cliente = MapeoDTO.Cliente(clienteDTO);
+            cliente.Login.Contraseña = Encriptar.MD5(cliente.Login.Contraseña).Substring(0,30);
+           
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
 

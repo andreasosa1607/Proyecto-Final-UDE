@@ -48,7 +48,20 @@ namespace AV.BO
 
         [Required]
         [Column(TypeName = "Integer")]
+<<<<<<< HEAD
+        public int CantidadReservas { get; set; }
+
+        [Required]
+        [Column(TypeName = "DateTime")]
+        public DateTime FechaReserva { get; set; }
+
+        [Required]
+        [Column(TypeName = "VarChar(50)")]
+        public string DescripcionEstado { get; set; }
+
+=======
         public int cantidadReservas { get; set; }
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
 
     }
 }

@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AV.DA;
 using AV_DTO;
-
+using AV.BL;
 
 namespace AV_API.Controllers
 {
@@ -49,8 +49,9 @@ namespace AV_API.Controllers
 
             try
             {
+                string contraseña = Encriptar.MD5(login.Contraseña).Substring(0, 30);
                 //Verifica el usuario y contraseña
-                if ( login.CorreoElectronico != loginExiste.CorreoElectronico || login.Contraseña != loginExiste.Contraseña)
+                if ( login.CorreoElectronico != loginExiste.CorreoElectronico || contraseña != loginExiste.Contraseña)
                 {
                     return BadRequest("Correo Electronico/Contraseña incorrectos");
                 }

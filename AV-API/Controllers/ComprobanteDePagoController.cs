@@ -33,7 +33,7 @@ namespace AV_API.Controllers
 
         [HttpPost]
         [Route("Subir")]
-        public string Subir(ComprobanteDePagoDTO request) {
+        public ComprobanteDePagoDTO Subir(ComprobanteDePagoDTO request) {
 
 
 
@@ -51,7 +51,7 @@ namespace AV_API.Controllers
                 request.Archivo = "";
 
                 //return CreatedAtAction("GetComprobanteDePago", new { id = request.IdDocumento }, request);
-                return "OK";
+             
                
             }
 
@@ -60,11 +60,12 @@ namespace AV_API.Controllers
 
                 //return StatusCode(StatusCodes.Status200OK, new { mensaje = error.Message });
 
-                return "Error";
+               
 
 
             }
-            
+            return request;
+
 
 
 

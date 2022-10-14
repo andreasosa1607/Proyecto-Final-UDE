@@ -41,4 +41,8 @@
 		<ProjectReference Include="..\AV-DTO\AV-DTO.csproj" />
 	</ItemGroup>
 
+<<<<<<< HEAD
 </Project>
+=======
+</Project>
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
