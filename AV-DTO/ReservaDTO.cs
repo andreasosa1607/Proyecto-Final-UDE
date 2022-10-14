@@ -15,15 +15,12 @@ namespace AV_DTO
         public List<Asiento> Asientos { get; set; }
         public string NombreEmpresa { get; set; }
         public int Telefono { get; set; }
-<<<<<<< HEAD
         public string CorreoElectronico { get; set; }
         public int CantidadReservas { get; set; }
 
         public DateTime FechaReserva { get; set; }
-=======
         public string correoElectronico { get; set; }
         public int cantidadReservas { get; set; }
         public string descripcionEstado { get; set; }
->>>>>>> main
     }
 }

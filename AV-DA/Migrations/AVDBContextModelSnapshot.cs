@@ -151,12 +151,9 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(30)");
 
-<<<<<<< HEAD
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
-=======
->>>>>>> main
                     b.Property<string>("Idioma")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -267,6 +264,10 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 
+                    b.Property<string>("DescripcionEstado")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
                     b.Property<string>("EstadoReserva")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -277,22 +278,7 @@ namespace AVDA.Migrations
                     b.Property<DateTime>("FechaReserva")
                         .HasColumnType("DateTime");
 
-<<<<<<< HEAD
                     b.Property<string>("NombreEmpresa")
-=======
-                    b.Property<int>("cantidadReservas")
-                        .HasColumnType("Integer");
-
-                    b.Property<string>("correoElectronico")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("descripcionEstado")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("nombreEmpresa")
->>>>>>> main
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
 

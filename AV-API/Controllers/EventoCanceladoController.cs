@@ -57,10 +57,10 @@ namespace AV_API.Controllers
                     "Lamentamos informarle que por razones de fuerza mayor, el mismo ha sido cancelado, si usted ya había realizado el pago correspondiente a la reserva, " +
                     "le solicitamos que se comunique con nosotros via correo electrónico (soporteclientesAV@gmail.com), adjuntando una imagen NITIDA y CLARA del comprobante de pago " +
                     "y en el cuerpo del correo, indiquenos el numero de referencia de la reserva: " + reserva.IdReserva + " seguido del nombre o empresa con el que registró la reserva: (" +
-                    reserva.nombreEmpresa + ")" +
+                    reserva.NombreEmpresa + ")" +
                     "\n Un agente de soporte se pondrá en contacto con usted a la brevedad para indicarle los pasos a seguir al telefono: " + reserva.Telefono + " en caso de que desee que nos comuniquemos por otro medio, puede indicarlo en en correo electronico" +
                     "\n de parte de AV , le reiteramos las disculpas por lo sucedido y le agradecemos por preferirnos. ",
-                    destinatarios: new List<string> { reserva.correoElectronico }
+                    destinatarios: new List<string> { reserva.CorreoElectronico }
                     );
             }
 

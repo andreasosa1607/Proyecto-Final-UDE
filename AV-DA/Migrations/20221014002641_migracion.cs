@@ -17,13 +17,8 @@ namespace AVDA.Migrations
                     Descripcion = table.Column<string>(type: "VarChar(300)", nullable: false),
                     Tipo = table.Column<string>(type: "VarChar(30)", nullable: false),
                     ImagenPortada = table.Column<byte[]>(type: "image", nullable: true),
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.cs
                     FechaHora = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Duracion = table.Column<string>(type: "VarChar(10)", nullable: false),
-========
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Duracion = table.Column<int>(type: "Integer", nullable: false),
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.cs
                     CallePuerta = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Barrio = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Ciudad = table.Column<string>(type: "VarChar(100)", nullable: false),
@@ -131,19 +126,12 @@ namespace AVDA.Migrations
                     EventoId = table.Column<int>(type: "int", nullable: true),
                     EstadoReserva = table.Column<string>(type: "VarChar(20)", nullable: false),
                     ComprobantePago = table.Column<byte[]>(type: "image", nullable: true),
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.cs
                     NombreEmpresa = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Telefono = table.Column<int>(type: "Integer", nullable: false),
                     CorreoElectronico = table.Column<string>(type: "VarChar(50)", nullable: false),
                     CantidadReservas = table.Column<int>(type: "Integer", nullable: false),
-                    FechaReserva = table.Column<DateTime>(type: "DateTime", nullable: false)
-========
-                    nombreEmpresa = table.Column<string>(type: "VarChar(100)", nullable: false),
-                    Telefono = table.Column<int>(type: "Integer", nullable: false),
-                    correoElectronico = table.Column<string>(type: "VarChar(50)", nullable: false),
-                    cantidadReservas = table.Column<int>(type: "Integer", nullable: false),
-                    descripcionEstado = table.Column<string>(type: "VarChar(50)", nullable: false)
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.cs
+                    FechaReserva = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    DescripcionEstado = table.Column<string>(type: "VarChar(50)", nullable: false)
                 },
                 constraints: table =>
                 {

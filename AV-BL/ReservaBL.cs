@@ -105,5 +105,14 @@ namespace AV.BL
             }
         }
 
+        public static void asignacionAutomatica(Reserva reserva)
+        {
+            DateTime hoy = DateTime.Now;
+            double diferencia = reserva.Evento.FechaHora.Date.Subtract(hoy.Date).TotalDays;
+            if (diferencia <= 2)
+            {
+            }
+        }
+
     }
 }

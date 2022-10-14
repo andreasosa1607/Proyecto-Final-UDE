@@ -10,11 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AVDA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.Designer.cs
-    [Migration("20221009161903_migracion")]
-========
-    [Migration("20221009172817_migracion")]
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.Designer.cs
+    [Migration("20221014002641_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,12 +153,9 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(30)");
 
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.Designer.cs
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
-========
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.Designer.cs
                     b.Property<string>("Idioma")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -273,6 +266,10 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 
+                    b.Property<string>("DescripcionEstado")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
                     b.Property<string>("EstadoReserva")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -283,22 +280,7 @@ namespace AVDA.Migrations
                     b.Property<DateTime>("FechaReserva")
                         .HasColumnType("DateTime");
 
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.Designer.cs
                     b.Property<string>("NombreEmpresa")
-========
-                    b.Property<int>("cantidadReservas")
-                        .HasColumnType("Integer");
-
-                    b.Property<string>("correoElectronico")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("descripcionEstado")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("nombreEmpresa")
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.Designer.cs
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
 

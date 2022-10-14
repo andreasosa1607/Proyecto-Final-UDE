@@ -56,7 +56,7 @@ namespace AV.BO
 
         [Required]
         [Column(TypeName = "VarChar(50)")]
-        public string descripcionEstado { get; set; }
+        public string DescripcionEstado { get; set; }
 
 
     }
