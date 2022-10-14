@@ -38,6 +38,10 @@ namespace AV.BO
         public DateTime Fecha { get; set; }
 
        [Required]
+<<<<<<< HEAD
+       [Column(TypeName = "VarChar(10)")]
+       public string Duracion { get; set; }
+=======
        [Column(TypeName = "Integer")]
        public int Duracion { get; set; }
 
@@ -53,6 +57,7 @@ namespace AV.BO
 
      
 
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
 
 
         [Required]

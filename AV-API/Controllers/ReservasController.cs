@@ -27,7 +27,14 @@ namespace AV_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReservaDTO>>> GetReservas()
         {
+<<<<<<< HEAD
+
             return await _context.Reservas.Include("Cliente").Include("Evento").Select(x => MapeoDTO.ReservaDTO(x)).ToListAsync();
+
+
+=======
+            return await _context.Reservas.Include("Cliente").Include("Evento").Select(x => MapeoDTO.ReservaDTO(x)).ToListAsync();
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
         }
 
 
