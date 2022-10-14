@@ -68,5 +68,54 @@ namespace AV.BL
 
             return ruta;
         }
+<<<<<<< HEAD
+
+
+        public static string ReservaCanceladaAutomaticamente(Reserva reserva)
+        {
+            var correoService = new AV.DA.ServiceCorreosElectronicos.SoporteCorreos();
+            correoService.enviarCorreo(
+             asunto: "Reserva cancelada",
+             cuerpo: "¡Hola " + reserva.Cliente.Nombre + "!" + "\n Su reserva " + reserva.NombreEmpresa + " para el evento " + reserva.Evento.Nombre + " " +
+             "ha sido cancelada debido a que se excedieron las 48 horas de plazo para realizar el pago de la misma. \n" +
+             "\n \n" +
+             "\n \n" +
+             "\n Ante cualquier duda , puede comunicarse con nosotros via correo electronico a 'soporteclientesAV@gmail.com'" +
+              "\n \n" +
+             "\n \n" +
+              "\n \n" +
+             "\n ¡GRACIAS POR PREFERIRNOS!\n",
+             destinatarios: new List<string> { reserva.CorreoElectronico }
+              );
+
+            return "Ok";
+        }
+
+
+
+        public static void cancelarReserva(Reserva reserva)
+        {
+            DateTime hoy = DateTime.Now;
+            double diferencia = reserva.FechaReserva.Date.Subtract(hoy.Date).TotalDays;
+
+            if ((diferencia > 2) && (reserva.ComprobantePago==null) && (reserva.EstadoReserva=="Pendiente de pago"))
+            {
+                reserva.EstadoReserva = "Cancelada";
+                ReservaCanceladaAutomaticamente(reserva);
+
+            }
+        }
+
+        public static void asignacionAutomatica(Reserva reserva)
+        {
+            DateTime hoy = DateTime.Now;
+            double diferencia = reserva.Evento.FechaHora.Date.Subtract(hoy.Date).TotalDays;
+            if (diferencia <= 2)
+            {
+            }
+        }
+
+=======
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
     }
 }
