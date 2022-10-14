@@ -8,13 +8,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+<<<<<<< HEAD
+=======
+
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
 using Microsoft.IdentityModel.Tokens;
+
 using System.Text;
-using MVC;
 
 namespace AV_API
 {
@@ -31,7 +36,6 @@ namespace AV_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddHostedService<IntervalTaskHostedService>();
 
             // Autenticación
             services.AddAuthentication(options =>

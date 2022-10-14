@@ -1,12 +1,14 @@
-﻿using AV.BL;
-using AV.BO;
-using AV.DA;
-using AV_DTO;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using AV.BO;
+using AV.DA;
+using AV_DTO;
+using AV.BL;
 
 namespace AV_API.Controllers
 {
@@ -25,33 +27,31 @@ namespace AV_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReservaDTO>>> GetReservas()
         {
+<<<<<<< HEAD
 
             return await _context.Reservas.Include("Cliente").Include("Evento").Select(x => MapeoDTO.ReservaDTO(x)).ToListAsync();
 
 
+=======
+            return await _context.Reservas.Include("Cliente").Include("Evento").Select(x => MapeoDTO.ReservaDTO(x)).ToListAsync();
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
         }
+
+
 
 
         // GET: api/Reservas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ReservaDTO>> GetReserva(int id)
         {
-            List<Reserva> reservas = await _context.Reservas.Include("Evento").Include("Cliente").Where(x => x.IdReserva == id).ToListAsync();
-                //FindAsync(id);
+            var reserva = await _context.Reservas.FindAsync(id);
 
-            if (reservas == null)
+            if (reserva == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Reserva reserva = reservas.First();
-                return MapeoDTO.ReservaDTO(reserva);
-            }
 
-            
-
-            //return MapeoDTO.ReservaDTO(reserva);
+            return Ok(reserva);
         }
 
         // PUT: api/Reservas/5
@@ -101,7 +101,7 @@ namespace AV_API.Controllers
         public async Task<ActionResult<ReservaDTO>> PostReserva(ReservaDTO reservaDTO)
         {
             Reserva reserva = MapeoDTO.Reserva(reservaDTO);
-            reserva.Evento.NroCupos = (reserva.Evento.NroCupos) - (reserva.CantidadReservas);
+            reserva.Evento.NroCupos = (reserva.Evento.NroCupos) - (reserva.cantidadReservas);
             _context.Eventos.Update(reserva.Evento);
             _context.Clientes.Update(reserva.Cliente);
             _context.Logins.Update(reserva.Cliente.Login);
@@ -138,4 +138,3 @@ namespace AV_API.Controllers
         }
     }
 }
-

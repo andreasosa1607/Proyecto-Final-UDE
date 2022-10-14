@@ -1,37 +1,32 @@
-﻿using AV.BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AV_DTO
 {
-    public class EventoDTO
+    public class EventoDTO2
     {
         public int EventoId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Tipo { get; set; }
         public string ImagenPortada { get; set; }
-        public DateTime Fecha { get; set; }
-        public int Duracion { get; set; }
-        public string CallePuerta { get; set; }
-        public string Barrio { get; set; }
-        public string Ciudad { get; set; }
-<<<<<<< HEAD
-=======
-
-        public string Hora { get; set; }
-
->>>>>>> adee5765e88b953567f2fcea878b522e14296f36
+       // public DateTime Fecha { get; set; }
+       // public TimeSpan Hora { get; set; }
+       // public int Duracion { get; set; }
+        public string callePuerta { get; set; }
+       public string barrio { get; set; }
+       public string ciudad { get; set; }
         public int NroCupos { get; set; }
-        public int CantidadMesas { get; set; }
-        public int CantidadAsientosMesa { get; set; }
+       // public int CantidadMesas { get; set; }
+       // public int CantidadAsientosMesa { get; set; }
         public int PrecioAsiento { get; set; }
         public string Idioma { get; set; }
         public string CriterioAsignacion { get; set; }
         public string EmpresaCreadora { get; set; }
 
-        public List<Mesa> Mesas { get; set; }
 
     }
 }
