@@ -162,6 +162,15 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(100)");
 
+<<<<<<< HEAD
+                    b.Property<string>("EstadoEvento")
+                        .IsRequired()
+                        .HasColumnType("Varchar(30)");
+
+                    b.Property<DateTime>("FechaHora")
+                        .HasColumnType("datetime2");
+
+=======
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -169,6 +178,7 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(8)");
 
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
                     b.Property<string>("Idioma")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -272,6 +282,17 @@ namespace AVDA.Migrations
                     b.Property<byte[]>("ComprobantePago")
                         .HasColumnType("image");
 
+<<<<<<< HEAD
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
+                    b.Property<string>("DescripcionEstado")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
+=======
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
                     b.Property<string>("EstadoReserva")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -282,6 +303,9 @@ namespace AVDA.Migrations
                     b.Property<int>("Telefono")
                         .HasColumnType("Integer");
 
+<<<<<<< HEAD
+                    b.Property<string>("NombreEmpresa")
+=======
                     b.Property<int>("cantidadReservas")
                         .HasColumnType("Integer");
 
@@ -290,6 +314,7 @@ namespace AVDA.Migrations
                         .HasColumnType("VarChar(50)");
 
                     b.Property<string>("nombreEmpresa")
+>>>>>>> adee5765e88b953567f2fcea878b522e14296f36
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
 
