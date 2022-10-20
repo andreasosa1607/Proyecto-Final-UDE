@@ -50,5 +50,9 @@ namespace AV.BO
 
         public Login Login { get; set; }
 
+        [Required]
+        [Column(TypeName = "VarChar(50)")]
+        public string IdiomaPreferencia { get; set; }
+
     }
 }
