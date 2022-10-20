@@ -10,11 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AVDA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.Designer.cs
-    [Migration("20221009161903_migracion")]
-========
-    [Migration("20221009172817_migracion")]
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.Designer.cs
+    [Migration("20221017230952_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +76,10 @@ namespace AVDA.Migrations
                     b.Property<byte[]>("FotoPerfil")
                         .HasColumnType("image");
 
+                    b.Property<string>("IdiomaPreferencia")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
                     b.Property<string>("LoginCorreoElectronico")
                         .HasColumnType("VarChar(150)");
 
@@ -110,6 +110,22 @@ namespace AVDA.Migrations
                     b.HasIndex("LoginCorreoElectronico");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("AV.BO.ComprobanteDePago", b =>
+                {
+                    b.Property<int>("IdDocumento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("VarChar(100)");
+
+                    b.HasKey("IdDocumento");
+
+                    b.ToTable("ComprobantesDePagos");
                 });
 
             modelBuilder.Entity("AV.BO.Evento", b =>
@@ -157,12 +173,9 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(30)");
 
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.Designer.cs
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
-========
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.Designer.cs
                     b.Property<string>("Idioma")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -196,7 +209,7 @@ namespace AVDA.Migrations
 
                     b.Property<string>("Contraseña")
                         .IsRequired()
-                        .HasColumnType("VarChar(30)");
+                        .HasColumnType("VarChar(200)");
 
                     b.Property<string>("Rol")
                         .IsRequired()
@@ -266,10 +279,17 @@ namespace AVDA.Migrations
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ComprobanteDePagoIdDocumento")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("ComprobantePago")
                         .HasColumnType("image");
 
                     b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
+                    b.Property<string>("DescripcionEstado")
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 
@@ -283,22 +303,7 @@ namespace AVDA.Migrations
                     b.Property<DateTime>("FechaReserva")
                         .HasColumnType("DateTime");
 
-<<<<<<<< HEAD:AV-DA/Migrations/20221009161903_migracion.Designer.cs
                     b.Property<string>("NombreEmpresa")
-========
-                    b.Property<int>("cantidadReservas")
-                        .HasColumnType("Integer");
-
-                    b.Property<string>("correoElectronico")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("descripcionEstado")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("nombreEmpresa")
->>>>>>>> main:AV-DA/Migrations/20221009172817_migracion.Designer.cs
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
 
@@ -308,6 +313,8 @@ namespace AVDA.Migrations
                     b.HasKey("IdReserva");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("ComprobanteDePagoIdDocumento");
 
                     b.HasIndex("EventoId");
 
@@ -367,11 +374,17 @@ namespace AVDA.Migrations
                         .WithMany()
                         .HasForeignKey("ClienteId");
 
+                    b.HasOne("AV.BO.ComprobanteDePago", "ComprobanteDePago")
+                        .WithMany()
+                        .HasForeignKey("ComprobanteDePagoIdDocumento");
+
                     b.HasOne("AV.BO.Evento", "Evento")
                         .WithMany()
                         .HasForeignKey("EventoId");
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("ComprobanteDePago");
 
                     b.Navigation("Evento");
                 });
