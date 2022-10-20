@@ -103,7 +103,7 @@ namespace AV_API.Controllers
         {
             
             Cliente cliente = MapeoDTO.Cliente(clienteDTO);
-            cliente.Login.Contraseña = Encriptar.MD5(cliente.Login.Contraseña).Substring(0,30);
+            cliente.Login.Contraseña = Encriptar.MD5(cliente.Login.Contraseña);
            
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();

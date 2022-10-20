@@ -58,5 +58,33 @@ namespace AV_API.Controllers
 
             }
         }
+        // GET: api/Administradores/correoElectronico
+        [HttpGet("{correoElectronico}")]
+
+        public async Task<ActionResult<Administrador>> GetAdmin(string correoElectronico)
+        {
+            var login = await _context.Logins.FindAsync(correoElectronico);
+
+            if (login == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                    List<Administrador> administradores = await _context.Administradores.Where(x => x.Login.CorreoElectronico == login.CorreoElectronico).ToListAsync();
+
+                    if (administradores == null || administradores.Count == 0)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        Administrador administrador = administradores.First();
+                        return administrador;
+                    }
+                
+                }
+
+            }
+        }
     }
-}

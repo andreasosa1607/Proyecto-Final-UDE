@@ -95,6 +95,8 @@ namespace AV_API.Controllers
         public async Task<ActionResult<EventoDTO>> PostEvento(EventoDTO eventoDTO)
         {
             Evento evento = MapeoDTO.Evento(eventoDTO);
+           
+            EventoBL.asientosPorMesa(evento);
             _context.Eventos.Add(evento);
             await _context.SaveChangesAsync();
 

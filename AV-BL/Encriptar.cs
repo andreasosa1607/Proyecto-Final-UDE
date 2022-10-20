@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace AV.BL
 {
@@ -19,10 +19,6 @@ namespace AV.BL
             //{
             //    rngCsp.GetNonZeroBytes(salt);
             //}
-
-            
-
-
 
 
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
