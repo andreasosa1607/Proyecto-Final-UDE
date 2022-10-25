@@ -14,14 +14,15 @@ namespace AV.BO
         [Key]
         public int NroAsiento { get; set; }
 
-        [Required]
-        [Column(TypeName = "Mesa")]
-        public Mesa Mesa { get; set; }
 
         [Required]
         [NotMapped]
         [Column(TypeName = "VarChar(20)")]
         public string CodigoQR { get; set; }
+
+        public int NroMesa { get; set; }
+
+        public int IdReserva { get; set; }
 
     }
 }

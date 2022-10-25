@@ -68,18 +68,11 @@ namespace AVDA.Migrations
                 {
                     NroMesa = table.Column<int>(type: "int", nullable: false),
                     CantidadAsientos = table.Column<int>(type: "Integer", nullable: false),
-                    LugaresDisponibles = table.Column<int>(type: "Integer", nullable: false),
-                    EventoId = table.Column<int>(type: "int", nullable: true)
+                    LugaresDisponibles = table.Column<int>(type: "Integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Mesas", x => x.NroMesa);
-                    table.ForeignKey(
-                        name: "FK_Mesas_Eventos_EventoId",
-                        column: x => x.EventoId,
-                        principalTable: "Eventos",
-                        principalColumn: "EventoId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -236,11 +229,6 @@ namespace AVDA.Migrations
                 name: "IX_Clientes_LoginCorreoElectronico",
                 table: "Clientes",
                 column: "LoginCorreoElectronico");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Mesas_EventoId",
-                table: "Mesas",
-                column: "EventoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pagos_ReservaIdReserva",

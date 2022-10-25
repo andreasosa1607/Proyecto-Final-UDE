@@ -23,5 +23,10 @@ namespace AV.BO
         [Column(TypeName = "Integer")]
         public int LugaresDisponibles { get; set; }
 
+        public int EventoId { get; set; }
+
+        public List<Asiento> Asientos { get; set; }
+
+
     }
 }

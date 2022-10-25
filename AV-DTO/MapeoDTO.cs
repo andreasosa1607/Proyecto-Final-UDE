@@ -15,7 +15,7 @@ namespace AV_DTO
                 reservaDTO.Cliente = reserva.Cliente;
                 reservaDTO.Evento = reserva.Evento;
                 reservaDTO.EstadoReserva = reserva.EstadoReserva;
-                reservaDTO.ComprobantePago = reserva.ComprobantePago;
+                reservaDTO.ComprobanteDePago = reserva.ComprobanteDePago;
                 reservaDTO.Asientos = reserva.Asientos;
                 reservaDTO.NombreEmpresa= reserva.NombreEmpresa;
                 reservaDTO.Telefono = reserva.Telefono;
@@ -35,7 +35,7 @@ namespace AV_DTO
             reserva.Cliente = reservaDTO.Cliente;
             reserva.Evento = reservaDTO.Evento;
             reserva.EstadoReserva = reservaDTO.EstadoReserva;
-            reserva.ComprobantePago = reservaDTO.ComprobantePago;
+            reserva.ComprobanteDePago = reservaDTO.ComprobanteDePago;
             reserva.Asientos = reservaDTO.Asientos;
             reserva.NombreEmpresa = reservaDTO.NombreEmpresa;
             reserva.Telefono = reservaDTO.Telefono;
@@ -66,7 +66,7 @@ namespace AV_DTO
             reserva.Cliente = reservaDTO.Cliente;
             reserva.Evento = reservaDTO.Evento;
             reserva.EstadoReserva = reservaDTO.EstadoReserva;
-            reserva.ComprobantePago = reservaDTO.ComprobantePago;
+            reserva.ComprobanteDePago = reservaDTO.ComprobanteDePago;
             if(reservaDTO.Asientos != null)
             { 
                 reserva.Asientos = new List<Asiento>(reservaDTO.Asientos);
@@ -142,7 +142,6 @@ namespace AV_DTO
             cliente.ProfesionCargo = clienteDTO.ProfesionCargo;
             cliente.NombreEmpresa = clienteDTO.NombreEmpresa;
             cliente.FotoPerfil = clienteDTO.FotoPerfil;
-   
             return cliente;
         }
 
@@ -167,6 +166,7 @@ namespace AV_DTO
             {
                 cliente.FotoPerfil = null;
             }
+            cliente.IdiomaPreferencia = clienteDTO.IdiomaPreferencia;
             cliente.Login = clienteDTO.login;
 
             return cliente;
@@ -195,6 +195,7 @@ namespace AV_DTO
             eventoDTO.EmpresaCreadora = evento.EmpresaCreadora;
             //eventoDTO.Mesas = evento.Mesas;
             eventoDTO.EstadoEvento = evento.EstadoEvento;
+            eventoDTO.Mesas = evento.Mesas;
             return eventoDTO;
         }
         //Dado un evento se actualiza con el dto
@@ -220,6 +221,7 @@ namespace AV_DTO
             evento.EmpresaCreadora = eventoDTO.EmpresaCreadora;
             //evento.Mesas = eventoDTO.Mesas;
             evento.EstadoEvento = eventoDTO.EstadoEvento;
+            evento.Mesas = eventoDTO.Mesas;
             return evento;
         }
 
@@ -245,14 +247,14 @@ namespace AV_DTO
             evento.Idioma = eventoDTO.Idioma;
             evento.CriterioAsignacion = eventoDTO.CriterioAsignacion;
             evento.EmpresaCreadora = eventoDTO.EmpresaCreadora;
-            //if (eventoDTO.Mesas != null)
-            //{
-            //    evento.Mesas = new List<Mesa>(evento.Mesas);
-            //}
-            //else
-            //{
-            //    evento.Mesas = null;
-            //}
+            if (eventoDTO.Mesas != null)
+            {
+                evento.Mesas = new List<Mesa>(evento.Mesas);
+            }
+            else
+            {
+                evento.Mesas = null;
+            }
             evento.EstadoEvento = eventoDTO.EstadoEvento;
             return evento;
         }
@@ -331,7 +333,8 @@ namespace AV_DTO
             mesaDTO.NroMesa = mesa.NroMesa;
             mesaDTO.CantidadAsientos = mesa.CantidadAsientos;
             mesaDTO.LugaresDisponibles = mesa.LugaresDisponibles;
-
+            mesaDTO.EventoId = mesa.EventoId;
+            mesaDTO.Asientos = mesa.Asientos;
             return mesaDTO;
         }
 
@@ -341,7 +344,8 @@ namespace AV_DTO
             mesa.NroMesa = mesaDTO.NroMesa;
             mesa.CantidadAsientos = mesaDTO.CantidadAsientos;
             mesa.LugaresDisponibles = mesaDTO.LugaresDisponibles;
-
+            mesa.EventoId = mesaDTO.EventoId;
+            mesa.Asientos = mesaDTO.Asientos;
             return mesa;
         }
 
@@ -352,6 +356,16 @@ namespace AV_DTO
             mesa.NroMesa = mesaDTO.NroMesa;
             mesa.CantidadAsientos = mesaDTO.CantidadAsientos;
             mesa.LugaresDisponibles = mesaDTO.LugaresDisponibles;
+            mesa.EventoId = mesaDTO.EventoId;
+            if (mesaDTO.Asientos != null)
+            {
+                mesa.Asientos = new List<Asiento>(mesa.Asientos);
+            }
+            else
+            {
+                mesa.Asientos = null;
+            }
+
 
             return mesa;
         }
@@ -361,8 +375,9 @@ namespace AV_DTO
             AsientoDTO asientoDTO = new AsientoDTO();
             
                 asientoDTO.NroAsiento = asiento.NroAsiento;
-                asientoDTO.Mesa = MapeoDTO.MesaDTO(asiento.Mesa);
+                asientoDTO.NroMesa = asiento.NroMesa;
                 asientoDTO.CodigoQR = asiento.CodigoQR;
+                asientoDTO.IdReserva = asiento.IdReserva;
             
             return asientoDTO;
         }
@@ -371,8 +386,9 @@ namespace AV_DTO
         public static Asiento ActualizarAsiento(Asiento asiento, AsientoDTO asientoDTO)
         {
             asiento.NroAsiento = asientoDTO.NroAsiento;
-            asiento.Mesa = Mesa(asientoDTO.Mesa);
+            asiento.NroMesa = asientoDTO.NroMesa;
             asiento.CodigoQR = asientoDTO.CodigoQR;
+            asiento.IdReserva = asientoDTO.IdReserva;
 
             return asiento;
         }
@@ -383,8 +399,9 @@ namespace AV_DTO
             Asiento asiento = new Asiento();
 
             asiento.NroAsiento = asientoDTO.NroAsiento;
-            asiento.Mesa = Mesa(asientoDTO.Mesa);
+            asiento.NroMesa = asientoDTO.NroMesa;
             asiento.CodigoQR = asientoDTO.CodigoQR;
+            asiento.IdReserva = asientoDTO.IdReserva;
 
             return asiento;
         }

@@ -107,8 +107,9 @@ namespace AV.BL
 
         public static void asientosPorMesa(Evento evento)
         {
-            double cntMesas = evento.NroCupos / evento.CantidadAsientosMesa;
+            
             evento.CantidadAsientosMesa = 10;
+            double cntMesas = evento.NroCupos / evento.CantidadAsientosMesa;
             evento.CantidadMesas = (int)Math.Ceiling(cntMesas);
         }
 
@@ -123,9 +124,9 @@ namespace AV.BL
                 nuevaMesa.LugaresDisponibles = 10;
                 nuevaMesa.NroMesa = x;
                 mesas.Add(nuevaMesa);
-
+                nuevaMesa.EventoId = evento.EventoId;
             }
-
+            evento.Mesas = mesas;
             return mesas;
 
 

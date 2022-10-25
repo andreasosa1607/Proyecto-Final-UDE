@@ -96,7 +96,7 @@ namespace AV.BL
             var correoService = new AV.DA.ServiceCorreosElectronicos.SoporteCorreos();
             correoService.enviarCorreo(
              asunto: "Reserva cancelada",
-             cuerpo: "¡Hola " + reserva.Cliente.Nombre + "!" + "\n Su reserva " + reserva.NombreEmpresa + " para el evento " + reserva.Evento.Nombre + " " +
+             cuerpo: "¡Hola " + reserva.NombreEmpresa + "!" + "\n Su reserva " + " para el evento " + reserva.Evento.Nombre + " " +
              "ha sido cancelada debido a que se excedieron las 48 horas de plazo para realizar el pago de la misma. \n" +
              "\n \n" +
              "\n \n" +
@@ -118,7 +118,7 @@ namespace AV.BL
             DateTime hoy = DateTime.Now;
             double diferencia = reserva.FechaReserva.Date.Subtract(hoy.Date).TotalDays;
 
-            if ((diferencia > 2) && (reserva.ComprobantePago==null) && (reserva.EstadoReserva=="Pendiente de pago"))
+            if ((diferencia > 2) && (reserva.ComprobanteDePago==null) && (reserva.EstadoReserva=="Pendiente de pago"))
             {
                 reserva.EstadoReserva = "Cancelada";
                 ReservaCanceladaAutomaticamente(reserva);
@@ -126,16 +126,194 @@ namespace AV.BL
             }
         }
 
-        public static void asignacionAutomatica(Reserva reserva)
+        public static string ReservaAprobadaORechazada(Reserva reserva)
         {
+            var correoService = new AV.DA.ServiceCorreosElectronicos.SoporteCorreos();
+            correoService.enviarCorreo(
+             asunto: "Reserva " + reserva.EstadoReserva,
+             cuerpo: "¡Hola " + reserva.NombreEmpresa + "!" + "\n Su comprobante de pago cargado " + "para el evento " + reserva.Evento.Nombre + " " +
+             "ha sido " + reserva.EstadoReserva + "y el comentario ingresado por la empresa creadora fué" + reserva.DescripcionEstado + "\n" +
+             "\n \n" +
+             "\n \n" +
+             "\n Ante cualquier duda , puede comunicarse con nosotros via correo electronico a 'soporteclientesAV@gmail.com'" +
+              "\n \n" +
+             "\n \n" +
+              "\n \n" +
+             "\n ¡GRACIAS POR PREFERIRNOS!\n",
+             destinatarios: new List<string> { reserva.CorreoElectronico }
+              );
+
+            return "Ok";
+        }
+
+
+
+        public static void asignacionAutomatica(List<Reserva> reservas)
+        {
+            List<Reserva> idiomaEspañol = new List<Reserva>();
+            List<Reserva> idiomaIngles = new List<Reserva>();
+            List<Reserva> idiomaChinoMandarin = new List<Reserva>();
+            List<Reserva> idiomaOtro = new List<Reserva>();
+
+            List<Reserva> rubroIngenieria = new List<Reserva>();
+            List<Reserva> rubroInformatica = new List<Reserva>();
+            List<Reserva> rubroAdministracion = new List<Reserva>();
+            List<Reserva> rubroOtro = new List<Reserva>();
+
             DateTime hoy = DateTime.Now;
-            double diferencia = reserva.Evento.FechaHora.Date.Subtract(hoy.Date).TotalDays;
-            if (diferencia <= 2)
+
+            foreach (Reserva reserva in reservas)
             {
+                double diferencia = reserva.Evento.FechaHora.Date.Subtract(hoy.Date).TotalDays;
+                if (diferencia <= 1 && reserva.EstadoReserva == "Aprobada")
+                {
+                    if (reserva.Evento.CriterioAsignacion == "Idioma")
+                    {
+                        if (reserva.Cliente.IdiomaPreferencia == "Español")
+                        {
+                            idiomaEspañol.Add(reserva);
+                        } else if (reserva.Cliente.IdiomaPreferencia == "Ingles")
+                        {
+                            idiomaIngles.Add(reserva);
+                        }else if (reserva.Cliente.IdiomaPreferencia == "Chino Mandarin")
+                        {
+                            idiomaChinoMandarin.Add(reserva);
+                        }
+                        else
+                        {
+                            idiomaOtro.Add(reserva);
+                        }
+                     
+                      
+                    }
+                    else if (reserva.Evento.CriterioAsignacion == "Rubro")
+                    {
+                        if(reserva.Cliente.ProfesionCargo == "Ingenieria")
+                        {
+                            rubroIngenieria.Add(reserva);
+                        }else if(reserva.Cliente.ProfesionCargo == "Informatica")
+                        {
+                            rubroInformatica.Add(reserva);
+                        }else if(reserva.Cliente.ProfesionCargo == "Administración")
+                        {
+                            rubroAdministracion.Add(reserva);
+                        }
+                        else
+                        {
+                            rubroOtro.Add(reserva);
+                        }
+                    }
+                }
+            }
+
+            foreach (Reserva reservaIdioma in idiomaEspañol)
+            {
+                foreach (Mesa mesa in reservaIdioma.Evento.Mesas)
+                {
+                    if (reservaIdioma.EstadoReserva == "Aprobada")
+                    {
+
+                        for (int x = 0; (x < reservaIdioma.CantidadReservas) && (x < mesa.LugaresDisponibles); x++)
+                        {
+                            foreach (Asiento asiento in mesa.Asientos)
+                            {
+                                asiento.IdReserva = reservaIdioma.IdReserva;
+                                asiento.NroMesa = mesa.NroMesa;
+                                reservaIdioma.Asientos.Add(asiento);
+                                reservaIdioma.EstadoReserva = "Asignada";
+                                mesa.LugaresDisponibles = -1;
+                            }
+                        }
+                    }
+                }
+            }
+            foreach (Reserva reservaIdioma in idiomaIngles)
+            {
+                foreach (Mesa mesa in reservaIdioma.Evento.Mesas)
+                {
+                    if (reservaIdioma.EstadoReserva == "Aprobada")
+                    {
+
+                        for (int x = 0; (x < reservaIdioma.CantidadReservas) && (x < mesa.LugaresDisponibles); x++)
+                        {
+                            foreach (Asiento asiento in mesa.Asientos)
+                            {
+                                asiento.IdReserva = reservaIdioma.IdReserva;
+                                asiento.NroMesa = mesa.NroMesa;
+                                reservaIdioma.Asientos.Add(asiento);
+                                reservaIdioma.EstadoReserva = "Asignada";
+                                mesa.LugaresDisponibles = -1;
+                            }
+                        }
+                    }
+                }
+            }
+            foreach (Reserva reservaIdioma in idiomaChinoMandarin)
+            {
+                foreach (Mesa mesa in reservaIdioma.Evento.Mesas)
+                {
+                    if (reservaIdioma.EstadoReserva == "Aprobada")
+                    {
+
+                        for (int x = 0; (x < reservaIdioma.CantidadReservas) && (x < mesa.LugaresDisponibles); x++)
+                        {
+                            foreach (Asiento asiento in mesa.Asientos)
+                            {
+                                asiento.IdReserva = reservaIdioma.IdReserva;
+                                asiento.NroMesa = mesa.NroMesa;
+                                reservaIdioma.Asientos.Add(asiento);
+                                reservaIdioma.EstadoReserva = "Asignada";
+                                mesa.LugaresDisponibles = -1;
+                            }
+                        }
+                    }
+                }
+            }
+            foreach (Reserva reservaIdioma in idiomaOtro)
+            {
+                foreach (Mesa mesa in reservaIdioma.Evento.Mesas)
+                {
+                    if (reservaIdioma.EstadoReserva == "Aprobada")
+                    {
+
+                        for (int x = 0; (x < reservaIdioma.CantidadReservas) && (x < mesa.LugaresDisponibles); x++)
+                        {
+                            foreach (Asiento asiento in mesa.Asientos)
+                            {
+                                asiento.IdReserva = reservaIdioma.IdReserva;
+                                asiento.NroMesa = mesa.NroMesa;
+                                reservaIdioma.Asientos.Add(asiento);
+                                reservaIdioma.EstadoReserva = "Asignada";
+                                mesa.LugaresDisponibles = -1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (Reserva reservaSinAsignar in reservas)
+            {
+                foreach(Mesa mesa in reservaSinAsignar.Evento.Mesas)
+                {
+                    if ((reservaSinAsignar.EstadoReserva == "Aprobada") && (mesa.CantidadAsientos >= reservaSinAsignar.CantidadReservas))
+                    {
+                        for (int x = 0; (x < reservaSinAsignar.CantidadReservas) && (x < mesa.LugaresDisponibles); x++)
+                        {
+                            foreach (Asiento asiento in mesa.Asientos)
+                            {
+                                asiento.IdReserva = reservaSinAsignar.IdReserva;
+                                asiento.NroMesa = mesa.NroMesa;
+                                reservaSinAsignar.Asientos.Add(asiento);
+                                reservaSinAsignar.EstadoReserva = "Asignada";
+                                mesa.LugaresDisponibles = -1;
+                            }
+                        }
+                    }
+                }
+               
             }
         }
 
-       
 
     }
 }

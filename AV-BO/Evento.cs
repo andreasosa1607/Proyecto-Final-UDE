@@ -93,8 +93,7 @@ namespace AV.BO
         [Column(TypeName = "Varchar(30)")]
         public string EstadoEvento { get; set; }
 
-        [NotMapped]
-        public List<string> Mesas { get; set; }
+        public List<Mesa> Mesas { get; set; }
 
-}
+    }
 }

@@ -226,15 +226,10 @@ namespace AVDA.Migrations
                     b.Property<int>("CantidadAsientos")
                         .HasColumnType("Integer");
 
-                    b.Property<int?>("EventoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LugaresDisponibles")
                         .HasColumnType("Integer");
 
                     b.HasKey("NroMesa");
-
-                    b.HasIndex("EventoId");
 
                     b.ToTable("Mesas");
                 });
@@ -350,13 +345,6 @@ namespace AVDA.Migrations
                     b.Navigation("Login");
                 });
 
-            modelBuilder.Entity("AV.BO.Mesa", b =>
-                {
-                    b.HasOne("AV.BO.Evento", null)
-                        .WithMany("Mesas")
-                        .HasForeignKey("EventoId");
-                });
-
             modelBuilder.Entity("AV.BO.Pago", b =>
                 {
                     b.HasOne("AV.BO.Reserva", "Reserva")
@@ -385,11 +373,6 @@ namespace AVDA.Migrations
                     b.Navigation("ComprobanteDePago");
 
                     b.Navigation("Evento");
-                });
-
-            modelBuilder.Entity("AV.BO.Evento", b =>
-                {
-                    b.Navigation("Mesas");
                 });
 
             modelBuilder.Entity("AV.BO.Reserva", b =>

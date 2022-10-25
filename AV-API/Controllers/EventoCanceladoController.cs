@@ -30,7 +30,7 @@ namespace AV_API.Controllers
         public async Task<ActionResult<List<Reserva>>> GetReservaEvento(int idEvento)
         {
 
-            List<Reserva> reservas = await _context.Reservas.Where(x => x.Evento.EventoId == idEvento).ToListAsync();
+            List<Reserva> reservas = await _context.Reservas.Include("Cliente").Include("Evento").Where(x => x.Evento.EventoId == idEvento).ToListAsync();
 
 
             if (reservas == null || reservas.Count == 0)
@@ -45,7 +45,7 @@ namespace AV_API.Controllers
         }
 
         [HttpGet("{reservas}")]
-        public async Task<ActionResult<List<Reserva>>> GetEventosReserva(List<Reserva> reservas)
+        public ActionResult<List<Reserva>> GetEventosReserva(List<Reserva> reservas)
         {
             foreach (Reserva reserva in reservas)
             {

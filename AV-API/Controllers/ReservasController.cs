@@ -98,6 +98,7 @@ namespace AV_API.Controllers
         {
             Reserva reserva = MapeoDTO.Reserva(reservaDTO);
             reserva.Evento.NroCupos = (reserva.Evento.NroCupos) - (reserva.CantidadReservas);
+            reserva.DescripcionEstado = "null";
             _context.Eventos.Update(reserva.Evento);
             _context.Clientes.Update(reserva.Cliente);
             _context.Logins.Update(reserva.Cliente.Login);
