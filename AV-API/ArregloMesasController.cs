@@ -35,7 +35,7 @@ namespace AV_API
             else
             {
 
-                return EventoBL.asignarMesas(evento);
+                return evento.Mesas;
             }
 
 

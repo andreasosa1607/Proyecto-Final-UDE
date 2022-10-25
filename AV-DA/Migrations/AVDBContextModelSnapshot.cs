@@ -42,18 +42,29 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Asiento", b =>
                 {
-                    b.Property<int>("NroAsiento")
+                    b.Property<int>("IdAsiento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdMesa")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MesaNroMesa")
+                    b.Property<int>("IdReserva")
                         .HasColumnType("int");
+
+                    b.Property<int?>("MesaIdMesa")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NroAsiento")
+                        .HasColumnType("Integer");
 
                     b.Property<int?>("ReservaIdReserva")
                         .HasColumnType("int");
 
-                    b.HasKey("NroAsiento");
+                    b.HasKey("IdAsiento");
 
-                    b.HasIndex("MesaNroMesa");
+                    b.HasIndex("MesaIdMesa");
 
                     b.HasIndex("ReservaIdReserva");
 
@@ -221,19 +232,24 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Mesa", b =>
                 {
-                    b.Property<int>("NroMesa")
-                        .HasColumnType("int");
+                    b.Property<int>("IdMesa")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CantidadAsientos")
                         .HasColumnType("Integer");
 
-                    b.Property<int?>("EventoId")
+                    b.Property<int>("EventoId")
                         .HasColumnType("int");
 
                     b.Property<int>("LugaresDisponibles")
                         .HasColumnType("Integer");
 
-                    b.HasKey("NroMesa");
+                    b.Property<int>("NroMesa")
+                        .HasColumnType("Integer");
+
+                    b.HasKey("IdMesa");
 
                     b.HasIndex("EventoId");
 
@@ -280,6 +296,7 @@ namespace AVDA.Migrations
 
                     b.Property<int?>("ComprobanteDePagoIdDocumento")
                         .HasColumnType("int");
+
 
 
                     b.Property<byte[]>("ComprobantePago")
@@ -333,15 +350,13 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Asiento", b =>
                 {
-                    b.HasOne("AV.BO.Mesa", "Mesa")
-                        .WithMany()
-                        .HasForeignKey("MesaNroMesa");
+                    b.HasOne("AV.BO.Mesa", null)
+                        .WithMany("Asientos")
+                        .HasForeignKey("MesaIdMesa");
 
                     b.HasOne("AV.BO.Reserva", null)
                         .WithMany("Asientos")
                         .HasForeignKey("ReservaIdReserva");
-
-                    b.Navigation("Mesa");
                 });
 
             modelBuilder.Entity("AV.BO.Cliente", b =>
@@ -357,7 +372,9 @@ namespace AVDA.Migrations
                 {
                     b.HasOne("AV.BO.Evento", null)
                         .WithMany("Mesas")
-                        .HasForeignKey("EventoId");
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AV.BO.Pago", b =>
@@ -393,6 +410,11 @@ namespace AVDA.Migrations
             modelBuilder.Entity("AV.BO.Evento", b =>
                 {
                     b.Navigation("Mesas");
+                });
+
+            modelBuilder.Entity("AV.BO.Mesa", b =>
+                {
+                    b.Navigation("Asientos");
                 });
 
             modelBuilder.Entity("AV.BO.Reserva", b =>

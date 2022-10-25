@@ -26,12 +26,14 @@ namespace AV.BO
         [Column(TypeName = "VarChar(20)")]
         public string EstadoReserva { get; set; }
 
+
         // ver esto con Emiliano (traerla por FTP)
         //[Required]
        // [Column(TypeName = "image")]
         public ComprobanteDePago ComprobanteDePago { get; set; }
 
-        [Column(TypeName = "Asiento")]
+
+       
         public List<Asiento> Asientos { get; set; }
 
         [Required]

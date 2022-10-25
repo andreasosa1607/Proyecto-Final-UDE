@@ -130,30 +130,51 @@ namespace AV.BL
         }
 
         public static void asientosPorMesa(Evento evento)
-        {
-            double cntMesas = evento.NroCupos / evento.CantidadAsientosMesa;
+           {
+
             evento.CantidadAsientosMesa = 10;
+            double cntMesas = evento.NroCupos / evento.CantidadAsientosMesa;
             evento.CantidadMesas = (int)Math.Ceiling(cntMesas);
 
+           }
+
+
         }
 
-        public static List<Mesa> asignarMesas(Evento evento)
-        {
-            List<Mesa> mesas = new List<Mesa>();
-           
-            for (int x = 1; x < evento.CantidadMesas +1; x++)
+
+
+        public static void asignarMesas(Evento evento)
             {
-                Mesa nuevaMesa = new Mesa();
-                nuevaMesa.CantidadAsientos = 10;
-                nuevaMesa.LugaresDisponibles = 10;
-                nuevaMesa.NroMesa = x;
-                mesas.Add(nuevaMesa);
+
+            evento.Mesas = new List<Mesa>();
+            for (int x = 1; x < evento.CantidadMesas +1; x++)
+                {
+
+                    Mesa nuevaMesa = new Mesa();
+                    nuevaMesa.EventoId = evento.EventoId;
+                    nuevaMesa.CantidadAsientos = 10;
+                    nuevaMesa.LugaresDisponibles = 10;
+                    nuevaMesa.NroMesa = x;
+
+                nuevaMesa.Asientos = new List<Asiento>();
+                    for (int i = 1; i < evento.CantidadAsientosMesa + 1; i++)
+                    {
+                        Asiento nuevoAsiento = new Asiento();
+                        nuevoAsiento.IdMesa = nuevaMesa.IdMesa;
+                        nuevoAsiento.NroAsiento = i;
+                        nuevaMesa.Asientos.Add(nuevoAsiento);
+
+                    }
+                evento.Mesas.Add(nuevaMesa);
+
+                }
+           
+      
+      
+
+             
+
 
             }
-
-            return mesas;
-
-
-        }
     }
 }

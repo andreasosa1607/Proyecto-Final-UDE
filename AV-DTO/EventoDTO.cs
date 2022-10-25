@@ -29,6 +29,6 @@ namespace AV_DTO
         public string CriterioAsignacion { get; set; }
         public string EmpresaCreadora { get; set; }
         public string EstadoEvento { get; set; }
-        public List<Mesa> Mesas { get; set; } 
+        public List<Mesa> Mesas { get; set; }
     }
 }
