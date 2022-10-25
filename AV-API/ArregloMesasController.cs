@@ -34,8 +34,10 @@ namespace AV_API
             }
             else
             {
-
+                await _context.SaveChangesAsync();
+   
                 return evento.Mesas;
+
             }
 
 

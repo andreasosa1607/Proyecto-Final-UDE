@@ -4,14 +4,16 @@ using AV.DA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AVDA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    partial class AVDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221021194456_migracion")]
+    partial class migracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,29 +44,18 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Asiento", b =>
                 {
-                    b.Property<int>("IdAsiento")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("IdMesa")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdReserva")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MesaIdMesa")
-                        .HasColumnType("int");
-
                     b.Property<int>("NroAsiento")
-                        .HasColumnType("Integer");
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MesaNroMesa")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ReservaIdReserva")
                         .HasColumnType("int");
 
-                    b.HasKey("IdAsiento");
+                    b.HasKey("NroAsiento");
 
-                    b.HasIndex("MesaIdMesa");
+                    b.HasIndex("MesaNroMesa");
 
                     b.HasIndex("ReservaIdReserva");
 
@@ -182,7 +173,6 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(30)");
 
-
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
@@ -232,24 +222,16 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Mesa", b =>
                 {
-                    b.Property<int>("IdMesa")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("NroMesa")
+                        .HasColumnType("int");
 
                     b.Property<int>("CantidadAsientos")
                         .HasColumnType("Integer");
 
-                    b.Property<int>("EventoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LugaresDisponibles")
                         .HasColumnType("Integer");
 
-                    b.Property<int>("NroMesa")
-                        .HasColumnType("Integer");
-
-                    b.HasKey("IdMesa");
+                    b.HasKey("NroMesa");
 
                     b.ToTable("Mesas");
                 });
@@ -295,11 +277,8 @@ namespace AVDA.Migrations
                     b.Property<int?>("ComprobanteDePagoIdDocumento")
                         .HasColumnType("int");
 
-
-
                     b.Property<byte[]>("ComprobantePago")
                         .HasColumnType("image");
-
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
@@ -348,13 +327,15 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Asiento", b =>
                 {
-                    b.HasOne("AV.BO.Mesa", null)
-                        .WithMany("Asientos")
-                        .HasForeignKey("MesaIdMesa");
+                    b.HasOne("AV.BO.Mesa", "Mesa")
+                        .WithMany()
+                        .HasForeignKey("MesaNroMesa");
 
                     b.HasOne("AV.BO.Reserva", null)
                         .WithMany("Asientos")
                         .HasForeignKey("ReservaIdReserva");
+
+                    b.Navigation("Mesa");
                 });
 
             modelBuilder.Entity("AV.BO.Cliente", b =>
@@ -365,16 +346,6 @@ namespace AVDA.Migrations
 
                     b.Navigation("Login");
                 });
-
-            modelBuilder.Entity("AV.BO.Mesa", b =>
-                {
-                    b.HasOne("AV.BO.Evento", null)
-                        .WithMany("Mesas")
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
 
             modelBuilder.Entity("AV.BO.Pago", b =>
                 {
@@ -404,16 +375,6 @@ namespace AVDA.Migrations
                     b.Navigation("ComprobanteDePago");
 
                     b.Navigation("Evento");
-                });
-
-            modelBuilder.Entity("AV.BO.Evento", b =>
-                {
-                    b.Navigation("Mesas");
-                });
-
-            modelBuilder.Entity("AV.BO.Mesa", b =>
-                {
-                    b.Navigation("Asientos");
                 });
 
             modelBuilder.Entity("AV.BO.Reserva", b =>

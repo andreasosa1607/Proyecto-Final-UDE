@@ -19,12 +19,11 @@ namespace AV.BO
         public int NroAsiento { get; set; }
 
 
+
         [Required]
         [NotMapped]
         [Column(TypeName = "VarChar(20)")]
         public string CodigoQR { get; set; }
-
-        //public int NroMesa { get; set; }
 
         public int IdMesa { get; set; }
 

@@ -130,6 +130,7 @@ namespace AV.BL
         }
 
         public static void asientosPorMesa(Evento evento)
+
            {
 
             evento.CantidadAsientosMesa = 10;
@@ -139,12 +140,21 @@ namespace AV.BL
            }
 
 
-        }
-
 
 
         public static void asignarMesas(Evento evento)
             {
+
+                Mesa nuevaMesa = new Mesa();
+                nuevaMesa.CantidadAsientos = 10;
+                nuevaMesa.LugaresDisponibles = 10;
+                nuevaMesa.NroMesa = x;
+                mesas.Add(nuevaMesa);
+                nuevaMesa.EventoId = evento.EventoId;
+            }
+            evento.Mesas = mesas;
+            return mesas;
+
 
             evento.Mesas = new List<Mesa>();
             for (int x = 1; x < evento.CantidadMesas +1; x++)
@@ -155,6 +165,7 @@ namespace AV.BL
                     nuevaMesa.CantidadAsientos = 10;
                     nuevaMesa.LugaresDisponibles = 10;
                     nuevaMesa.NroMesa = x;
+
 
                 nuevaMesa.Asientos = new List<Asiento>();
                     for (int i = 1; i < evento.CantidadAsientosMesa + 1; i++)

@@ -30,7 +30,7 @@ namespace AV_DTO
                 reservaDTO.Cliente = reserva.Cliente;
                 reservaDTO.Evento = reserva.Evento;
                 reservaDTO.EstadoReserva = reserva.EstadoReserva;
-              //Leer esto de la base 
+
                 reservaDTO.ComprobanteDePago = reserva.ComprobanteDePago;
                 reservaDTO.Asientos = reserva.Asientos;
                 reservaDTO.NombreEmpresa= reserva.NombreEmpresa;
@@ -96,11 +96,14 @@ namespace AV_DTO
             reserva.EstadoReserva = reservaDTO.EstadoReserva;
             reserva.ComprobanteDePago = reservaDTO.ComprobanteDePago;
 
+            if(reservaDTO.Asientos != null)
+            { 
+
+
             if (reservaDTO.Asientos != null)
             {
 
  
-
                 reserva.Asientos = new List<Asiento>(reservaDTO.Asientos);
             }
             else
@@ -410,6 +413,13 @@ namespace AV_DTO
         {
             AsientoDTO asientoDTO = new AsientoDTO();
 
+            
+                asientoDTO.NroAsiento = asiento.NroAsiento;
+                asientoDTO.NroMesa = asiento.NroMesa;
+                asientoDTO.CodigoQR = asiento.CodigoQR;
+                asientoDTO.IdReserva = asiento.IdReserva;
+   
+
             asientoDTO.IdAsiento = asiento.IdAsiento;
             asientoDTO.NroAsiento = asiento.NroAsiento;
             asientoDTO.IdMesa = asiento.IdMesa;
@@ -424,7 +434,10 @@ namespace AV_DTO
         {
             asiento.IdAsiento = asientoDTO.IdAsiento;
             asiento.NroAsiento = asientoDTO.NroAsiento;
+
+
             asiento.IdMesa = asientoDTO.IdMesa;
+
             asiento.CodigoQR = asientoDTO.CodigoQR;
             asiento.IdReserva = asientoDTO.IdReserva;
 
@@ -438,7 +451,9 @@ namespace AV_DTO
 
             asiento.IdAsiento = asientoDTO.IdAsiento;
             asiento.NroAsiento = asientoDTO.NroAsiento;
+
             asiento.IdMesa = asientoDTO.IdMesa;
+
             asiento.CodigoQR = asientoDTO.CodigoQR;
             asiento.IdReserva = asientoDTO.IdReserva;
 
