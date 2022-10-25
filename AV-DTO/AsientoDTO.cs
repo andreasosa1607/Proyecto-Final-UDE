@@ -4,10 +4,14 @@ using System.Text;
 using AV.BO;
 namespace AV_DTO
 {
-   public class AsientoDTO
+    public class AsientoDTO
     {
+        public int IdAsiento { get; set; }
         public int NroAsiento { get; set; }
-        public MesaDTO Mesa { get; set; }
+        public int IdMesa { get; set; }
+
+        public int IdReserva { get; set; }
         public string CodigoQR { get; set; }
     }
 }
+

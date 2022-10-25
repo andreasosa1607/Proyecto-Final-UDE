@@ -11,7 +11,6 @@ namespace AV_DTO
         public Cliente Cliente { get; set; }
         public Evento Evento { get; set; }
         public string EstadoReserva { get; set; }
-        public string ComprobantePago { get; set; }
         public List<Asiento> Asientos { get; set; }
         public string NombreEmpresa { get; set; }
         public int Telefono { get; set; }
@@ -19,5 +18,8 @@ namespace AV_DTO
         public int CantidadReservas { get; set; }
         public DateTime FechaReserva { get; set; }
         public string DescripcionEstado { get; set; }
+        public ComprobanteDePago ComprobanteDePago { get; set; }
+
     }
 }
+

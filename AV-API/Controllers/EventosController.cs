@@ -97,7 +97,13 @@ namespace AV_API.Controllers
             Evento evento = MapeoDTO.Evento(eventoDTO);
            
             EventoBL.asientosPorMesa(evento);
+            EventoBL.asignarMesas(evento);
             _context.Eventos.Add(evento);
+           
+
+            //_context.Mesas.Update(evento.Mesas);
+            //_context.Asientos.Update(evento.Mesas);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEvento", new { id = evento.EventoId }, evento);

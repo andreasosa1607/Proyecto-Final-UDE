@@ -66,20 +66,22 @@ namespace AVDA.Migrations
                 name: "Mesas",
                 columns: table => new
                 {
-                    NroMesa = table.Column<int>(type: "int", nullable: false),
+                    IdMesa = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NroMesa = table.Column<int>(type: "Integer", nullable: false),
                     CantidadAsientos = table.Column<int>(type: "Integer", nullable: false),
                     LugaresDisponibles = table.Column<int>(type: "Integer", nullable: false),
-                    EventoId = table.Column<int>(type: "int", nullable: true)
+                    EventoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mesas", x => x.NroMesa);
+                    table.PrimaryKey("PK_Mesas", x => x.IdMesa);
                     table.ForeignKey(
                         name: "FK_Mesas_Eventos_EventoId",
                         column: x => x.EventoId,
                         principalTable: "Eventos",
                         principalColumn: "EventoId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -139,7 +141,6 @@ namespace AVDA.Migrations
                     ClienteId = table.Column<int>(type: "int", nullable: true),
                     EventoId = table.Column<int>(type: "int", nullable: true),
                     EstadoReserva = table.Column<string>(type: "VarChar(20)", nullable: false),
-                    ComprobantePago = table.Column<byte[]>(type: "image", nullable: true),
                     NombreEmpresa = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Telefono = table.Column<int>(type: "Integer", nullable: false),
                     CorreoElectronico = table.Column<string>(type: "VarChar(50)", nullable: false),
@@ -175,18 +176,22 @@ namespace AVDA.Migrations
                 name: "Asientos",
                 columns: table => new
                 {
-                    NroAsiento = table.Column<int>(type: "int", nullable: false),
-                    MesaNroMesa = table.Column<int>(type: "int", nullable: true),
+                    IdAsiento = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NroAsiento = table.Column<int>(type: "Integer", nullable: false),
+                    IdMesa = table.Column<int>(type: "int", nullable: false),
+                    IdReserva = table.Column<int>(type: "int", nullable: false),
+                    MesaIdMesa = table.Column<int>(type: "int", nullable: true),
                     ReservaIdReserva = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Asientos", x => x.NroAsiento);
+                    table.PrimaryKey("PK_Asientos", x => x.IdAsiento);
                     table.ForeignKey(
-                        name: "FK_Asientos_Mesas_MesaNroMesa",
-                        column: x => x.MesaNroMesa,
+                        name: "FK_Asientos_Mesas_MesaIdMesa",
+                        column: x => x.MesaIdMesa,
                         principalTable: "Mesas",
-                        principalColumn: "NroMesa",
+                        principalColumn: "IdMesa",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Asientos_Reservas_ReservaIdReserva",
@@ -223,9 +228,9 @@ namespace AVDA.Migrations
                 column: "LoginCorreoElectronico");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Asientos_MesaNroMesa",
+                name: "IX_Asientos_MesaIdMesa",
                 table: "Asientos",
-                column: "MesaNroMesa");
+                column: "MesaIdMesa");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Asientos_ReservaIdReserva",

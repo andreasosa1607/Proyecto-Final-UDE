@@ -37,9 +37,9 @@ namespace AV.BO
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime FechaHora { get; set; }
 
-       [Required]
-       [Column(TypeName = "VarChar(10)")]
-       public string Duracion { get; set; }
+        [Required]
+        [Column(TypeName = "VarChar(10)")]
+        public string Duracion { get; set; }
 
 
 
@@ -75,12 +75,12 @@ namespace AV.BO
         [Column(TypeName = "Integer")]
         public int PrecioAsiento { get; set; }
 
-        // VER como traerla ya con las opciones 
+        // VER como traerla ya con las opciones
         [Required]
         [Column(TypeName = "VarChar(20)")]
         public string Idioma { get; set; }
 
-        // VER como traerla ya con las opciones 
+        // VER como traerla ya con las opciones
         [Required]
         [Column(TypeName = "VarChar(20)")]
         public string CriterioAsignacion { get; set; }
@@ -93,8 +93,7 @@ namespace AV.BO
         [Column(TypeName = "Varchar(30)")]
         public string EstadoEvento { get; set; }
 
-        [NotMapped]
-        public List<string> Mesas { get; set; }
+        public List<Mesa> Mesas { get; set; }
 
-}
+    }
 }

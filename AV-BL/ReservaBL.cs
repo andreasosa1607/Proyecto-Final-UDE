@@ -118,7 +118,7 @@ namespace AV.BL
             DateTime hoy = DateTime.Now;
             double diferencia = reserva.FechaReserva.Date.Subtract(hoy.Date).TotalDays;
 
-            if ((diferencia > 2) && (reserva.ComprobantePago==null) && (reserva.EstadoReserva=="Pendiente de pago"))
+            if ((diferencia > 2) && (reserva.ComprobanteDePago==null) && (reserva.EstadoReserva=="Pendiente de pago"))
             {
                 reserva.EstadoReserva = "Cancelada";
                 ReservaCanceladaAutomaticamente(reserva);

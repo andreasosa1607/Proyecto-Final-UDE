@@ -46,8 +46,22 @@ namespace AV_API.Controllers
             {
                 return NotFound();
             }
+            List<Reserva> reservas = await _context.Reservas.Include("Evento").Include("Cliente").Include("Asientos").Where(x => x.IdReserva == id).ToListAsync();
 
-            return Ok(reserva);
+
+            if (reservas == null || reservas.Count == 0)
+
+            {
+                return NotFound();
+            }
+            else
+            {
+                Reserva reserva2 = reservas.First();
+
+
+
+                return Ok(reserva2);
+            }
         }
 
         // PUT: api/Reservas/5

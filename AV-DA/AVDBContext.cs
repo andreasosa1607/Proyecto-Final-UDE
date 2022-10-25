@@ -30,8 +30,8 @@ namespace AV.DA
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Evento>().Property(et => et.EventoId).ValueGeneratedNever();
-            modelBuilder.Entity<Mesa>().Property(et => et.NroMesa).ValueGeneratedNever();
-            modelBuilder.Entity<Asiento>().Property(et => et.NroAsiento).ValueGeneratedNever();
+            //modelBuilder.Entity<Mesa>().Property(et => et.NroMesa).ValueGeneratedNever();
+            //modelBuilder.Entity<Asiento>().Property(et => et.NroAsiento).ValueGeneratedNever();
             modelBuilder.Entity<Login>().Property(et => et.CorreoElectronico).ValueGeneratedNever();
 
         }

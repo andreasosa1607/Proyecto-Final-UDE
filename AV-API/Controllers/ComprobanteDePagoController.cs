@@ -13,6 +13,7 @@ using AV.BL;
 using AV_DTO;
 using System.IO;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 namespace AV_API.Controllers
 {
@@ -28,10 +29,7 @@ namespace AV_API.Controllers
         }
 
 
-
-
-
-        [HttpPost]
+    [HttpPost]
         [Route("Subir")]
         public ComprobanteDePagoDTO Subir(ComprobanteDePagoDTO request) {
 
