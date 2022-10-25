@@ -50,7 +50,7 @@ namespace AV_API.Controllers
                 {
                     foreach (Reserva reserva in reservas)
                     {
-                        EventoBL.EnvioCorreoEventoModificado(reservas, evento);
+                        EventoBL.EnvioCorreo(reservas, evento);
                         await _context.SaveChangesAsync();
                     }
                     _context.Eventos.Remove(evento);

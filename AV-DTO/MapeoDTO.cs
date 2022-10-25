@@ -15,14 +15,22 @@ namespace AV_DTO
                 reservaDTO.Cliente = reserva.Cliente;
                 reservaDTO.Evento = reserva.Evento;
                 reservaDTO.EstadoReserva = reserva.EstadoReserva;
-                reservaDTO.ComprobantePago = reserva.ComprobantePago;
+              //Leer esto de la base 
+                reservaDTO.ComprobanteDePago = reserva.ComprobanteDePago;
                 reservaDTO.Asientos = reserva.Asientos;
                 reservaDTO.NombreEmpresa= reserva.NombreEmpresa;
                 reservaDTO.Telefono = reserva.Telefono;
                 reservaDTO.CorreoElectronico = reserva.CorreoElectronico;
                 reservaDTO.CantidadReservas = reserva.CantidadReservas;
                 reservaDTO.FechaReserva = reserva.FechaReserva;
+
+                reservaDTO.descripcionEstado = reserva.DescripcionEstado;
+            
+
+            }
+
                 reservaDTO.DescripcionEstado = reserva.DescripcionEstado;
+
 
             return reservaDTO;
         }
@@ -35,7 +43,7 @@ namespace AV_DTO
             reserva.Cliente = reservaDTO.Cliente;
             reserva.Evento = reservaDTO.Evento;
             reserva.EstadoReserva = reservaDTO.EstadoReserva;
-            reserva.ComprobantePago = reservaDTO.ComprobantePago;
+            reserva.ComprobanteDePago = reservaDTO.ComprobanteDePago;
             reserva.Asientos = reservaDTO.Asientos;
             reserva.NombreEmpresa = reservaDTO.NombreEmpresa;
             reserva.Telefono = reservaDTO.Telefono;
@@ -53,6 +61,10 @@ namespace AV_DTO
             reserva.IdReserva = reservaDTO.IdReserva;
             reserva.EstadoReserva = reservaDTO.EstadoReserva;
             reserva.DescripcionEstado = reservaDTO.descripcionEstado;
+
+           // reserva.correoElectronico = reservaDTO.CorreoElectronico;
+           // reserva.cantidadReservas = reservaDTO.cantidadReservas;
+
             return reserva;
 
         }
@@ -66,7 +78,7 @@ namespace AV_DTO
             reserva.Cliente = reservaDTO.Cliente;
             reserva.Evento = reservaDTO.Evento;
             reserva.EstadoReserva = reservaDTO.EstadoReserva;
-            reserva.ComprobantePago = reservaDTO.ComprobantePago;
+            reserva.ComprobanteDePago = reservaDTO.ComprobanteDePago;
             if(reservaDTO.Asientos != null)
             { 
                 reserva.Asientos = new List<Asiento>(reservaDTO.Asientos);
@@ -80,9 +92,9 @@ namespace AV_DTO
             reserva.CorreoElectronico = reservaDTO.CorreoElectronico;
             reserva.CantidadReservas = reservaDTO.CantidadReservas;
             reserva.FechaReserva = reservaDTO.FechaReserva;
-            reserva.DescripcionEstado = reservaDTO.DescripcionEstado;
 
-
+            reserva.DescripcionEstado = reservaDTO.descripcionEstado;
+          reserva.DescripcionEstado = reservaDTO.DescripcionEstado;
 
             return reserva;
         }
@@ -181,6 +193,7 @@ namespace AV_DTO
             eventoDTO.Descripcion = evento.Descripcion;
             eventoDTO.Tipo = evento.Tipo;
             eventoDTO.ImagenPortada = evento.ImagenPortada;
+
             eventoDTO.FechaHora = evento.FechaHora;
             eventoDTO.CallePuerta = evento.CallePuerta;
             eventoDTO.Barrio = evento.Barrio;
@@ -234,6 +247,7 @@ namespace AV_DTO
             evento.Tipo = eventoDTO.Tipo;
             evento.Duracion = eventoDTO.Duracion;
             evento.ImagenPortada = eventoDTO.ImagenPortada;
+
             evento.FechaHora = eventoDTO.FechaHora;
             evento.CallePuerta = eventoDTO.CallePuerta;
             evento.Barrio = eventoDTO.Barrio;
@@ -441,7 +455,6 @@ namespace AV_DTO
             ComprobanteDePago comprobanteDePago = new ComprobanteDePago();
             comprobanteDePago.IdDocumento = comprobanteDePagoDTO.IdDocumento;
             comprobanteDePago.Nombre = comprobanteDePagoDTO.Nombre;
-
 
             return comprobanteDePago;
         }

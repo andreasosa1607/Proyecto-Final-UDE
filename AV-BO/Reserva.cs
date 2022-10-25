@@ -28,8 +28,8 @@ namespace AV.BO
 
         // ver esto con Emiliano (traerla por FTP)
         //[Required]
-        [Column(TypeName = "image")]
-        public string ComprobantePago { get; set; }
+       // [Column(TypeName = "image")]
+        public ComprobanteDePago ComprobanteDePago { get; set; }
 
         [Column(TypeName = "Asiento")]
         public List<Asiento> Asientos { get; set; }
@@ -59,6 +59,7 @@ namespace AV.BO
         public string DescripcionEstado { get; set; }
 
         public ComprobanteDePago ComprobanteDePago { get; set; }
+
 
     }
 }

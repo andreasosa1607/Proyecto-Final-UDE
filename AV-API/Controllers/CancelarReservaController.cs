@@ -40,7 +40,7 @@ namespace AV_API.Controllers
                 else
                 {
                     Reserva reserva = reservas.First();
-                    ReservaBL.ReservaCancelada(reserva);
+                    ReservaBL.cancelarReserva(reserva);
                 reserva.Evento.NroCupos = (reserva.Evento.NroCupos) + (reserva.CantidadReservas);
                 reserva.EstadoReserva = "Reserva cancelada";
                 await _context.SaveChangesAsync();

@@ -14,14 +14,9 @@ namespace AV.BO
         [Key]
         public int IdDocumento { get; set; }
 
-        //[Required]
-        //[Column(TypeName = "VarChar(300)")]
-        //public string Descripcion { get; set; }
-
         [Required]
         [Column(TypeName = "VarChar(100)")]
         public string Nombre { get; set; }
-
         
         
     }
