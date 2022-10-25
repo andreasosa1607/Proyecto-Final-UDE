@@ -12,7 +12,12 @@ namespace AV.BO
     public class Asiento
     {
         [Key]
+        public int IdAsiento { get; set; }
+
+        [Required]
+        [Column(TypeName = "Integer")]
         public int NroAsiento { get; set; }
+
 
 
         [Required]
@@ -20,9 +25,10 @@ namespace AV.BO
         [Column(TypeName = "VarChar(20)")]
         public string CodigoQR { get; set; }
 
-        public int NroMesa { get; set; }
+        public int IdMesa { get; set; }
 
         public int IdReserva { get; set; }
 
     }
 }
+

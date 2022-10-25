@@ -23,15 +23,15 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-  
 
-        // GET: api/Reservas/5
+
+        //GET: api/Reservas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Reserva>>> GetReservasPorEvento(int id)
 
         {
 
-            List<Reserva> reservas = await _context.Reservas.Include("Cliente").Include("Evento").Where(x => x.Evento.EventoId == id).ToListAsync();
+            List<Reserva> reservas = await _context.Reservas.Include("Cliente").Include("ComprobanteDePago").Include("Evento").Where(x => x.Evento.EventoId == id).ToListAsync();
             return reservas;
 
             //MapeoDTO.ReservaDTO(reservas);

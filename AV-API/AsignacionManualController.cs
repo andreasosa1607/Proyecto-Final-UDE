@@ -25,12 +25,12 @@ namespace AV_API
         }
 
         // GET: api/AsignacionManual
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservasAprobadas()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservasAprobadas(int id)
         {
 
 
-            return await _context.Reservas.Include("Cliente").Include("Evento").Where(x => x.EstadoReserva == "Aprobada").ToListAsync();
+            return await _context.Reservas.Include("Cliente").Include("Evento").Where(x => x.EstadoReserva == "Aprobada" && x.Evento.EventoId== id).ToListAsync();
 
         }
 

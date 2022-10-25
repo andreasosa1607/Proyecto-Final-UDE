@@ -60,6 +60,30 @@ namespace AV.BL
             {
                 return ("Este evento no tiene reservas");
 
+                private static string Correo(Reserva reserva) {
+                    var correoService = new AV.DA.ServiceCorreosElectronicos.SoporteCorreos();
+                    correoService.enviarCorreo(
+                     asunto: "Evento cancelado",
+                     cuerpo: "¡Hola " + reserva.Cliente.Nombre + "!" + "\nUsted realizó una reserva a nombre de " + reserva.NombreEmpresa + " para el evento " + reserva.Evento.Nombre + ".\n" +
+                     "Le informamos que por razones de fuerza mayor, el mismo ha sido cancelado " +
+                     "\n \n" +
+                     "\n \n" +
+                     "\n Si usted ya había efectuado el pago para dicha reserva, le pedimos se comunique con nosotros vía correo Electrónico 'soporteclientesAV@gmail.com' \n" +
+                     "\n Indicandonos el nombre con el que registró la reserva:( " + reserva.NombreEmpresa + ")" + " el numero de referencia: " + reserva.IdReserva + " y un teléfono de contacto, en nuestra base de datos tenemos los siguientes contactos:\n" +
+                     +reserva.Cliente.Telefono + " y " + reserva.Telefono +
+                     "\n Un agente de nuestro equipo de soporte se pondrá en contacto con usted para indicarle los pasos a seguir para recibir el reembolso de su dinero." +
+
+                     "\n De parte de AV, le pedimos disculpas por los inconvenientes." +
+                     "\n Le reiteramos que ante cualquier duda , puede comunicarse con nosotros via correo electronico a 'soporteclientesAV@gmail.com'" +
+                      "\n \n" +
+                     "\n \n" +
+                      "\n \n" +
+                     "\n ¡GRACIAS POR PREFERIRNOS!\n",
+                     destinatarios: new List<string> { reserva.CorreoElectronico }
+                      );
+
+            return ("ok");
+
             }
             else
             {
@@ -106,19 +130,21 @@ namespace AV.BL
         }
 
         public static void asientosPorMesa(Evento evento)
-        {
-            
+
+           {
+
             evento.CantidadAsientosMesa = 10;
             double cntMesas = evento.NroCupos / evento.CantidadAsientosMesa;
             evento.CantidadMesas = (int)Math.Ceiling(cntMesas);
-        }
 
-        public static List<Mesa> asignarMesas(Evento evento)
-        {
-            List<Mesa> mesas = new List<Mesa>();
-           
-            for (int x = 1; x < evento.CantidadMesas +1; x++)
+           }
+
+
+
+
+        public static void asignarMesas(Evento evento)
             {
+
                 Mesa nuevaMesa = new Mesa();
                 nuevaMesa.CantidadAsientos = 10;
                 nuevaMesa.LugaresDisponibles = 10;
@@ -130,6 +156,36 @@ namespace AV.BL
             return mesas;
 
 
-        }
+            evento.Mesas = new List<Mesa>();
+            for (int x = 1; x < evento.CantidadMesas +1; x++)
+                {
+
+                    Mesa nuevaMesa = new Mesa();
+                    nuevaMesa.EventoId = evento.EventoId;
+                    nuevaMesa.CantidadAsientos = 10;
+                    nuevaMesa.LugaresDisponibles = 10;
+                    nuevaMesa.NroMesa = x;
+
+
+                nuevaMesa.Asientos = new List<Asiento>();
+                    for (int i = 1; i < evento.CantidadAsientosMesa + 1; i++)
+                    {
+                        Asiento nuevoAsiento = new Asiento();
+                        nuevoAsiento.IdMesa = nuevaMesa.IdMesa;
+                        nuevoAsiento.NroAsiento = i;
+                        nuevaMesa.Asientos.Add(nuevoAsiento);
+
+                    }
+                evento.Mesas.Add(nuevaMesa);
+
+                }
+           
+      
+      
+
+             
+
+
+            }
     }
 }

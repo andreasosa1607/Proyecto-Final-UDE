@@ -17,6 +17,10 @@ namespace AV_DTO
         public string CallePuerta { get; set; }
         public string Barrio { get; set; }
         public string Ciudad { get; set; }
+
+
+        //public string Hora { get; set; }
+
         public int NroCupos { get; set; }
         public int CantidadMesas { get; set; }
         public int CantidadAsientosMesa { get; set; }
@@ -25,6 +29,6 @@ namespace AV_DTO
         public string CriterioAsignacion { get; set; }
         public string EmpresaCreadora { get; set; }
         public string EstadoEvento { get; set; }
-        public List<Mesa> Mesas { get; set; } 
+        public List<Mesa> Mesas { get; set; }
     }
 }

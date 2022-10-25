@@ -13,6 +13,7 @@ using AV.BL;
 using AV_DTO;
 using System.IO;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 namespace AV_API.Controllers
 {
@@ -28,17 +29,11 @@ namespace AV_API.Controllers
         }
 
 
-
-
-
-        [HttpPost]
+    [HttpPost]
         [Route("Subir")]
         public ComprobanteDePagoDTO Subir(ComprobanteDePagoDTO request) {
 
-
-
             try {
-
 
                 ComprobanteDePago comprobanteDePago = MapeoDTO.ComprobanteDePago(request);
                 _context.ComprobantesDePagos.Add(comprobanteDePago);
@@ -60,16 +55,8 @@ namespace AV_API.Controllers
 
                 //return StatusCode(StatusCodes.Status200OK, new { mensaje = error.Message });
 
-               
-
-
             }
             return request;
-
-
-
-
-
         }
 
         public static void GuardarArchivoFTP(string fileName, byte[] file)
@@ -84,14 +71,38 @@ namespace AV_API.Controllers
             Stream requestStream = request.GetRequestStream();
             //requestStream.Write(file);
 
-
             requestStream.Write(file, 0, file.Length);
             requestStream.Close();
-
+          
         }
 
 
+        public static bool MostrarArchivoDelServidor(Uri serverUri)
+        {
+            // El parámetro serverUri debe comenzar con el esquema ftp://.
+            FtpWebRequest UriSchemeFtp = (FtpWebRequest)WebRequest.Create(@"ftp://win5207.site4now.net/" + serverUri);
+            if (serverUri.Scheme != Uri.UriSchemeFtp)
+            {
+                return false;
+            }
+            // Obtenga el objeto utilizado para comunicarse con el servidor.
+            WebClient request = new WebClient();
 
+            // En este ejemplo se supone que el sitio FTP utiliza el inicio de sesión anónimo.
+                request.Credentials = new NetworkCredential("proyectoude", "pr0yect0ude2022");
+
+            try
+            {
+                byte[] newFileData = request.DownloadData(serverUri.ToString());
+                string fileString = System.Text.Encoding.UTF8.GetString(newFileData);
+                Console.WriteLine(fileString);
+            }
+            catch (WebException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return true;
+        }
 
 
 

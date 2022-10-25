@@ -10,11 +10,27 @@ namespace AV_DTO
         public static ReservaDTO ReservaDTO(Reserva reserva)
         {
             ReservaDTO reservaDTO = new ReservaDTO();
+
+
+            reservaDTO.IdReserva = reserva.IdReserva;
+            reservaDTO.Cliente = reserva.Cliente;
+            reservaDTO.Evento = reserva.Evento;
+            reservaDTO.EstadoReserva = reserva.EstadoReserva;
+            reservaDTO.ComprobanteDePago = reserva.ComprobanteDePago;
+            reservaDTO.Asientos = reserva.Asientos;
+            reservaDTO.NombreEmpresa = reserva.NombreEmpresa;
+            reservaDTO.Telefono = reserva.Telefono;
+            reservaDTO.CorreoElectronico = reserva.CorreoElectronico;
+            reservaDTO.CantidadReservas = reserva.CantidadReservas;
+            reservaDTO.FechaReserva = reserva.FechaReserva;
+            reservaDTO.DescripcionEstado = reserva.DescripcionEstado;
+
           
                 reservaDTO.IdReserva = reserva.IdReserva;
                 reservaDTO.Cliente = reserva.Cliente;
                 reservaDTO.Evento = reserva.Evento;
                 reservaDTO.EstadoReserva = reserva.EstadoReserva;
+
                 reservaDTO.ComprobanteDePago = reserva.ComprobanteDePago;
                 reservaDTO.Asientos = reserva.Asientos;
                 reservaDTO.NombreEmpresa= reserva.NombreEmpresa;
@@ -22,7 +38,15 @@ namespace AV_DTO
                 reservaDTO.CorreoElectronico = reserva.CorreoElectronico;
                 reservaDTO.CantidadReservas = reserva.CantidadReservas;
                 reservaDTO.FechaReserva = reserva.FechaReserva;
+
+                reservaDTO.descripcionEstado = reserva.DescripcionEstado;
+            
+
+            }
+
                 reservaDTO.DescripcionEstado = reserva.DescripcionEstado;
+
+
 
             return reservaDTO;
         }
@@ -53,12 +77,16 @@ namespace AV_DTO
             reserva.IdReserva = reservaDTO.IdReserva;
             reserva.EstadoReserva = reservaDTO.EstadoReserva;
             reserva.DescripcionEstado = reservaDTO.descripcionEstado;
+
+           // reserva.correoElectronico = reservaDTO.CorreoElectronico;
+           // reserva.cantidadReservas = reservaDTO.cantidadReservas;
+
             return reserva;
 
         }
 
         //Dado una reservaDTO se crea la reserva  
-        public static Reserva Reserva (ReservaDTO reservaDTO)
+        public static Reserva Reserva(ReservaDTO reservaDTO)
         {
             Reserva reserva = new Reserva();
 
@@ -67,8 +95,15 @@ namespace AV_DTO
             reserva.Evento = reservaDTO.Evento;
             reserva.EstadoReserva = reservaDTO.EstadoReserva;
             reserva.ComprobanteDePago = reservaDTO.ComprobanteDePago;
+
             if(reservaDTO.Asientos != null)
             { 
+
+
+            if (reservaDTO.Asientos != null)
+            {
+
+ 
                 reserva.Asientos = new List<Asiento>(reservaDTO.Asientos);
             }
             else
@@ -80,16 +115,16 @@ namespace AV_DTO
             reserva.CorreoElectronico = reservaDTO.CorreoElectronico;
             reserva.CantidadReservas = reservaDTO.CantidadReservas;
             reserva.FechaReserva = reservaDTO.FechaReserva;
-            reserva.DescripcionEstado = reservaDTO.DescripcionEstado;
 
-
+            reserva.DescripcionEstado = reservaDTO.descripcionEstado;
+          reserva.DescripcionEstado = reservaDTO.DescripcionEstado;
 
             return reserva;
         }
 
 
 
-            public static ClienteDTO ClienteDTO(Cliente cliente)
+        public static ClienteDTO ClienteDTO(Cliente cliente)
         {
             ClienteDTO clienteDTO = new ClienteDTO();
 
@@ -107,11 +142,11 @@ namespace AV_DTO
                 clienteDTO.IdiomaPreferencia = cliente.IdiomaPreferencia;
                 clienteDTO.FotoPerfil = cliente.FotoPerfil;
                 clienteDTO.login = cliente.Login;
-             
+
 
 
             }
-                return clienteDTO;
+            return clienteDTO;
         }
 
         //Dado un Cliente se actualiza CON EL DTO
@@ -145,7 +180,7 @@ namespace AV_DTO
             return cliente;
         }
 
-        //Dado un Cliente dto se crea un Cliente 
+        //Dado un Cliente dto se crea un Cliente
         public static Cliente Cliente(ClienteDTO clienteDTO)
         {
             Cliente cliente = new Cliente();
@@ -181,6 +216,7 @@ namespace AV_DTO
             eventoDTO.Descripcion = evento.Descripcion;
             eventoDTO.Tipo = evento.Tipo;
             eventoDTO.ImagenPortada = evento.ImagenPortada;
+
             eventoDTO.FechaHora = evento.FechaHora;
             eventoDTO.CallePuerta = evento.CallePuerta;
             eventoDTO.Barrio = evento.Barrio;
@@ -199,7 +235,7 @@ namespace AV_DTO
             return eventoDTO;
         }
         //Dado un evento se actualiza con el dto
-        public static Evento ActualizarEvento (Evento evento, EventoDTO eventoDTO)
+        public static Evento ActualizarEvento(Evento evento, EventoDTO eventoDTO)
         {
 
             evento.EventoId = eventoDTO.EventoId;
@@ -226,7 +262,7 @@ namespace AV_DTO
         }
 
         //Dado un eventodto se crea un evento
-        public static Evento Evento (EventoDTO eventoDTO)
+        public static Evento Evento(EventoDTO eventoDTO)
         {
             Evento evento = new Evento();
 
@@ -236,6 +272,7 @@ namespace AV_DTO
             evento.Tipo = eventoDTO.Tipo;
             evento.Duracion = eventoDTO.Duracion;
             evento.ImagenPortada = eventoDTO.ImagenPortada;
+
             evento.FechaHora = eventoDTO.FechaHora;
             evento.CallePuerta = eventoDTO.CallePuerta;
             evento.Barrio = eventoDTO.Barrio;
@@ -271,7 +308,7 @@ namespace AV_DTO
         }
 
         //Dado un Login se actualiza CON EL DTO
-        public static Login ActualizarLogin (Login login, LoginDTO loginDTO)
+        public static Login ActualizarLogin(Login login, LoginDTO loginDTO)
         {
             login.Rol = loginDTO.Rol;
             login.CorreoElectronico = loginDTO.CorreoElectronico;
@@ -290,10 +327,10 @@ namespace AV_DTO
             login.CorreoElectronico = loginDTO.CorreoElectronico;
             login.Contraseña = loginDTO.Contraseña;
 
-           return login;
+            return login;
         }
 
-            public static AdministradorDTO AdministradorDTO(Administrador administrador)
+        public static AdministradorDTO AdministradorDTO(Administrador administrador)
         {
             AdministradorDTO administradorDTO = new AdministradorDTO();
 
@@ -326,10 +363,10 @@ namespace AV_DTO
             return administrador;
         }
 
-            public static MesaDTO MesaDTO(Mesa mesa)
+        public static MesaDTO MesaDTO(Mesa mesa)
         {
             MesaDTO mesaDTO = new MesaDTO();
-            
+            mesaDTO.IdMesa = mesa.NroMesa;
             mesaDTO.NroMesa = mesa.NroMesa;
             mesaDTO.CantidadAsientos = mesa.CantidadAsientos;
             mesaDTO.LugaresDisponibles = mesa.LugaresDisponibles;
@@ -341,6 +378,7 @@ namespace AV_DTO
         //Dado una mesa se actualiza CON EL DTO
         public static Mesa ActualizarMesa(Mesa mesa, MesaDTO mesaDTO)
         {
+            mesa.IdMesa = mesaDTO.NroMesa;
             mesa.NroMesa = mesaDTO.NroMesa;
             mesa.CantidadAsientos = mesaDTO.CantidadAsientos;
             mesa.LugaresDisponibles = mesaDTO.LugaresDisponibles;
@@ -349,10 +387,11 @@ namespace AV_DTO
             return mesa;
         }
 
-        //Dado una mesaDTO SE CREA Mesa 
+        //Dado una mesaDTO SE CREA Mesa
         public static Mesa Mesa(MesaDTO mesaDTO)
         {
             Mesa mesa = new Mesa();
+            mesa.IdMesa = mesaDTO.NroMesa;
             mesa.NroMesa = mesaDTO.NroMesa;
             mesa.CantidadAsientos = mesaDTO.CantidadAsientos;
             mesa.LugaresDisponibles = mesaDTO.LugaresDisponibles;
@@ -370,23 +409,35 @@ namespace AV_DTO
             return mesa;
         }
 
-            public static AsientoDTO AsientoDTO(Asiento asiento)
+        public static AsientoDTO AsientoDTO(Asiento asiento)
         {
             AsientoDTO asientoDTO = new AsientoDTO();
+
             
                 asientoDTO.NroAsiento = asiento.NroAsiento;
                 asientoDTO.NroMesa = asiento.NroMesa;
                 asientoDTO.CodigoQR = asiento.CodigoQR;
                 asientoDTO.IdReserva = asiento.IdReserva;
-            
+   
+
+            asientoDTO.IdAsiento = asiento.IdAsiento;
+            asientoDTO.NroAsiento = asiento.NroAsiento;
+            asientoDTO.IdMesa = asiento.IdMesa;
+            asientoDTO.CodigoQR = asiento.CodigoQR;
+            asientoDTO.IdReserva = asiento.IdReserva;
+
             return asientoDTO;
         }
 
         //Dado un asiento se actualiza CON EL DTO
         public static Asiento ActualizarAsiento(Asiento asiento, AsientoDTO asientoDTO)
         {
+            asiento.IdAsiento = asientoDTO.IdAsiento;
             asiento.NroAsiento = asientoDTO.NroAsiento;
-            asiento.NroMesa = asientoDTO.NroMesa;
+
+
+            asiento.IdMesa = asientoDTO.IdMesa;
+
             asiento.CodigoQR = asientoDTO.CodigoQR;
             asiento.IdReserva = asientoDTO.IdReserva;
 
@@ -398,15 +449,18 @@ namespace AV_DTO
         {
             Asiento asiento = new Asiento();
 
+            asiento.IdAsiento = asientoDTO.IdAsiento;
             asiento.NroAsiento = asientoDTO.NroAsiento;
-            asiento.NroMesa = asientoDTO.NroMesa;
+
+            asiento.IdMesa = asientoDTO.IdMesa;
+
             asiento.CodigoQR = asientoDTO.CodigoQR;
             asiento.IdReserva = asientoDTO.IdReserva;
 
             return asiento;
         }
 
-            public static PagoDTO PagoDTO(Pago pago)
+        public static PagoDTO PagoDTO(Pago pago)
         {
             PagoDTO pagoDTO = new PagoDTO();
 
@@ -438,7 +492,7 @@ namespace AV_DTO
         }
 
         //Dado DTO se crea Pago
-        public static Pago Pago (PagoDTO pagoDTO)
+        public static Pago Pago(PagoDTO pagoDTO)
         {
             Pago pago = new Pago();
 
@@ -459,12 +513,11 @@ namespace AV_DTO
             comprobanteDePago.IdDocumento = comprobanteDePagoDTO.IdDocumento;
             comprobanteDePago.Nombre = comprobanteDePagoDTO.Nombre;
 
-
             return comprobanteDePago;
         }
 
 
-        }
+    }
 }
 
 

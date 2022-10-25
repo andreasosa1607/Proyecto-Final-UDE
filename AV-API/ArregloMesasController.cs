@@ -35,7 +35,9 @@ namespace AV_API
             else
             {
                 await _context.SaveChangesAsync();
-                return EventoBL.asignarMesas(evento);
+   
+                return evento.Mesas;
+
             }
 
 

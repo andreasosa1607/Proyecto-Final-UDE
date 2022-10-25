@@ -40,14 +40,33 @@ namespace AV_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ReservaDTO>> GetReserva(int id)
         {
-            var reserva = await _context.Reservas.FindAsync(id);
-
+          
+            var reservas = await (_context.Reservas.Include("Evento").Include("ComprobanteDePago").Include("Cliente").Where(x => x.IdReserva == id).ToListAsync());
+            var reserva = reservas.First();
             if (reserva == null)
             {
                 return NotFound();
             }
+            List<Reserva> reservas = await _context.Reservas.Include("Evento").Include("Cliente").Include("Asientos").Where(x => x.IdReserva == id).ToListAsync();
 
-            return Ok(reserva);
+
+
+            if (reservas == null || reservas.Count == 0)
+
+            {
+                return NotFound();
+            }
+            else
+            {
+                Reserva reserva2 = reservas.First();
+
+
+
+                return Ok(reserva2);
+            }
+
+            return MapeoDTO.ReservaDTO(reserva);
+
         }
 
         // PUT: api/Reservas/5
