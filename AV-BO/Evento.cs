@@ -35,30 +35,11 @@ namespace AV.BO
         [Required]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime Fecha { get; set; }
+        public DateTime FechaHora { get; set; }
 
        [Required]
-<<<<<<< HEAD
        [Column(TypeName = "VarChar(10)")]
        public string Duracion { get; set; }
-=======
-       [Column(TypeName = "Integer")]
-       public int Duracion { get; set; }
-
-
-       //[Required]
-       // [Column(TypeName = "Time(7)")]
-       // public TimeSpan Hora { get; set; }
-
-
-        [Required]
-        [Column(TypeName = "VarChar(8)")]
-        public string Hora { get; set; }
-
-     
-
->>>>>>> adee5765e88b953567f2fcea878b522e14296f36
-
 
         [Required]
         [Column(TypeName = "VarChar(100)")]

@@ -155,30 +155,17 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(300)");
 
-                    b.Property<int>("Duracion")
-                        .HasColumnType("Integer");
+                    b.Property<string>("Duracion")
+                        .IsRequired()
+                        .HasColumnType("VarChar(10)");
 
                     b.Property<string>("EmpresaCreadora")
                         .IsRequired()
                         .HasColumnType("Varchar(100)");
 
-<<<<<<< HEAD
-                    b.Property<string>("EstadoEvento")
-                        .IsRequired()
-                        .HasColumnType("Varchar(30)");
-
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
-=======
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Hora")
-                        .IsRequired()
-                        .HasColumnType("VarChar(8)");
-
->>>>>>> adee5765e88b953567f2fcea878b522e14296f36
                     b.Property<string>("Idioma")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -276,13 +263,15 @@ namespace AVDA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CantidadReservas")
+                        .HasColumnType("Integer");
+
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("ComprobantePago")
-                        .HasColumnType("image");
+                    b.Property<int?>("ComprobanteDePagoIdDocumento")
+                        .HasColumnType("int");
 
-<<<<<<< HEAD
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
@@ -291,8 +280,6 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 
-=======
->>>>>>> adee5765e88b953567f2fcea878b522e14296f36
                     b.Property<string>("EstadoReserva")
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
@@ -300,27 +287,21 @@ namespace AVDA.Migrations
                     b.Property<int?>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Telefono")
-                        .HasColumnType("Integer");
+                    b.Property<DateTime>("FechaReserva")
+                        .HasColumnType("DateTime");
 
-<<<<<<< HEAD
                     b.Property<string>("NombreEmpresa")
-=======
-                    b.Property<int>("cantidadReservas")
-                        .HasColumnType("Integer");
-
-                    b.Property<string>("correoElectronico")
-                        .IsRequired()
-                        .HasColumnType("VarChar(50)");
-
-                    b.Property<string>("nombreEmpresa")
->>>>>>> adee5765e88b953567f2fcea878b522e14296f36
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
+
+                    b.Property<int>("Telefono")
+                        .HasColumnType("Integer");
 
                     b.HasKey("IdReserva");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("ComprobanteDePagoIdDocumento");
 
                     b.HasIndex("EventoId");
 
@@ -380,11 +361,17 @@ namespace AVDA.Migrations
                         .WithMany()
                         .HasForeignKey("ClienteId");
 
+                    b.HasOne("AV.BO.ComprobanteDePago", "ComprobanteDePago")
+                        .WithMany()
+                        .HasForeignKey("ComprobanteDePagoIdDocumento");
+
                     b.HasOne("AV.BO.Evento", "Evento")
                         .WithMany()
                         .HasForeignKey("EventoId");
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("ComprobanteDePago");
 
                     b.Navigation("Evento");
                 });

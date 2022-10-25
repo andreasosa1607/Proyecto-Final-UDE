@@ -27,14 +27,9 @@ namespace AV_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReservaDTO>>> GetReservas()
         {
-<<<<<<< HEAD
 
             return await _context.Reservas.Include("Cliente").Include("Evento").Select(x => MapeoDTO.ReservaDTO(x)).ToListAsync();
 
-
-=======
-            return await _context.Reservas.Include("Cliente").Include("Evento").Select(x => MapeoDTO.ReservaDTO(x)).ToListAsync();
->>>>>>> adee5765e88b953567f2fcea878b522e14296f36
         }
 
 
@@ -44,14 +39,15 @@ namespace AV_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ReservaDTO>> GetReserva(int id)
         {
-            var reserva = await _context.Reservas.FindAsync(id);
-
+          
+            var reservas = await (_context.Reservas.Include("Evento").Include("ComprobanteDePago").Include("Cliente").Where(x => x.IdReserva == id).ToListAsync());
+            var reserva = reservas.First();
             if (reserva == null)
             {
                 return NotFound();
             }
 
-            return Ok(reserva);
+            return MapeoDTO.ReservaDTO(reserva);
         }
 
         // PUT: api/Reservas/5
@@ -101,7 +97,7 @@ namespace AV_API.Controllers
         public async Task<ActionResult<ReservaDTO>> PostReserva(ReservaDTO reservaDTO)
         {
             Reserva reserva = MapeoDTO.Reserva(reservaDTO);
-            reserva.Evento.NroCupos = (reserva.Evento.NroCupos) - (reserva.cantidadReservas);
+            reserva.Evento.NroCupos = (reserva.Evento.NroCupos) - (reserva.CantidadReservas);
             _context.Eventos.Update(reserva.Evento);
             _context.Clientes.Update(reserva.Cliente);
             _context.Logins.Update(reserva.Cliente.Login);

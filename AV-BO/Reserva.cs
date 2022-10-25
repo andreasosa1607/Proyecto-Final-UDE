@@ -28,15 +28,15 @@ namespace AV.BO
 
         // ver esto con Emiliano (traerla por FTP)
         //[Required]
-        [Column(TypeName = "image")]
-        public string ComprobantePago { get; set; }
+       // [Column(TypeName = "image")]
+        public ComprobanteDePago ComprobanteDePago { get; set; }
 
         [Column(TypeName = "Asiento")]
         public List<Asiento> Asientos { get; set; }
 
         [Required]
         [Column(TypeName = "VarChar(100)")]
-        public string nombreEmpresa { get; set; }
+        public string NombreEmpresa { get; set; }
 
         [Required]
         [Column(TypeName = "Integer")]
@@ -44,11 +44,10 @@ namespace AV.BO
 
         [Required]
         [Column(TypeName = "VarChar(50)")]
-        public string correoElectronico { get; set; }
+        public string CorreoElectronico { get; set; }
 
         [Required]
         [Column(TypeName = "Integer")]
-<<<<<<< HEAD
         public int CantidadReservas { get; set; }
 
         [Required]
@@ -59,9 +58,7 @@ namespace AV.BO
         [Column(TypeName = "VarChar(50)")]
         public string DescripcionEstado { get; set; }
 
-=======
-        public int cantidadReservas { get; set; }
->>>>>>> adee5765e88b953567f2fcea878b522e14296f36
+
 
     }
 }

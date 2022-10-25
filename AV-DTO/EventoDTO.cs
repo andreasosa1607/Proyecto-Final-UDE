@@ -12,17 +12,13 @@ namespace AV_DTO
         public string Descripcion { get; set; }
         public string Tipo { get; set; }
         public string ImagenPortada { get; set; }
-        public DateTime Fecha { get; set; }
-        public int Duracion { get; set; }
+        public DateTime FechaHora { get; set; }
+        public string Duracion { get; set; }
         public string CallePuerta { get; set; }
         public string Barrio { get; set; }
         public string Ciudad { get; set; }
-<<<<<<< HEAD
-=======
 
-        public string Hora { get; set; }
-
->>>>>>> adee5765e88b953567f2fcea878b522e14296f36
+        //public string Hora { get; set; }
         public int NroCupos { get; set; }
         public int CantidadMesas { get; set; }
         public int CantidadAsientosMesa { get; set; }
