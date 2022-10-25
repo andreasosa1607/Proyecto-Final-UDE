@@ -12,8 +12,8 @@ namespace AV_DTO
         public int IdDocumento { get; set; }
         //public string Descripcion { get; set; }
         public string Nombre { get; set; }
-
         public string Archivo { get; set; }
+     
 
     }
 }

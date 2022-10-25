@@ -60,6 +60,30 @@ namespace AV.BL
             {
                 return ("Este evento no tiene reservas");
 
+                private static string Correo(Reserva reserva) {
+                    var correoService = new AV.DA.ServiceCorreosElectronicos.SoporteCorreos();
+                    correoService.enviarCorreo(
+                     asunto: "Evento cancelado",
+                     cuerpo: "¡Hola " + reserva.Cliente.Nombre + "!" + "\nUsted realizó una reserva a nombre de " + reserva.NombreEmpresa + " para el evento " + reserva.Evento.Nombre + ".\n" +
+                     "Le informamos que por razones de fuerza mayor, el mismo ha sido cancelado " +
+                     "\n \n" +
+                     "\n \n" +
+                     "\n Si usted ya había efectuado el pago para dicha reserva, le pedimos se comunique con nosotros vía correo Electrónico 'soporteclientesAV@gmail.com' \n" +
+                     "\n Indicandonos el nombre con el que registró la reserva:( " + reserva.NombreEmpresa + ")" + " el numero de referencia: " + reserva.IdReserva + " y un teléfono de contacto, en nuestra base de datos tenemos los siguientes contactos:\n" +
+                     +reserva.Cliente.Telefono + " y " + reserva.Telefono +
+                     "\n Un agente de nuestro equipo de soporte se pondrá en contacto con usted para indicarle los pasos a seguir para recibir el reembolso de su dinero." +
+
+                     "\n De parte de AV, le pedimos disculpas por los inconvenientes." +
+                     "\n Le reiteramos que ante cualquier duda , puede comunicarse con nosotros via correo electronico a 'soporteclientesAV@gmail.com'" +
+                      "\n \n" +
+                     "\n \n" +
+                      "\n \n" +
+                     "\n ¡GRACIAS POR PREFERIRNOS!\n",
+                     destinatarios: new List<string> { reserva.CorreoElectronico }
+                      );
+
+            return ("ok");
+
             }
             else
             {
@@ -111,7 +135,12 @@ namespace AV.BL
             evento.CantidadAsientosMesa = 10;
             double cntMesas = evento.NroCupos / evento.CantidadAsientosMesa;
             evento.CantidadMesas = (int)Math.Ceiling(cntMesas);
+
            }
+
+
+        }
+
 
 
         public static void asignarMesas(Evento evento)

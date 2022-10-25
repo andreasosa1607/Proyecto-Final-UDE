@@ -91,6 +91,7 @@ namespace AV.BL
         }
 
 
+
         public static string ReservaCanceladaAutomaticamente(Reserva reserva)
         {
             var correoService = new AV.DA.ServiceCorreosElectronicos.SoporteCorreos();
@@ -135,7 +136,6 @@ namespace AV.BL
             }
         }
 
-       
 
     }
 }

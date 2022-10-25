@@ -34,7 +34,11 @@ namespace AV.BO
 
         [Required]
         [DataType(DataType.DateTime)]
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm}", ApplyFormatInEditMode = true)]
+
         public DateTime FechaHora { get; set; }
 
         [Required]
