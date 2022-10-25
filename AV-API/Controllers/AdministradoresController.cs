@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV_DTO;
 using AV.DA;
+using AV.BL;
 
 namespace AV_API.Controllers
 {
@@ -37,6 +38,7 @@ namespace AV_API.Controllers
         public async Task<ActionResult<AdministradorDTO>> GetAdministrador(int id)
         {
             var administrador = await _context.Administradores.FindAsync(id);
+            administrador.Login.Contraseña = Encriptar.MD5(administrador.Login.Contraseña);
 
             if (administrador == null)
             {
@@ -91,6 +93,7 @@ namespace AV_API.Controllers
         public async Task<ActionResult<AdministradorDTO>> PostAdministrador(AdministradorDTO administradorDTO)
         {
             Administrador administrador = MapeoDTO.Administrador(administradorDTO);
+            administrador.Login.Contraseña = Encriptar.MD5(administrador.Login.Contraseña);
             _context.Administradores.Add(administrador);
             await _context.SaveChangesAsync();
 

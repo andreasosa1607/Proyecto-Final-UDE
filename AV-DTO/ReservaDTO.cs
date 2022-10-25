@@ -19,8 +19,8 @@ namespace AV_DTO
         public string CorreoElectronico { get; set; }
         public int CantidadReservas { get; set; }
         public DateTime FechaReserva { get; set; }
-        public string descripcionEstado { get; set; }
 
+        public string DescripcionEstado { get; set; }
 
     }
 }

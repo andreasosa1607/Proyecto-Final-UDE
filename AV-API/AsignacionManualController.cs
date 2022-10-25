@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AV.BO;
 using AV.DA;
 using AV_DTO;
+using AV.BL;
 
 namespace AV_API
 {
@@ -32,6 +33,8 @@ namespace AV_API
             return await _context.Reservas.Include("Cliente").Include("Evento").Where(x => x.EstadoReserva == "Aprobada").ToListAsync();
 
         }
+
+        
     }
 }
 

@@ -4,14 +4,16 @@ using AV.DA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AVDA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    partial class AVDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221017230952_migracion")]
+    partial class migracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,7 +173,6 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(30)");
 
-
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
@@ -281,10 +282,8 @@ namespace AVDA.Migrations
                     b.Property<int?>("ComprobanteDePagoIdDocumento")
                         .HasColumnType("int");
 
-
                     b.Property<byte[]>("ComprobantePago")
                         .HasColumnType("image");
-
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AV-BL", "AV-BL\AV-BL.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AV-DTO", "AV-DTO\AV-DTO.csproj", "{481B59C0-9EBC-460B-8A8D-78B1DCA8C0CB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{8B38ED2E-2227-465B-93B9-2920E8925AC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{481B59C0-9EBC-460B-8A8D-78B1DCA8C0CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{481B59C0-9EBC-460B-8A8D-78B1DCA8C0CB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{481B59C0-9EBC-460B-8A8D-78B1DCA8C0CB}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{8B38ED2E-2227-465B-93B9-2920E8925AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B38ED2E-2227-465B-93B9-2920E8925AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B38ED2E-2227-465B-93B9-2920E8925AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B38ED2E-2227-465B-93B9-2920E8925AC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

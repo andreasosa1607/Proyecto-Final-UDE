@@ -15,6 +15,7 @@ namespace AV_DTO
         public int Telefono { get; set; }
         public string ProfesionCargo { get; set; }
         public string NombreEmpresa { get; set; }
+        public string IdiomaPreferencia { get; set; }
         public string FotoPerfil { get; set; }
         public Login login { get; set; }
 

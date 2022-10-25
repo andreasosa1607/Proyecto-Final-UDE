@@ -53,6 +53,27 @@ namespace AV.BL
 
         }
 
+        public static string ReservaCancelada(Reserva reserva)
+        {
+            var correoService = new AV.DA.ServiceCorreosElectronicos.SoporteCorreos();
+            correoService.enviarCorreo(
+             asunto: "Reserva cancelada",
+             cuerpo: "¡Hola " + reserva.Cliente.Nombre + "!" + "\n Su reserva " + reserva.NombreEmpresa + " para el evento " + reserva.Evento.Nombre + " " +
+             "ha sido cancelada con éxito. \n" +
+             "\n \n" +
+             "\n \n" +
+             "\n Ante cualquier duda , puede comunicarse con nosotros via correo electronico a 'soporteclientesAV@gmail.com'" +
+              "\n \n" +
+             "\n \n" +
+              "\n \n" +
+             "\n ¡GRACIAS POR PREFERIRNOS!\n",
+             destinatarios: new List<string> { reserva.CorreoElectronico }
+              );
+
+            return "Ok";
+        }
+
+
         public static string GenerarQR(Reserva reserva)
         {
             Document doc = new Document(PageSize.A4);
@@ -68,6 +89,8 @@ namespace AV.BL
 
             return ruta;
         }
+
+
 
         public static string ReservaCanceladaAutomaticamente(Reserva reserva)
         {
@@ -112,6 +135,7 @@ namespace AV.BL
             {
             }
         }
+
 
     }
 }

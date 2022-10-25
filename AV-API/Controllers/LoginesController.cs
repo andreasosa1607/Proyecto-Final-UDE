@@ -55,6 +55,7 @@ namespace AV_API.Controllers
         public async Task<ActionResult<Login>> GetLoginYPass(string id, string passAnterior)
         {
             var login = await _context.Logins.FindAsync(id);
+            passAnterior = Encriptar.MD5(passAnterior);
 
             if (login == null)
             {
@@ -93,6 +94,9 @@ namespace AV_API.Controllers
             {
                 return NotFound();
             }
+
+           
+            loginDTO.Contraseña = Encriptar.MD5(loginDTO.Contraseña);
 
             login = MapeoDTO.ActualizarLogin(login, loginDTO);
 

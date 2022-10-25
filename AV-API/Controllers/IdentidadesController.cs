@@ -49,7 +49,7 @@ namespace AV_API.Controllers
 
             try
             {
-                string contraseña = Encriptar.MD5(login.Contraseña).Substring(0, 30);
+                string contraseña = Encriptar.MD5(login.Contraseña);
                 //Verifica el usuario y contraseña
                 if ( login.CorreoElectronico != loginExiste.CorreoElectronico || contraseña != loginExiste.Contraseña)
                 {

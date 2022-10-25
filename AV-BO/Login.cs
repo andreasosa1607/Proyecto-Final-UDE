@@ -15,9 +15,8 @@ namespace AV.BO
        [Column(TypeName = "VarChar(20)")]
         public string Rol { get; set; }
 
-        // ver si es aca que se encripta
         [Required]
-        [Column(TypeName = "VarChar(30)")]
+        [Column(TypeName = "VarChar(200)")]
         public string Contraseña { get; set; }
 
         [Key]

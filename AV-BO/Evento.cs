@@ -34,12 +34,18 @@ namespace AV.BO
 
         [Required]
         [DataType(DataType.DateTime)]
+
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm}", ApplyFormatInEditMode = true)]
+
         public DateTime FechaHora { get; set; }
 
        [Required]
        [Column(TypeName = "VarChar(10)")]
        public string Duracion { get; set; }
+
+
 
         [Required]
         [Column(TypeName = "VarChar(100)")]
@@ -87,7 +93,12 @@ namespace AV.BO
         [Column(TypeName = "Varchar(100)")]
         public string EmpresaCreadora { get; set; }
 
-        public List<Mesa> Mesas { get; set; }
+        [Required]
+        [Column(TypeName = "Varchar(30)")]
+        public string EstadoEvento { get; set; }
 
-    }
+        [NotMapped]
+        public List<string> Mesas { get; set; }
+
+}
 }

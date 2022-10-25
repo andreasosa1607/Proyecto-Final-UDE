@@ -58,6 +58,7 @@ namespace AV.BO
         [Column(TypeName = "VarChar(50)")]
         public string DescripcionEstado { get; set; }
 
+        public ComprobanteDePago ComprobanteDePago { get; set; }
 
 
     }
