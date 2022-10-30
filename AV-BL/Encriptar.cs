@@ -10,15 +10,7 @@ namespace AV.BL
 
         public static string MD5(string contraseña) 
         {
-
-
-
-            //byte[] salt = new byte[128 / 8];
             string salt = "test";
-            //using (var rngCsp = new RNGCryptoServiceProvider())
-            //{
-            //    rngCsp.GetNonZeroBytes(salt);
-            //}
 
 
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(

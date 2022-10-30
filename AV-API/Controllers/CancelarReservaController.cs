@@ -33,17 +33,24 @@ namespace AV_API.Controllers
 
                 List<Reserva> reservas = await _context.Reservas.Include("Cliente").Include("Evento").Where(x => x.IdReserva == id).ToListAsync();
 
-                if (reservas == null || reservas.Count == 0)
+            if (reservas == null || reservas.Count == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                Reserva reserva = reservas.First();
+                if (reserva.EstadoReserva == "Pendiente de pago")
                 {
-                    return NotFound();
+                    ReservaBL.cancelarReserva(reserva);
+                    reserva.Evento.NroCupos = (reserva.Evento.NroCupos) + (reserva.CantidadReservas);
+                    reserva.EstadoReserva = "Reserva cancelada";
+                    await _context.SaveChangesAsync();
                 }
                 else
                 {
-                    Reserva reserva = reservas.First();
-                    ReservaBL.cancelarReserva(reserva);
-                reserva.Evento.NroCupos = (reserva.Evento.NroCupos) + (reserva.CantidadReservas);
-                reserva.EstadoReserva = "Reserva cancelada";
-                await _context.SaveChangesAsync();
+                    return NotFound();
+                }
             }
 
             return NoContent();

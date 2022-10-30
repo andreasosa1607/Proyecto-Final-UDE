@@ -8,9 +8,8 @@ namespace AV_DTO
     {
         public int IdAsiento { get; set; }
         public int NroAsiento { get; set; }
-        public int IdMesa { get; set; }
+        public int MesaIdMesa { get; set; }
         public int IdReserva { get; set; }
-        public string CodigoQR { get; set; }
     }
 }
 

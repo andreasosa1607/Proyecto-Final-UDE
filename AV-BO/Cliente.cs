@@ -13,14 +13,13 @@ namespace AV.BO
         [Key]
         public int ClienteId { get; set; }
 
-        // ver como traer opciones
         [Required]
         [Column(TypeName = "VarChar(20)")]
         public string TipoDocumento { get; set; }
 
         [Required]
-        [Column(TypeName = "Integer")]
-        public int NroDocumento { get; set; }
+        [Column(TypeName = "Varchar(20)")]
+        public string NroDocumento { get; set; }
 
         [Required]
         [Column(TypeName = "VarChar(50)")]
@@ -30,12 +29,12 @@ namespace AV.BO
         [Column(TypeName = "VarChar(100)")]
         public string Apellidos { get; set; }
 
-        // ver como poner formato de telefono
+      
         [Required]
         [Column(TypeName = "Integer")]
         public int Telefono { get; set; }
 
-        // ver como traer opciones
+    
         [Required]
         [Column(TypeName = "VarChar(100)")]
         public string ProfesionCargo { get; set; }
@@ -43,10 +42,6 @@ namespace AV.BO
         [Required]
         [Column(TypeName = "VarChar(100)")]
         public string NombreEmpresa { get; set; }
-
-        // ver esto con Emiliano (traerla por FTP)
-        [Column(TypeName = "image")]
-        public string FotoPerfil { get; set; }
 
         public Login Login { get; set; }
 

@@ -23,17 +23,16 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-        // GET: api/Administradores
+        // GET: api_1_0/Administradores
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AdministradorDTO>>> GetAdministradores()
         {
-            //return await _context.Administradores.ToListAsync();
 
             return await _context.Administradores
                 .Select(x => MapeoDTO.AdministradorDTO(x))
                 .ToListAsync();
         }
-        // GET: api/Administradores/5
+        // GET: api_1_0/Administradores/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AdministradorDTO>> GetAdministrador(int id)
         {
@@ -48,8 +47,7 @@ namespace AV_API.Controllers
             return Ok(administrador);
         }
 
-        // PUT: api/Administradores/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api_1_0/Administradores/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAdministrador(int id, AdministradorDTO administradorDTO)
         {
@@ -87,8 +85,7 @@ namespace AV_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Administradores
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api_1_0/Administradores
         [HttpPost]
         public async Task<ActionResult<AdministradorDTO>> PostAdministrador(AdministradorDTO administradorDTO)
         {
@@ -100,7 +97,7 @@ namespace AV_API.Controllers
             return CreatedAtAction("GetAdministrador", new { id = administrador.IdAdmin }, administrador);
         }
 
-        // DELETE: api/Administradores/5
+        // DELETE:api_1_0/Administradores/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAdministrador(int id)
         {

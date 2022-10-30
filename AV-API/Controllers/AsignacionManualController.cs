@@ -24,7 +24,6 @@ namespace AV_API
             _context = context;
         }
 
-        // GET: api/AsignacionManual
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Reserva>>> GetReservasAprobadas(int id)
         {

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AVDA.Migrations
 {
     [DbContext(typeof(AVDBContext))]
-    [Migration("20221022003607_migracion")]
+    [Migration("20221029003620_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,18 +44,26 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Asiento", b =>
                 {
-                    b.Property<int>("NroAsiento")
+                    b.Property<int>("IdAsiento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdReserva")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MesaNroMesa")
+                    b.Property<int>("MesaIdMesa")
                         .HasColumnType("int");
+
+                    b.Property<int>("NroAsiento")
+                        .HasColumnType("Integer");
 
                     b.Property<int?>("ReservaIdReserva")
                         .HasColumnType("int");
 
-                    b.HasKey("NroAsiento");
+                    b.HasKey("IdAsiento");
 
-                    b.HasIndex("MesaNroMesa");
+                    b.HasIndex("MesaIdMesa");
 
                     b.HasIndex("ReservaIdReserva");
 
@@ -76,6 +84,10 @@ namespace AVDA.Migrations
                     b.Property<byte[]>("FotoPerfil")
                         .HasColumnType("image");
 
+                    b.Property<string>("IdiomaPreferencia")
+                        .IsRequired()
+                        .HasColumnType("VarChar(50)");
+
                     b.Property<string>("LoginCorreoElectronico")
                         .HasColumnType("VarChar(150)");
 
@@ -87,8 +99,9 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
 
-                    b.Property<int>("NroDocumento")
-                        .HasColumnType("Integer");
+                    b.Property<string>("NroDocumento")
+                        .IsRequired()
+                        .HasColumnType("Varchar(20)");
 
                     b.Property<string>("ProfesionCargo")
                         .IsRequired()
@@ -165,6 +178,10 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(100)");
 
+                    b.Property<string>("EstadoEvento")
+                        .IsRequired()
+                        .HasColumnType("Varchar(30)");
+
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
@@ -172,8 +189,12 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(20)");
 
-                    b.Property<byte[]>("ImagenPortada")
-                        .HasColumnType("image");
+                    b.Property<string>("ImagenPortada")
+                        .HasColumnType("VarChar(100)");
+
+                    b.Property<string>("Moneda")
+                        .IsRequired()
+                        .HasColumnType("Varchar(3)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -189,6 +210,10 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(30)");
 
+                    b.Property<string>("TipoAsignacion")
+                        .IsRequired()
+                        .HasColumnType("VarChar(20)");
+
                     b.HasKey("EventoId");
 
                     b.ToTable("Eventos");
@@ -201,7 +226,7 @@ namespace AVDA.Migrations
 
                     b.Property<string>("Contraseña")
                         .IsRequired()
-                        .HasColumnType("VarChar(30)");
+                        .HasColumnType("VarChar(200)");
 
                     b.Property<string>("Rol")
                         .IsRequired()
@@ -214,48 +239,28 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Mesa", b =>
                 {
-                    b.Property<int>("NroMesa")
-                        .HasColumnType("int");
+                    b.Property<int>("IdMesa")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CantidadAsientos")
                         .HasColumnType("Integer");
 
-                    b.Property<int?>("EventoId")
+                    b.Property<int>("EventoId")
                         .HasColumnType("int");
 
                     b.Property<int>("LugaresDisponibles")
                         .HasColumnType("Integer");
 
-                    b.HasKey("NroMesa");
+                    b.Property<int>("NroMesa")
+                        .HasColumnType("Integer");
+
+                    b.HasKey("IdMesa");
 
                     b.HasIndex("EventoId");
 
                     b.ToTable("Mesas");
-                });
-
-            modelBuilder.Entity("AV.BO.Pago", b =>
-                {
-                    b.Property<int>("IdPago")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comentario")
-                        .IsRequired()
-                        .HasColumnType("VarChar(200)");
-
-                    b.Property<string>("EstadoPago")
-                        .IsRequired()
-                        .HasColumnType("VarChar(20)");
-
-                    b.Property<int?>("ReservaIdReserva")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdPago");
-
-                    b.HasIndex("ReservaIdReserva");
-
-                    b.ToTable("Pagos");
                 });
 
             modelBuilder.Entity("AV.BO.Reserva", b =>
@@ -270,6 +275,9 @@ namespace AVDA.Migrations
 
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CodigoQR")
+                        .HasColumnType("VarChar(100)");
 
                     b.Property<int?>("ComprobanteDePagoIdDocumento")
                         .HasColumnType("int");
@@ -296,6 +304,9 @@ namespace AVDA.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(100)");
 
+                    b.Property<int>("ReservasSinAsignar")
+                        .HasColumnType("Integer");
+
                     b.Property<int>("Telefono")
                         .HasColumnType("Integer");
 
@@ -321,15 +332,15 @@ namespace AVDA.Migrations
 
             modelBuilder.Entity("AV.BO.Asiento", b =>
                 {
-                    b.HasOne("AV.BO.Mesa", "Mesa")
-                        .WithMany()
-                        .HasForeignKey("MesaNroMesa");
+                    b.HasOne("AV.BO.Mesa", null)
+                        .WithMany("Asientos")
+                        .HasForeignKey("MesaIdMesa")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AV.BO.Reserva", null)
                         .WithMany("Asientos")
                         .HasForeignKey("ReservaIdReserva");
-
-                    b.Navigation("Mesa");
                 });
 
             modelBuilder.Entity("AV.BO.Cliente", b =>
@@ -345,16 +356,9 @@ namespace AVDA.Migrations
                 {
                     b.HasOne("AV.BO.Evento", null)
                         .WithMany("Mesas")
-                        .HasForeignKey("EventoId");
-                });
-
-            modelBuilder.Entity("AV.BO.Pago", b =>
-                {
-                    b.HasOne("AV.BO.Reserva", "Reserva")
-                        .WithMany()
-                        .HasForeignKey("ReservaIdReserva");
-
-                    b.Navigation("Reserva");
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AV.BO.Reserva", b =>
@@ -381,6 +385,11 @@ namespace AVDA.Migrations
             modelBuilder.Entity("AV.BO.Evento", b =>
                 {
                     b.Navigation("Mesas");
+                });
+
+            modelBuilder.Entity("AV.BO.Mesa", b =>
+                {
+                    b.Navigation("Asientos");
                 });
 
             modelBuilder.Entity("AV.BO.Reserva", b =>

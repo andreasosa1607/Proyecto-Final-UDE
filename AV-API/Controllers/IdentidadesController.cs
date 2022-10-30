@@ -23,11 +23,6 @@ namespace AV_API.Controllers
 
         private readonly AVDBContext _context;
 
-        //public IdentidadesController(AVDBContext context)
-        //{
-        //    _context = context;
-        //}
-
         public IdentidadesController(IConfiguration configuration, ILogger<IdentidadesController> logger, AVDBContext context)
         {
             _configuration = configuration;
@@ -50,7 +45,6 @@ namespace AV_API.Controllers
             try
             {
                 string contraseña = Encriptar.MD5(login.Contraseña);
-                //Verifica el usuario y contraseña
                 if ( login.CorreoElectronico != loginExiste.CorreoElectronico || contraseña != loginExiste.Contraseña)
                 {
                     return BadRequest("Correo Electronico/Contraseña incorrectos");

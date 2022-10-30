@@ -23,9 +23,8 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-        // GET: api/Clientes/correoElectronico
-        [HttpGet("{correoElectronico}/{pass}")]
 
+        [HttpGet("{correoElectronico}/{pass}")]
         public async Task<ActionResult<Cliente>> GetCliente(string correoElectronico, string pass)
         {
             var login = await _context.Logins.FindAsync(correoElectronico);
