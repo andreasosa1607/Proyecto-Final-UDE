@@ -29,7 +29,7 @@ namespace AV_API.Controllers
         }
 
 
-    [HttpPost]
+        [HttpPost]
         [Route("Subir")]
         public ComprobanteDePagoDTO Subir(ComprobanteDePagoDTO request) {
 
@@ -38,22 +38,17 @@ namespace AV_API.Controllers
                 ComprobanteDePago comprobanteDePago = MapeoDTO.ComprobanteDePago(request);
                 _context.ComprobantesDePagos.Add(comprobanteDePago);
 
-                    //Ver NOMBRE que NO SE REPITA!
                 _context.SaveChangesAsync();
                 GuardarArchivoFTP(comprobanteDePago.IdDocumento + "_" + comprobanteDePago.Nombre, Convert.FromBase64String(request.Archivo.Split(',')[1]));
-
+                
                 request.IdDocumento = comprobanteDePago.IdDocumento;
                 request.Archivo = "";
 
-                //return CreatedAtAction("GetComprobanteDePago", new { id = request.IdDocumento }, request);
-             
-               
             }
 
 
             catch (Exception error) {
 
-                //return StatusCode(StatusCodes.Status200OK, new { mensaje = error.Message });
 
             }
             return request;
@@ -61,15 +56,12 @@ namespace AV_API.Controllers
 
         public static void GuardarArchivoFTP(string fileName, byte[] file)
         {
-            // Get the object used to communicate with the server.
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(@"ftp://win5207.site4now.net/" + fileName);
             request.Method = WebRequestMethods.Ftp.UploadFile;
 
-            // This example assumes the FTP site uses anonymous logon.
             request.Credentials = new NetworkCredential("proyectoude", "pr0yect0ude2022");
 
             Stream requestStream = request.GetRequestStream();
-            //requestStream.Write(file);
 
             requestStream.Write(file, 0, file.Length);
             requestStream.Close();
@@ -79,16 +71,14 @@ namespace AV_API.Controllers
 
         public static bool MostrarArchivoDelServidor(Uri serverUri)
         {
-            // El parámetro serverUri debe comenzar con el esquema ftp://.
             FtpWebRequest UriSchemeFtp = (FtpWebRequest)WebRequest.Create(@"ftp://win5207.site4now.net/" + serverUri);
             if (serverUri.Scheme != Uri.UriSchemeFtp)
             {
                 return false;
             }
-            // Obtenga el objeto utilizado para comunicarse con el servidor.
             WebClient request = new WebClient();
 
-            // En este ejemplo se supone que el sitio FTP utiliza el inicio de sesión anónimo.
+            //Se supone que el sitio FTP utiliza el inicio de sesión anónimo.
                 request.Credentials = new NetworkCredential("proyectoude", "pr0yect0ude2022");
 
             try

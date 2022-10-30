@@ -26,19 +26,14 @@ namespace AV.BO
         [Column(TypeName = "VarChar(30)")]
         public string Tipo { get; set; }
 
-        // ver esto con Emiliano (traerla por FTP)
 
-        [Column(TypeName = "image")]
+        [Column(TypeName = "VarChar(100)")]
         public string ImagenPortada { get; set; }
 
 
         [Required]
         [DataType(DataType.DateTime)]
-
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm}", ApplyFormatInEditMode = true)]
-
         public DateTime FechaHora { get; set; }
 
         [Required]
@@ -79,12 +74,19 @@ namespace AV.BO
         [Column(TypeName = "Integer")]
         public int PrecioAsiento { get; set; }
 
-        // VER como traerla ya con las opciones
+        [Required]
+        [Column(TypeName = "Varchar(3)")]
+        public string Moneda { get; set; }
+
         [Required]
         [Column(TypeName = "VarChar(20)")]
         public string Idioma { get; set; }
 
-        // VER como traerla ya con las opciones
+        [Required]
+        [Column(TypeName = "VarChar(20)")]
+        public string TipoAsignacion { get; set; }
+
+
         [Required]
         [Column(TypeName = "VarChar(20)")]
         public string CriterioAsignacion { get; set; }
@@ -101,4 +103,4 @@ namespace AV.BO
 
     }
 }
-}
+

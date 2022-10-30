@@ -22,17 +22,16 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-        // GET: api/Asientos
+        // GET: api_1_0/Asientos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AsientoDTO>>> GetAsientos()
         {
-            //return await _context.Asientos.ToListAsync();
             return await _context.Asientos
              .Select(x => MapeoDTO.AsientoDTO(x))
                 .ToListAsync();
         }
 
-        // GET: api/Asientos/5
+        // GET: api_1_0/Asientos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AsientoDTO>> GetAsiento(int id)
         {
@@ -46,8 +45,7 @@ namespace AV_API.Controllers
             return Ok(asiento);
         }
 
-        // PUT: api/Asientos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api_1_0/Asientos/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsiento(int id, AsientoDTO asientoDTO)
         {
@@ -84,8 +82,7 @@ namespace AV_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Asientos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api_1_0/Asientos
         [HttpPost]
         public async Task<ActionResult<AsientoDTO>> PostAsiento(AsientoDTO asientoDTO)
         {
@@ -110,7 +107,7 @@ namespace AV_API.Controllers
             return CreatedAtAction("GetAsiento", new { id = asiento.NroAsiento }, asiento);
         }
 
-        // DELETE: api/Asientos/5
+        // DELETE: api_1_0/Asientos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsiento(int id)
         {

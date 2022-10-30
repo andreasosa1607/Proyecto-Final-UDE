@@ -23,7 +23,7 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-        // GET: api/Eventos
+        // GET: api_1_0/Eventos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventoDTO>>> GetEventos()
         {
@@ -34,7 +34,7 @@ namespace AV_API.Controllers
 
         }
 
-        // GET: api/Eventos/5
+        // GET: api_1_0/Eventos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<EventoDTO>> GetEvento(int id)
         {
@@ -50,8 +50,7 @@ namespace AV_API.Controllers
         }
 
 
-        // PUT: api/Eventos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT:api_1_0/Eventos/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEvento(int id, EventoDTO eventoDTO)
         {
@@ -89,27 +88,52 @@ namespace AV_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Eventos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api_1_0/Eventos
         [HttpPost]
         public async Task<ActionResult<EventoDTO>> PostEvento(EventoDTO eventoDTO)
         {
+
+
             Evento evento = MapeoDTO.Evento(eventoDTO);
            
-            EventoBL.asientosPorMesa(evento);
-            EventoBL.asignarMesas(evento);
-            _context.Eventos.Add(evento);
+            DateTime hoy = DateTime.Now;
+            double diferencia = evento.FechaHora.Date.Subtract(hoy.Date).TotalHours;
+            if (diferencia > 0)
+            {
+                try
+                {
+                    EventoBL.asientosPorMesa(evento);
+                    EventoBL.asignarMesas(evento);
+                   
+                    _context.Eventos.Add(evento);
+
+
+                    await _context.SaveChangesAsync();
+                    EventoBL.GuardarArchivoFTP(evento.EventoId + "_" + eventoDTO.ImagenPortada , Convert.FromBase64String(eventoDTO.Archivo.Split(',')[1]));
+                    
+                    eventoDTO.Archivo = "";
+
+                    CreatedAtAction("GetEvento", new { id = evento.EventoId }, evento);
+                    evento.ImagenPortada = "http://montevideoit-001-site5.htempurl.com/img/" + evento.EventoId + "_" + eventoDTO.ImagenPortada;
+
+                    await _context.SaveChangesAsync();
+                    return Ok();
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+                
+         
            
-
-            //_context.Mesas.Update(evento.Mesas);
-            //_context.Asientos.Update(evento.Mesas);
-
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEvento", new { id = evento.EventoId }, evento);
         }
 
-        // DELETE: api/Eventos/5
+        // DELETE: api_1_0/Eventos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvento(int id)
         {

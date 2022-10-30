@@ -29,9 +29,6 @@ namespace AV.DA
         //este método es para que no autogenere los id de tipo int
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Evento>().Property(et => et.EventoId).ValueGeneratedNever();
-            //modelBuilder.Entity<Mesa>().Property(et => et.NroMesa).ValueGeneratedNever();
-            //modelBuilder.Entity<Asiento>().Property(et => et.NroAsiento).ValueGeneratedNever();
             modelBuilder.Entity<Login>().Property(et => et.CorreoElectronico).ValueGeneratedNever();
 
         }
@@ -44,7 +41,6 @@ namespace AV.DA
         public DbSet<Reserva> Reservas { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Administrador> Administradores { get; set; }
-        public DbSet<Pago> Pagos { get; set; }
         public DbSet<Login> Logins { get; set; }
         public DbSet<ComprobanteDePago> ComprobantesDePagos { get; set; }
     }

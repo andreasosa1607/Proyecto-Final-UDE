@@ -29,7 +29,7 @@ namespace AVDA.Migrations
                     Nombre = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Descripcion = table.Column<string>(type: "VarChar(300)", nullable: false),
                     Tipo = table.Column<string>(type: "VarChar(30)", nullable: false),
-                    ImagenPortada = table.Column<byte[]>(type: "image", nullable: true),
+                    ImagenPortada = table.Column<string>(type: "VarChar(100)", nullable: true),
                     FechaHora = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Duracion = table.Column<string>(type: "VarChar(10)", nullable: false),
                     CallePuerta = table.Column<string>(type: "VarChar(100)", nullable: false),
@@ -39,7 +39,9 @@ namespace AVDA.Migrations
                     CantidadMesas = table.Column<int>(type: "Integer", nullable: false),
                     CantidadAsientosMesa = table.Column<int>(type: "Integer", nullable: false),
                     PrecioAsiento = table.Column<int>(type: "Integer", nullable: false),
+                    Moneda = table.Column<string>(type: "Varchar(3)", nullable: false),
                     Idioma = table.Column<string>(type: "VarChar(20)", nullable: false),
+                    TipoAsignacion = table.Column<string>(type: "VarChar(20)", nullable: false),
                     CriterioAsignacion = table.Column<string>(type: "VarChar(20)", nullable: false),
                     EmpresaCreadora = table.Column<string>(type: "Varchar(100)", nullable: false),
                     EstadoEvento = table.Column<string>(type: "Varchar(30)", nullable: false)
@@ -111,7 +113,7 @@ namespace AVDA.Migrations
                     ClienteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoDocumento = table.Column<string>(type: "VarChar(20)", nullable: false),
-                    NroDocumento = table.Column<int>(type: "Integer", nullable: false),
+                    NroDocumento = table.Column<string>(type: "Varchar(20)", nullable: false),
                     Nombre = table.Column<string>(type: "VarChar(50)", nullable: false),
                     Apellidos = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Telefono = table.Column<int>(type: "Integer", nullable: false),
@@ -141,13 +143,15 @@ namespace AVDA.Migrations
                     ClienteId = table.Column<int>(type: "int", nullable: true),
                     EventoId = table.Column<int>(type: "int", nullable: true),
                     EstadoReserva = table.Column<string>(type: "VarChar(20)", nullable: false),
+                    ComprobanteDePagoIdDocumento = table.Column<int>(type: "int", nullable: true),
                     NombreEmpresa = table.Column<string>(type: "VarChar(100)", nullable: false),
                     Telefono = table.Column<int>(type: "Integer", nullable: false),
                     CorreoElectronico = table.Column<string>(type: "VarChar(50)", nullable: false),
                     CantidadReservas = table.Column<int>(type: "Integer", nullable: false),
                     FechaReserva = table.Column<DateTime>(type: "DateTime", nullable: false),
                     DescripcionEstado = table.Column<string>(type: "VarChar(50)", nullable: false),
-                    ComprobanteDePagoIdDocumento = table.Column<int>(type: "int", nullable: true)
+                    CodigoQR = table.Column<string>(type: "VarChar(100)", nullable: true),
+                    ReservasSinAsignar = table.Column<int>(type: "Integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -179,9 +183,8 @@ namespace AVDA.Migrations
                     IdAsiento = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NroAsiento = table.Column<int>(type: "Integer", nullable: false),
-                    IdMesa = table.Column<int>(type: "int", nullable: false),
+                    MesaIdMesa = table.Column<int>(type: "int", nullable: false),
                     IdReserva = table.Column<int>(type: "int", nullable: false),
-                    MesaIdMesa = table.Column<int>(type: "int", nullable: true),
                     ReservaIdReserva = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -192,30 +195,9 @@ namespace AVDA.Migrations
                         column: x => x.MesaIdMesa,
                         principalTable: "Mesas",
                         principalColumn: "IdMesa",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Asientos_Reservas_ReservaIdReserva",
-                        column: x => x.ReservaIdReserva,
-                        principalTable: "Reservas",
-                        principalColumn: "IdReserva",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pagos",
-                columns: table => new
-                {
-                    IdPago = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EstadoPago = table.Column<string>(type: "VarChar(20)", nullable: false),
-                    Comentario = table.Column<string>(type: "VarChar(200)", nullable: false),
-                    ReservaIdReserva = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pagos", x => x.IdPago);
-                    table.ForeignKey(
-                        name: "FK_Pagos_Reservas_ReservaIdReserva",
                         column: x => x.ReservaIdReserva,
                         principalTable: "Reservas",
                         principalColumn: "IdReserva",
@@ -248,11 +230,6 @@ namespace AVDA.Migrations
                 column: "EventoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagos_ReservaIdReserva",
-                table: "Pagos",
-                column: "ReservaIdReserva");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reservas_ClienteId",
                 table: "Reservas",
                 column: "ClienteId");
@@ -275,9 +252,6 @@ namespace AVDA.Migrations
 
             migrationBuilder.DropTable(
                 name: "Asientos");
-
-            migrationBuilder.DropTable(
-                name: "Pagos");
 
             migrationBuilder.DropTable(
                 name: "Mesas");

@@ -21,16 +21,12 @@ namespace AV.BO
         [Column(TypeName = "Evento")]
         public Evento Evento { get; set; }
 
-        // ver como traer opciones
+    
         [Required]
         [Column(TypeName = "VarChar(20)")]
         public string EstadoReserva { get; set; }
 
 
-
-        // ver esto con Emiliano (traerla por FTP)
-        //[Required]
-       // [Column(TypeName = "image")]
         public ComprobanteDePago ComprobanteDePago { get; set; }
 
        
@@ -60,8 +56,12 @@ namespace AV.BO
         [Column(TypeName = "VarChar(50)")]
         public string DescripcionEstado { get; set; }
 
-        public ComprobanteDePago ComprobanteDePago { get; set; }
 
+        [Column(TypeName = "VarChar(100)")]
+        public string CodigoQR { get; set; }
+
+        [Column(TypeName = "Integer")]
+        public int ReservasSinAsignar { get; set; }
 
     }
 }

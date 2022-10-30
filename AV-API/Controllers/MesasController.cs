@@ -22,17 +22,16 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-        // GET: api/Mesas
+        // GET:api_1_0/Mesas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MesaDTO>>> GetMesas()
         {
-            //  return await _context.Mesas.ToListAsync();
             return await _context.Mesas
             .Select(x => MapeoDTO.MesaDTO(x))
                .ToListAsync();
         }
 
-        // GET: api/Mesas/5
+        // GET: api_1_0/Mesas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<MesaDTO>> GetMesa(int id)
         {
@@ -46,8 +45,7 @@ namespace AV_API.Controllers
             return Ok(mesa);
         }
 
-        // PUT: api/Mesas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api_1_0/Mesas/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMesa(int id, MesaDTO mesaDTO)
         {
@@ -84,8 +82,7 @@ namespace AV_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Mesas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api_1_0/Mesas
         [HttpPost]
         public async Task<ActionResult<MesaDTO>> PostMesa(MesaDTO mesaDTO)
         {
@@ -110,7 +107,7 @@ namespace AV_API.Controllers
             return CreatedAtAction("GetMesa", new { id = mesa.NroMesa }, mesa);
         }
 
-        // DELETE: api/Mesas/5
+        // DELETE: api_1_0/Mesas/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMesa(int id)
         {

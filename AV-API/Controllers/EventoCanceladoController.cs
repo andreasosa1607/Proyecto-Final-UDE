@@ -25,7 +25,6 @@ namespace AV_API.Controllers
         }
 
 
-        // GET: api/Reservas/correoElectronico
         [HttpGet("{idEvento}")]
         public async Task<ActionResult<List<Reserva>>> GetReservaEvento(int idEvento)
         {

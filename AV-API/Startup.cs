@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 
 using System.Text;
+using MVC;
 
 namespace AV_API
 {
@@ -32,6 +33,7 @@ namespace AV_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHostedService<IntervalTaskHostedService>();
 
             // Autenticación
             services.AddAuthentication(options =>

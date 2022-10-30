@@ -24,8 +24,7 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-    
-        // GET: api/Logins/correoElectronico
+
         [HttpGet("{correoElectronico}")]
         public async Task<ActionResult<int>> GetLoginCorreo(string correoElectronico)
         {
@@ -36,7 +35,6 @@ namespace AV_API.Controllers
             if (logins == null || logins.Count == 0)
 
             {
-                //return Json("Usted no tiene una cuenta asociada al correo electrónico ingresado");
                 return 0;
             }
             else
@@ -53,7 +51,6 @@ namespace AV_API.Controllers
                     "\n Debe ingresarlo en el campo 'Ingrese el codigo' en el navegador.",
                     destinatarios: new List<string> { correoElectronico }
                     );
-                //return Json("Atención! \n, revise su casilla de correo electrónico");
                 return codigo;
             }
 

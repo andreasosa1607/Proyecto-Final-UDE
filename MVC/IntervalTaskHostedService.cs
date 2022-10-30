@@ -19,8 +19,9 @@ namespace MVC
         private Timer _timer;
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _timer = new Timer(llamoEventoAsync, null, TimeSpan.Zero, TimeSpan.FromHours(24));
-            _timer = new Timer(llamoReservasAsync, null, TimeSpan.Zero, TimeSpan.FromHours(24));
+            _timer = new Timer(llamoEventoAsync, null, TimeSpan.Zero, TimeSpan.FromHours(15));
+            _timer = new Timer(llamoReservasAsync, null, TimeSpan.Zero, TimeSpan.FromHours(15));
+           _timer = new Timer(llamoAsignacionAsync, null, TimeSpan.Zero, TimeSpan.FromHours(5));
             return Task.CompletedTask;
         }
 
@@ -67,10 +68,33 @@ namespace MVC
 
                 ReservaBL.cancelarReserva(reserva);
                 await _context.SaveChangesAsync();
-                _context.Reservas.Update(reserva);
 
             }
         }
+
+
+
+        public async void llamoAsignacionAsync(object state)
+        {
+            await GetAsignacionAsync();
+        }
+
+        public async Task GetAsignacionAsync()
+        {
+            DbContextOptionsBuilder options = new DbContextOptionsBuilder();
+            options.UseSqlServer("Data Source=localhost;Initial Catalog=AVBase;Integrated Security=true");
+            AVDBContext _context = new AVDBContext(options.Options, 0);
+
+
+            List<Reserva> reservas = await _context.Reservas.Include("Cliente").Include("Evento").Include("Asientos").Include("ComprobanteDePago").ToListAsync();
+            List<Mesa> mesas = await _context.Mesas.ToListAsync();
+            List<Asiento> asientos = await _context.Asientos.ToListAsync();
+            ReservaBL.asignacionAutomatica(reservas, mesas, asientos, _context);
+
+        }
+
+
+
 
 
         public Task StopAsync(CancellationToken cancellationToken)

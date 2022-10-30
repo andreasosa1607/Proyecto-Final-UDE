@@ -17,12 +17,12 @@ namespace AV.BO
         [Column(TypeName = "Integer")]
         public int NroMesa { get; set; }
 
-        // ver max y min en anotaciones
+    
         [Required]
         [Column(TypeName = "Integer")]
         public int CantidadAsientos { get; set; }
 
-        // ver max y min en anotaciones
+       
         [Required]
         [Column(TypeName = "Integer")]
         public int LugaresDisponibles { get; set; }

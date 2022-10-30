@@ -24,7 +24,7 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-        // GET: api/Logines
+        // GET: api_1_0/Logines
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LoginDTO>>> GetLogins()
         {
@@ -34,7 +34,7 @@ namespace AV_API.Controllers
               .ToListAsync();
         }
 
-        // GET: api/Logines/5
+        // GET: api_1_0/Logines/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Login>> GetLogin(string id)
         {
@@ -75,8 +75,7 @@ namespace AV_API.Controllers
             }
         }
 
-        // PUT: api/Logines/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api_1_0/Logines/5
         [HttpPut("{id}")]
         public async Task<ActionResult<LoginDTO>> PutLogin(string id, LoginDTO loginDTO)
         {
@@ -121,8 +120,7 @@ namespace AV_API.Controllers
             return MapeoDTO.LoginDTO(login);
         }
 
-        // POST: api/Logines
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api_1_0/Logines
         [HttpPost]
         public async Task<ActionResult<LoginDTO>> PostLogin(LoginDTO loginDTO)
         {
@@ -147,7 +145,7 @@ namespace AV_API.Controllers
             return CreatedAtAction("GetLogin", new { id = login.CorreoElectronico }, login);
         }
 
-        // DELETE: api/Logines/5
+        // DELETE: api_1_0/Logines/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Login>> DeleteLogin(string id)
         {

@@ -10,7 +10,6 @@ namespace AV.BO
 {
     public class Login
     {
-       // ver como traer opciones
        [Required]
        [Column(TypeName = "VarChar(20)")]
         public string Rol { get; set; }

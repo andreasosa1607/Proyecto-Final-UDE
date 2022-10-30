@@ -12,27 +12,28 @@ namespace AV_API.Controllers
 {
     [Route("api_1_0/[controller]")]
     [ApiController]
-    public class MesasPorEventoController : ControllerBase
+    public class AsientosPorMesaController : ControllerBase
     {
         private readonly AVDBContext _context;
 
-        public MesasPorEventoController(AVDBContext context)
+        public AsientosPorMesaController(AVDBContext context)
         {
             _context = context;
         }
 
 
-        // GET: api_1_0/MesasPorEvento/5
-
+        // GET: api_1_0/AsientosPorMesa/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Mesa>>> GetMesasPorEventos(int id)
+        public async Task<ActionResult<IEnumerable<Asiento>>> GetAsientosPorMesa(int id)
 
         {
-            List<Mesa> mesas = await _context.Mesas.Include("Asientos").Where(x => x.EventoId == id).ToListAsync();
-            return mesas;
-
-
+            List<Asiento> asientos = await _context.Asientos.Where(x => x.MesaIdMesa == id).ToListAsync();
+            return asientos;
 
         }
+
+
+
+
     }
 }

@@ -23,7 +23,6 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-        // GET: api/Administradores/correoElectronico
         [HttpGet("{correoElectronico}/{pass}")]
 
         public async Task<ActionResult<Administrador>> GetAdmin(string correoElectronico, string pass)
@@ -58,9 +57,9 @@ namespace AV_API.Controllers
 
             }
         }
-        // GET: api/Administradores/correoElectronico
-        [HttpGet("{correoElectronico}")]
 
+
+        [HttpGet("{correoElectronico}")]
         public async Task<ActionResult<Administrador>> GetAdmin(string correoElectronico)
         {
             var login = await _context.Logins.FindAsync(correoElectronico);

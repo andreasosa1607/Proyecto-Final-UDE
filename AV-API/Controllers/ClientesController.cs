@@ -16,7 +16,6 @@ namespace AV_API.Controllers
 {
 
     [Route("api_1_0/[controller]")]
-
     [ApiController]
     public class ClientesController : ControllerBase
     {
@@ -28,7 +27,7 @@ namespace AV_API.Controllers
             _context = context;
         }
 
-        // GET: api/Clientes
+        // GET: api_1_0/Clientes
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ClienteDTO>>> GetClientes()
@@ -39,7 +38,7 @@ namespace AV_API.Controllers
               .ToListAsync();
         }
 
-        // GET: api/Clientes/5
+        // GET: api_1_0/Clientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ClienteDTO>> GetCliente(int id)
         {
@@ -53,7 +52,7 @@ namespace AV_API.Controllers
             return Ok(cliente);
         }
 
-        // PUT: api/Clientes/5
+        // PUT: api_1_0/Clientes/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCliente(int id, ClienteDTO clienteDTO)
         {
@@ -90,7 +89,7 @@ namespace AV_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Clientes
+        // POST: api_1_0/Clientes
         [HttpPost]
         public async Task<ActionResult<ClienteDTO>> PostCliente(ClienteDTO clienteDTO)
         {
@@ -104,7 +103,7 @@ namespace AV_API.Controllers
             return CreatedAtAction("GetCliente", new { id = cliente.ClienteId }, cliente);
         }
 
-        // DELETE: api/Clientes/5
+        // DELETE: api_1_0/Clientes/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Cliente>> DeleteCliente(int id)
         {
